@@ -14,7 +14,7 @@ export default function HeroSection() {
             'radial-gradient(ellipse 70% 60% at 80% 40%, rgba(52,209,134,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(52,209,134,0.06) 0%, transparent 50%)',
         }}
       />
-
+<h1>YO YO YOOOOOO</h1>
       {/* Grid overlay */}
       <div
         className="absolute inset-0 z-0 opacity-30"
