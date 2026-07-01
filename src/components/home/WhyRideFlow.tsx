@@ -1,70 +1,103 @@
+'use client'
 const features = [
-  {
-    icon: '🪪',
-    title: 'Verified Driver Identity',
-    desc: 'Every driver\'s ID is verified before they can take their first ride. No exceptions.',
-  },
-  {
-    icon: '💳',
-    title: 'Local Payment Methods',
-    desc: 'Pay with mobile wallets or cash — we support what people already use every day.',
-  },
-  {
-    icon: '📍',
-    title: 'Live GPS Tracking',
-    desc: 'Your driver\'s location streams live during the ride. Share your trip in one tap.',
-  },
-  {
-    icon: '🆘',
-    title: 'One-Tap SOS',
-    desc: 'Hit SOS and your location, ride ID, and details go instantly to emergency contacts.',
-  },
-  {
-    icon: '📊',
-    title: 'Transparent Fare, Always',
-    desc: 'See the full fare before confirming. Surge is shown clearly and capped at 2×.',
-  },
-  {
-    icon: '⭐',
-    title: 'Two-Way Rating System',
-    desc: 'Drivers and passengers rate each other after every ride, keeping the platform safe.',
-  },
+  { icon: '🪪', title: 'Verified Driver Identity', desc: 'Every driver\'s ID is verified before their first ride. No exceptions.' },
+  { icon: '💳', title: 'Local Payment Methods', desc: 'Pay with mobile wallets or cash — we support what people already use.' },
+  { icon: '📍', title: 'Live GPS Tracking', desc: 'Your driver\'s location streams live during the ride. Share your trip in one tap.' },
+  { icon: '🆘', title: 'One-Tap SOS', desc: 'Hit SOS and your location and ride ID go instantly to emergency contacts.' },
+  { icon: '📊', title: 'Transparent Fare, Always', desc: 'See the full fare before confirming. Surge is shown clearly and capped at 2×.' },
+  { icon: '⭐', title: 'Two-Way Rating System', desc: 'Drivers and passengers rate each other after every ride, keeping everyone safe.' },
 ]
 
 export default function WhyRideFlow() {
   return (
-    <section className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-
-        <span className="block text-xs font-bold uppercase tracking-widest text-[#34D186] mb-3">
+    <section style={{ padding: '90px 5vw' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <span
+          style={{
+            display: 'inline-block',
+            fontSize: '1rem',
+            fontWeight: 700,
+            letterSpacing: '2px',
+            textTransform: 'uppercase' as const,
+            color: '#1DB954',
+            marginBottom: '0.75rem',
+          }}
+        >
           Why RideFlow
         </span>
-        <h2 className="font-black text-3xl md:text-5xl tracking-tight leading-tight mb-4 max-w-xl">
+        <h2
+          style={{
+            fontFamily: 'var(--font-syne), sans-serif',
+            fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)',
+            fontWeight: 800,
+            letterSpacing: '-0.8px',
+            marginBottom: '1rem',
+          }}
+        >
           Safety and fairness, not just speed.
         </h2>
-        <p className="text-gray-500 max-w-md mb-16 leading-relaxed">
+        <p style={{ fontSize: '1.05rem', color: '#888', maxWidth: '520px', marginBottom: '3rem', lineHeight: 1.7 }}>
           Every decision is built around two people: the passenger who needs to feel safe, and the driver who deserves to earn fairly.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '1.5rem',
+          }}
+        >
           {features.map((f) => (
             <div
               key={f.title}
-              className="bg-[#141414] border border-[#222222] rounded-2xl p-7 transition-all duration-300 hover:border-[#34D186] hover:-translate-y-1"
+              style={{
+                background: '#181818',
+                border: '1px solid #262626',
+                borderRadius: '14px',
+                padding: '1.8rem',
+                transition: 'border-color 0.25s, transform 0.2s',
+                cursor: 'default',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#1DB954'
+                e.currentTarget.style.transform = 'translateY(-3px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#262626'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
             >
-              <div className="w-12 h-12 rounded-xl bg-[#34D186]/10 flex items-center justify-center text-2xl mb-5">
+              <div
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  background: 'rgba(29,185,84,0.12)',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.4rem',
+                  marginBottom: '1.1rem',
+                }}
+              >
                 {f.icon}
               </div>
-              <h4 className="font-bold text-base mb-2">
+              <h4
+                style={{
+                  fontFamily: 'var(--font-syne), sans-serif',
+                  fontSize: '1.10rem',
+                  fontWeight: 700,
+                  marginBottom: '0.5rem',
+                }}
+              >
                 {f.title}
               </h4>
-              <p className="text-sm text-gray-500 leading-relaxed">
+              <p style={{ fontSize: '1rem', color: '#888', lineHeight: 1.65 }}>
                 {f.desc}
               </p>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   )

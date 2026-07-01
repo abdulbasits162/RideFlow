@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { Zap, MapPin, ShieldCheck } from "lucide-react";
+
 import { RideType, PaymentMethod, FareEstimate } from '@/types'
 import RideTypeSelector from './RideTypeSelector'
 
@@ -11,7 +13,6 @@ export default function BookingWidget() {
   const [durationMin, setDurationMin] = useState('15')
   const [rideType, setRideType] = useState<RideType>('economy')
   const [payment, setPayment] = useState<PaymentMethod>('cash')
-
   const [fare, setFare] = useState<FareEstimate | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -39,121 +40,226 @@ export default function BookingWidget() {
     }
   }
 
-  return (
-    <div className="bg-[#141414] border border-[#222222] rounded-2xl p-7 max-w-md w-full">
-      <h3 className="font-bold text-lg mb-5">Book a Ride</h3>
+  const inputStyle = {
+    width: '100%',
+    background: '#0A0A0A',
+    border: '1px solid #262626',
+    borderRadius: '10px',
+    padding: '0.75rem 1rem',
+    color: '#fff',
+    fontSize: '0.9rem',
+    outline: 'none',
+    fontFamily: 'var(--font-inter), sans-serif',
+  }
 
-      <div className="flex flex-col gap-4 mb-5">
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">
-            Pickup Location
-          </label>
+  const labelStyle = {
+    display: 'block',
+    fontSize: '0.75rem',
+    fontWeight: 700,
+    letterSpacing: '0.5px',
+    textTransform: 'uppercase' as const,
+    color: '#6B6B6B',
+    marginBottom: '0.4rem',
+  }
+
+  return (
+    
+    <section
+      id="book"
+
+      style={{
+        padding: '90px 10vw',
+        borderBottom: '1px solid #262626',
+        display: 'flex',
+        justifyContent: 'space-evenly'
+        
+      }}
+    >
+ <div className="flex flex-col">
+      {/* Section Label */}
+      <span className="text-sm font-semibold uppercase tracking-[0.2em] text-green-500">
+        Book Online
+      </span>
+
+      {/* Title */}
+      <h2 className="mt-4 text-4xl md:text-5xl font-bold leading-tight text-white">
+        Your ride,
+        <br />
+        in seconds.
+      </h2>
+
+      {/* Description */}
+      <p className="mt-6 text-gray-400 leading-7 max-w-lg">
+        Set your pickup, choose your destination, and we'll match you with the
+        nearest verified driver in under 2 minutes. Fare shown upfront — no
+        surprises.
+      </p>
+<br />
+      {/* Features */}
+      <div className="mt-8 flex flex-col gap-4">
+        <div className="flex items-center gap-3 text-sm text-gray-400">
+          <Zap size={18} className="text-green-500" />
+          <span>Average match time: 90 seconds</span>
+        </div>
+
+        <div className="flex items-center gap-3 text-sm text-gray-400">
+          <MapPin size={18} className="text-green-500" />
+          <span>Fare locked at booking — no hidden charges</span>
+        </div>
+
+        <div className="flex items-center gap-3 text-sm text-gray-400">
+          <ShieldCheck size={18} className="text-green-500" />
+          <span>Every driver NADRA-checked before their first ride</span>
+        </div>
+      </div>
+    </div>
+
+      <div
+        style={{
+          background: '#181818',
+          border: '1px solid #262626',
+          borderRadius: '14px',
+          padding: '2rem',
+          width: '100%',
+          maxWidth: '500px',
+        }}
+      >
+        <h3
+          style={{
+            fontFamily: 'var(--font-syne), sans-serif',
+            fontSize: '1.4rem',
+            fontWeight: 700,
+            marginBottom: '1.5rem',
+          }}
+        >
+          Book a Ride
+        </h3>
+
+        {/* Pickup */}
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={labelStyle}>Pickup Location</label>
           <input
             type="text"
             value={pickup}
             onChange={(e) => setPickup(e.target.value)}
-            placeholder="e.g. Saddar"
-            className="w-full bg-black border border-[#222222] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#34D186] transition-colors"
+            placeholder="e.g. Saddar, Rawalpindi"
+            style={inputStyle}
           />
         </div>
 
-        <div>
-          <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">
-            Drop-off Location
-          </label>
+        {/* Dropoff */}
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={labelStyle}>Drop-off Location</label>
           <input
             type="text"
             value={dropoff}
             onChange={(e) => setDropoff(e.target.value)}
-            placeholder="e.g. Centaurus Mall"
-            className="w-full bg-black border border-[#222222] rounded-xl px-4 py-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#34D186] transition-colors"
+            placeholder="e.g. Centaurus Mall, Islamabad"
+            style={inputStyle}
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">
-              Distance (km)
-            </label>
-            <input
-              type="number"
-              value={distanceKm}
-              onChange={(e) => setDistanceKm(e.target.value)}
-              min="0"
-              step="0.1"
-              className="w-full bg-black border border-[#222222] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#34D186] transition-colors"
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">
-              Duration (min)
-            </label>
-            <input
-              type="number"
-              value={durationMin}
-              onChange={(e) => setDurationMin(e.target.value)}
-              min="0"
-              className="w-full bg-black border border-[#222222] rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#34D186] transition-colors"
-            />
+       
+
+        {/* Ride Type */}
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={labelStyle}>Ride Type</label>
+          <RideTypeSelector value={rideType} onChange={setRideType} />
+        </div>
+
+        {/* Payment */}
+        <div style={{ marginBottom: '1.2rem' }}>
+          <label style={labelStyle}>Payment</label>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            {(['cash', 'wallet'] as PaymentMethod[]).map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setPayment(m)}
+                style={{
+                  flex: 1,
+                  padding: '0.6rem',
+                  borderRadius: '10px',
+                  border: `1px solid ${payment === m ? '#1DB954' : '#262626'}`,
+                  background: payment === m ? 'rgba(29,185,84,0.08)' : 'transparent',
+                  color: payment === m ? '#1DB954' : '#aaa',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  fontFamily: 'var(--font-inter), sans-serif',
+                }}
+              >
+                {m === 'cash' ? 'Cash' : 'Mobile Wallet'}
+              </button>
+            ))}
           </div>
         </div>
-      </div>
 
-      <div className="mb-5">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2.5">
-          Ride Type
-        </label>
-        <RideTypeSelector value={rideType} onChange={setRideType} />
-      </div>
-
-      <div className="mb-5">
-        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2.5">
-          Payment
-        </label>
-        <div className="flex gap-2">
-          {(['cash', 'wallet'] as PaymentMethod[]).map((m) => (
-            <button
-              key={m}
-              type="button"
-              onClick={() => setPayment(m)}
-              className={`flex-1 text-sm font-medium rounded-xl py-2.5 border transition-all ${
-                payment === m
-                  ? 'border-[#34D186] bg-[#34D186]/8 text-[#34D186]'
-                  : 'border-[#222222] text-gray-400 hover:border-[#333333]'
-              }`}
+        {/* Fare result */}
+        {fare && (
+          <div
+            style={{
+              background: 'rgba(29,185,84,0.08)',
+              border: '1px solid rgba(29,185,84,0.2)',
+              borderRadius: '10px',
+              padding: '1rem',
+              marginBottom: '1.2rem',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <div>
+              <div style={{ fontSize: '0.8rem', color: '#888' }}>Estimated Fare</div>
+              <div style={{ fontSize: '0.72rem', color: '#555', marginTop: '2px' }}>
+                {fare.distanceKm} km · {fare.durationMin} min
+              </div>
+            </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-syne), sans-serif',
+                fontWeight: 800,
+                fontSize: '1.6rem',
+                color: '#1DB954',
+              }}
             >
-              {m === 'cash' ? 'Cash' : 'Mobile Wallet'}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {fare && (
-        <div className="bg-[#34D186]/8 border border-[#34D186]/20 rounded-xl p-4 mb-5 flex justify-between items-center">
-          <div>
-            <div className="text-xs text-gray-500">Estimated Fare</div>
-            <div className="text-[10px] text-gray-600 mt-0.5">
-              {fare.distanceKm} km · {fare.durationMin} min
+              PKR {fare.finalFare}
             </div>
           </div>
-          <div className="font-black text-2xl text-[#34D186]">
-            PKR {fare.finalFare}
-          </div>
-        </div>
-      )}
+        )}
 
-      {error && (
-        <p className="text-xs text-red-400 mb-4">{error}</p>
-      )}
+        {error && (
+          <p style={{ fontSize: '0.8rem', color: '#e05', marginBottom: '1rem' }}>{error}</p>
+        )}
 
-      <button
-        type="button"
-        onClick={handleGetFare}
-        disabled={loading || !pickup || !dropoff}
-        className="w-full bg-[#34D186] text-black font-bold text-sm py-3.5 rounded-full hover:bg-[#1AAF65] transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
-      >
-        {loading ? 'Calculating...' : fare ? 'Confirm Booking' : 'Get Fare Estimate'}
-      </button>
-    </div>
+        {/* CTA */}
+        <button
+          type="button"
+          onClick={handleGetFare}
+          disabled={loading || !pickup || !dropoff}
+          style={{
+            width: '100%',
+            background: '#1DB954',
+            color: '#000',
+            border: 'none',
+            borderRadius: '50px',
+            padding: '0.9rem',
+            fontFamily: 'var(--font-syne), sans-serif',
+            fontSize: '1rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            transition: 'background 0.2s',
+            opacity: loading || !pickup || !dropoff ? 0.5 : 1,
+          }}
+        >
+          {loading ? 'Calculating...' : fare ? 'Confirm Booking' : 'Get Fare Estimate'}
+        </button>
+
+        <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#555', marginTop: '0.75rem' }}>
+          Fare is locked at booking — no hidden charges.
+        </p>
+      </div>
+    </section>
   )
 }

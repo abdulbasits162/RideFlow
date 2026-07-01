@@ -1,102 +1,235 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
 const links = [
-  { label: 'Book a Ride', href: '/book' },
-  { label: 'How It Works', href: '/#how' },
-  { label: 'Cities', href: '/cities' },
-  { label: 'Safety', href: '/safety' },
-  { label: 'Drive with Us', href: '/driver' },
+  { label: 'Book a Ride', href: '#book' },
+  { label: 'How It Works', href: '#how' },
+  { label: 'Cities', href: '#cities' },
+  { label: 'Drive with Us', href: '#driver' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [visible, setVisible] = useState(true)
   const [open, setOpen] = useState(false)
+  const lastScrollY = useRef(0)
+  const router = useRouter()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
+    const onScroll = () => {
+      const currentY = window.scrollY
+
+      // Show/hide based on scroll direction
+      if (currentY < 50) {
+        setVisible(true)
+      } else if (currentY > lastScrollY.current) {
+        // Scrolling down — hide
+        setVisible(false)
+        setOpen(false)
+      } else {
+        // Scrolling up — show
+        setVisible(true)
+      }
+
+      setScrolled(currentY > 20)
+      lastScrollY.current = currentY
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    e.preventDefault()
+    setOpen(false)
+
+    if (href.startsWith('#')) {
+      const isHome = window.location.pathname === '/'
+      if (isHome) {
+        const el = document.getElementById(href.replace('#', ''))
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        router.push('/')
+        setTimeout(() => {
+          const el = document.getElementById(href.replace('#', ''))
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 500)
+      }
+    } else {
+      router.push(href)
+    }
+  }
+
   return (
     <nav
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'bg-[#0A0A0A]/95 backdrop-blur-md border-b border-[#222222]'
-          : 'bg-transparent'
-      )}
+      style={{
+        position: 'fixed',
+        top: 0, left: 0, right: 0,
+        zIndex: 100,
+        height: '68px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 5vw',
+        background: scrolled ? 'rgba(10,10,10,0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid #262626' : 'none',
+        transform: visible ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'transform 0.3s ease, background 0.3s, border-color 0.3s',
+      }}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      {/* Logo */}
+      <Link
+        href="/"
+        style={{
+          fontFamily: 'var(--font-syne), sans-serif',
+          fontWeight: 800,
+          fontSize: '1.45rem',
+          letterSpacing: '-0.5px',
+          color: '#fff',
+          textDecoration: 'none',
+        }}
+      >
+        Ride<span style={{ color: '#1DB954' }}>Flow</span>
+      </Link>
 
-        {/* Logo */}
-        <Link href="/" className="font-black text-xl tracking-tight">
-          Ride<span className="text-[#34D186]">Flow</span>
-        </Link>
+      {/* Desktop links */}
+      <ul
+        className="hidden md:flex"
+        style={{ gap: '2rem', listStyle: 'none', alignItems: 'center', display: 'flex' }}
+      >
+        {links.map((l) => (
+          <li key={l.href}>
+            <a
+              href={l.href}
+              onClick={(e) => handleNavClick(e, l.href)}
+              style={{
+                color: '#ccc',
+                textDecoration: 'none',
+                fontSize: '0.9rem',
+                fontWeight: 500,
+                cursor: 'pointer',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#ccc')}
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="text-sm text-gray-400 hover:text-white transition-colors font-medium"
-              >
-                {l.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/driver/register"
-            className="text-sm font-semibold text-white border border-[#222222] px-5 py-2 rounded-full hover:border-[#34D186] hover:bg-[#34D186]/5 transition-all"
-          >
-            Become a Driver
-          </Link>
-          <Link
-            href="/book"
-            className="text-sm font-semibold bg-[#34D186] text-black px-5 py-2 rounded-full hover:bg-[#1AAF65] transition-all"
-          >
-            Book Now
-          </Link>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setOpen(!open)}
+      {/* Desktop CTAs */}
+      <div
+        className="hidden md:flex"
+        style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
+      >
+        <Link
+          href="/driver/register"
+          style={{
+            fontSize: '0.88rem',
+            fontWeight: 600,
+            color: '#fff',
+            border: '1px solid #262626',
+            padding: '0.45rem 1.2rem',
+            borderRadius: '50px',
+            textDecoration: 'none',
+            transition: 'border-color 0.2s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#262626')}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+          Become a Driver
+        </Link>
+        <a
+          href="#book"
+          onClick={(e) => handleNavClick(e, '#book')}
+          style={{
+            fontSize: '0.88rem',
+            fontWeight: 600,
+            color: '#000',
+            background: '#1DB954',
+            padding: '0.45rem 1.2rem',
+            borderRadius: '50px',
+            textDecoration: 'none',
+            cursor: 'pointer',
+            transition: 'background 0.2s',
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#159040')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = '#1DB954')}
+        >
+          Book Now
+        </a>
       </div>
+
+      {/* Mobile toggle */}
+      <button
+        className="md:hidden"
+        onClick={() => setOpen(!open)}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: '#fff',
+          cursor: 'pointer',
+          padding: '0.5rem',
+        }}
+      >
+        {open ? <X size={22} /> : <Menu size={22} />}
+      </button>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-[#0A0A0A] border-t border-[#222222] px-6 py-4 flex flex-col gap-4">
+        <div
+          style={{
+            position: 'absolute',
+            top: '68px',
+            left: 0, right: 0,
+            background: '#0A0A0A',
+            borderBottom: '1px solid #262626',
+            padding: '1rem 5vw',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+          }}
+        >
           {links.map((l) => (
-            <Link
+            <a
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
-              className="text-sm text-gray-400 hover:text-white transition-colors py-1"
+              onClick={(e) => handleNavClick(e, l.href)}
+              style={{
+                color: '#ccc',
+                textDecoration: 'none',
+                fontSize: '0.9rem',
+                padding: '0.25rem 0',
+                cursor: 'pointer',
+              }}
             >
               {l.label}
-            </Link>
+            </a>
           ))}
-          <Link
-            href="/book"
-            className="text-sm font-semibold bg-[#34D186] text-black px-5 py-3 rounded-full text-center hover:bg-[#1AAF65] transition-all mt-2"
+          <a
+            href="#book"
+            onClick={(e) => handleNavClick(e, '#book')}
+            style={{
+              background: '#1DB954',
+              color: '#000',
+              fontWeight: 700,
+              textAlign: 'center',
+              padding: '0.75rem',
+              borderRadius: '50px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+              marginTop: '0.5rem',
+            }}
           >
             Book Now
-          </Link>
+          </a>
         </div>
       )}
     </nav>

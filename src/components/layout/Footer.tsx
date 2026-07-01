@@ -20,41 +20,77 @@ const footerLinks = {
   ],
 }
 
-const socials = [
-  { label: 'Facebook', href: '#' },
-  { label: 'Instagram', href: '#' },
-  { label: 'TikTok', href: '#' },
-  { label: 'X', href: '#' },
-]
+const socials = ['Facebook', 'Instagram', 'TikTok', 'X']
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A0A0A] border-t border-[#222222] pt-16 pb-8 px-6">
-      <div className="max-w-7xl mx-auto">
+    <footer
+      style={{
+        background: '#111111',
+        borderTop: '1px solid #262626',
+        padding: '4rem 5vw 2rem',
+      }}
+    >
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
-
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="font-black text-2xl tracking-tight">
-              Ride<span className="text-[#34D186]">Flow</span>
+        {/* Top grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '2fr 1fr 1fr 1fr',
+            gap: '3rem',
+            marginBottom: '3rem',
+          }}
+        >
+          {/* Brand */}
+          <div>
+            <Link
+              href="/"
+              style={{
+                fontFamily: 'var(--font-syne), sans-serif',
+                fontWeight: 800,
+                fontSize: '1.6rem',
+                letterSpacing: '-0.5px',
+                color: '#fff',
+                textDecoration: 'none',
+                display: 'inline-block',
+                marginBottom: '0.8rem',
+              }}
+            >
+              Ride<span style={{ color: '#1DB954' }}>Flow</span>
             </Link>
-            <p className="text-sm text-[#6B6B6B] mt-3 leading-relaxed max-w-xs">
+            <p style={{ fontSize: '0.85rem', color: '#555', lineHeight: 1.7, maxWidth: '260px' }}>
               Pakistan&apos;s safety-first, driver-fair ride-hailing platform.
               Starting in Rawalpindi &amp; Islamabad.
             </p>
           </div>
 
+          {/* Link columns */}
           {Object.entries(footerLinks).map(([title, items]) => (
             <div key={title}>
-              <h5 className="text-xs font-bold uppercase tracking-widest text-[#6B6B6B] mb-4">
+              <h5
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase' as const,
+                  letterSpacing: '1.5px',
+                  color: '#555',
+                  marginBottom: '1rem',
+                }}
+              >
                 {title}
               </h5>
-              <ul className="flex flex-col gap-2.5">
+              <ul style={{ listStyle: 'none' }}>
                 {items.map((item) => (
-                  <li key={item.label}>
+                  <li key={item.label} style={{ marginBottom: '0.6rem' }}>
                     <Link
                       href={item.href}
-                      className="text-sm text-gray-500 hover:text-white transition-colors"
+                      style={{
+                        color: '#888',
+                        fontSize: '0.88rem',
+                        textDecoration: 'none',
+                        transition: 'color 0.2s',
+                      }}
                     >
                       {item.label}
                     </Link>
@@ -65,18 +101,34 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-[#222222] pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-[#6B6B6B]">
+        {/* Bottom bar */}
+        <div
+          style={{
+            borderTop: '1px solid #262626',
+            paddingTop: '1.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap' as const,
+            gap: '1rem',
+          }}
+        >
+          <p style={{ fontSize: '0.8rem', color: '#555' }}>
             © 2026 RideFlow Pakistan. All rights reserved.
           </p>
-          <div className="flex gap-4">
+          <div style={{ display: 'flex', gap: '1.2rem' }}>
             {socials.map((s) => (
               <a
-                key={s.label}
-                href={s.href}
-                className="text-xs text-[#6B6B6B] hover:text-[#34D186] transition-colors"
+                key={s}
+                href="#"
+                style={{
+                  fontSize: '0.8rem',
+                  color: '#555',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                }}
               >
-                {s.label}
+                {s}
               </a>
             ))}
           </div>

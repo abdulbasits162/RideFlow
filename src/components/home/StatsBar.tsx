@@ -1,25 +1,44 @@
 const stats = [
   { num: '50M+', desc: 'Urban commuters underserved' },
-  { num: '15–18%', desc: 'Commission — lowest in the market' },
+  { num: '15–18%', desc: 'Lowest commission in the market' },
   { num: '<90s', desc: 'Average driver match time' },
-  { num: '2×', desc: 'Max surge cap — full transparency' },
+  { num: '2×', desc: 'Max surge cap — always transparent' },
 ]
 
 export default function StatsBar() {
   return (
-    <section className="border-t border-b border-[#222222] py-16 px-6">
-      <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-        {stats.map((s) => (
-          <div key={s.desc} className="text-center">
-            <div className="font-black text-3xl md:text-4xl text-[#34D186] mb-2 tracking-tight">
-              {s.num}
-            </div>
-            <div className="text-sm text-gray-500">
-              {s.desc}
-            </div>
+    <div
+      style={{
+        borderTop: '1px solid #262626',
+        borderBottom: '1px solid #262626',
+        background: '#111111',
+        padding: '2rem 5vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexWrap: 'wrap' as const,
+        gap: '7.5rem',
+      }}
+    >
+      {stats.map((s) => (
+        <div key={s.desc} style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              fontFamily: 'var(--font-syne), sans-serif',
+              fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
+              fontWeight: 800,
+              color: '#1DB954',
+              lineHeight: 1,
+              marginBottom: '0.3rem',
+            }}
+          >
+            {s.num}
           </div>
-        ))}
-      </div>
-    </section>
+          <div style={{ fontSize: '1rem', color: '#6B6B6B' }}>
+            {s.desc}
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }

@@ -10,15 +10,17 @@ interface Props {
 
 const rideTypes: RideType[] = ['economy', 'comfort', 'premium']
 
+
+
 const descriptions: Record<RideType, string> = {
-  economy: 'Affordable, everyday rides',
+  economy: 'Affordable everyday rides',
   comfort: 'Newer cars, more space',
-  premium: 'Top-rated drivers, best cars',
+  premium: 'Top-rated drivers & cars',
 }
 
 export default function RideTypeSelector({ value, onChange }: Props) {
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
       {rideTypes.map((type) => {
         const config = FARE_CONFIG[type]
         const active = value === type
@@ -28,19 +30,42 @@ export default function RideTypeSelector({ value, onChange }: Props) {
             key={type}
             type="button"
             onClick={() => onChange(type)}
-            className={`text-left rounded-xl border p-3.5 transition-all ${
-              active
-                ? 'border-[#34D186] bg-[#34D186]/8'
-                : 'border-[#222222] hover:border-[#333333]'
-            }`}
+            style={{
+              background: active ? 'rgba(29,185,84,0.08)' : '#0A0A0A',
+              border: `1px solid ${active ? '#1DB954' : '#262626'}`,
+              borderRadius: '12px',
+              padding: '1rem 0.75rem',
+              cursor: 'pointer',
+              textAlign: 'left',
+              transition: 'all 0.2s',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.4rem',
+            }}
           >
-            <div className="font-bold text-sm mb-1">{config.label}</div>
-            <div className="text-xs text-gray-500 mb-2 leading-snug">
+            <span
+              style={{
+                fontFamily: 'var(--font-syne), sans-serif',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                color: active ? '#1DB954' : '#fff',
+              }}
+            >
+              {config.label}
+            </span>
+            <span style={{ fontSize: '0.75rem', color: '#666', lineHeight: 1.4 }}>
               {descriptions[type]}
-            </div>
-            <div className="text-xs font-semibold text-[#34D186]">
+            </span>
+            <span
+              style={{
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                color: '#1DB954',
+                marginTop: '0.2rem',
+              }}
+            >
               From PKR {config.minFare}
-            </div>
+            </span>
           </button>
         )
       })}

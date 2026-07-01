@@ -11,16 +11,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-
-      <section className="px-6 py-16 flex justify-center">
-        <BookingWidget />
-      </section>
-
+      <BookingWidget />
       <StatsBar />
       <HowItWorks />
       <WhyRideFlow />
-      <DriverCTA />
       <CityStrip />
+      <DriverCTA />
       <AppDownload />
     </>
   )
