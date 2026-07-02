@@ -58,7 +58,7 @@ export default function BookingWidget() {
     fontWeight: 800,
     letterSpacing: '0.5px',
     textTransform: 'uppercase' as const,
-    color: 'gray-800',
+    color: 'gray',
     marginBottom: '0.4rem',
   }
 
@@ -68,7 +68,7 @@ export default function BookingWidget() {
       id="book"
 
       style={{
-        background:'black',
+        background:'white',
         padding: '90px 10vw',
         borderBottom: '1px solid #262626',
         display: 'flex',
@@ -182,9 +182,9 @@ export default function BookingWidget() {
                   flex: 1,
                   padding: '0.6rem',
                   borderRadius: '10px',
-                  border: `1px solid ${payment === m ? 'white' : '#262626'}`,
+                  border: `1px solid ${payment === m ? 'black' : '#999'}`,
                   background: payment === m ? 'rgba(29,185,84,0.07)' : 'transparent',
-                  color: payment === m ? 'white' : '#aaa',
+                  color: payment === m ? '#444' : '#aaa',
                   fontSize: '0.88rem',
                   fontWeight: 600,
                   cursor: 'pointer',

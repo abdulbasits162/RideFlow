@@ -31,7 +31,7 @@ export default function RideTypeSelector({ value, onChange }: Props) {
             type="button"
             onClick={() => onChange(type)}
             style={{
-              background: active ? 'rgba(29,185,84,0.08)' : '#0A0A0A',
+              background: active ? '#fff' : '#rgba(29,185,84,0.08)',
               border: `1px solid ${active ? 'white' : '#262626'}`,
               borderRadius: '12px',
               padding: '1rem 0.75rem',
@@ -48,12 +48,12 @@ export default function RideTypeSelector({ value, onChange }: Props) {
                 fontFamily: 'var(--font-syne), sans-serif',
                 fontWeight: 700,
                 fontSize: '0.88rem',
-                color: active ? 'white' : '#aaa',
+                color: active ? '#222' : '#999',
               }}
             >
               {config.label}
             </span>
-            <span style={{ fontSize: '0.75rem', color: 'white', lineHeight: 1.4 }}>
+            <span style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.4 }}>
               {descriptions[type]}
             </span>
             <span
