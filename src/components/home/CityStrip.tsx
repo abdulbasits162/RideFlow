@@ -50,7 +50,7 @@ export default function CityStrip() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1rem',
           }}
         >

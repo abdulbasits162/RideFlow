@@ -10,7 +10,7 @@ export default function HowItWorks() {
     <section
       id="how"
       style={{
-        padding: '130px 5vw',
+        padding: '140px 5vw',
         background: '#111111',
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',
@@ -30,6 +30,7 @@ export default function HowItWorks() {
         >
           How It Works
         </span>
+        <br/>
         <h2
           style={{
             fontFamily: 'var(--font-inter), sans-serif',
@@ -41,12 +42,12 @@ export default function HowItWorks() {
         >
           From tap to destination in four steps.
         </h2>
-
+<br />
         <div
 
       style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '2rem',
           }}
         >

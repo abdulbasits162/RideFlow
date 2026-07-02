@@ -12,7 +12,7 @@ export default function StatsBar() {
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',
         background: '#111111',
-        padding: '4rem 5vw',
+        padding: '5rem 5vw',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

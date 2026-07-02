@@ -121,6 +121,7 @@ export default function BookingWidget() {
           border: '1px solid #262626',
           borderRadius: '14px',
           padding: '2rem',
+          
           width: '100%',
           maxWidth: '500px',
         }}
