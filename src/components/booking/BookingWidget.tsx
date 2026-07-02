@@ -42,23 +42,23 @@ export default function BookingWidget() {
 
   const inputStyle = {
     width: '100%',
-    background: '#0A0A0A',
+    background: '#fff',
     border: '1px solid #262626',
     borderRadius: '10px',
     padding: '0.75rem 1rem',
-    color: '#fff',
+    color: 'black',
     fontSize: '0.9rem',
-    outline: 'none',
+    outline: 'none',  
     fontFamily: 'var(--font-inter), sans-serif',
   }
 
   const labelStyle = {
     display: 'block',
-    fontSize: '0.75rem',
-    fontWeight: 700,
+    fontSize: '0.8rem',
+    fontWeight: 800,
     letterSpacing: '0.5px',
     textTransform: 'uppercase' as const,
-    color: '#6B6B6B',
+    color: 'gray-800',
     marginBottom: '0.4rem',
   }
 
@@ -68,6 +68,7 @@ export default function BookingWidget() {
       id="book"
 
       style={{
+        background:'black',
         padding: '90px 10vw',
         borderBottom: '1px solid #262626',
         display: 'flex',
@@ -82,14 +83,14 @@ export default function BookingWidget() {
       </span>
 
       {/* Title */}
-      <h2 className="mt-4 text-4xl md:text-5xl font-bold leading-tight text-white">
+      <h2 className="mt-4 text-4xl md:text-5xl font-bold leading-tight text-gray-950">
         Your ride,
         <br />
         in seconds.
       </h2>
 
       {/* Description */}
-      <p className="mt-6 text-gray-400 leading-7 max-w-lg">
+      <p className="mt-6 text-gray-900 leading-7 max-w-lg">
         Set your pickup, choose your destination, and we'll match you with the
         nearest verified driver in under 2 minutes. Fare shown upfront — no
         surprises.
@@ -97,17 +98,17 @@ export default function BookingWidget() {
 <br />
       {/* Features */}
       <div className="mt-8 flex flex-col gap-4">
-        <div className="flex items-center gap-3 text-sm text-gray-400">
+        <div className="flex items-center gap-3 text-sm text-gray-800">
           <Zap size={18} className="text-green-500" />
           <span>Average match time: 90 seconds</span>
         </div>
 
-        <div className="flex items-center gap-3 text-sm text-gray-400">
+        <div className="flex items-center gap-3 text-sm text-gray-800">
           <MapPin size={18} className="text-green-500" />
           <span>Fare locked at booking — no hidden charges</span>
         </div>
 
-        <div className="flex items-center gap-3 text-sm text-gray-400">
+        <div className="flex items-center gap-3 text-sm text-gray-800">
           <ShieldCheck size={18} className="text-green-500" />
           <span>Every driver NADRA-checked before their first ride</span>
         </div>
@@ -116,7 +117,7 @@ export default function BookingWidget() {
 
       <div
         style={{
-          background: '#181818',
+          background: '#eee',
           border: '1px solid #262626',
           borderRadius: '14px',
           padding: '2rem',
@@ -126,10 +127,11 @@ export default function BookingWidget() {
       >
         <h3
           style={{
-            fontFamily: 'var(--font-syne), sans-serif',
+            fontFamily: 'var(--font-inter), sans-serif',
             fontSize: '1.4rem',
             fontWeight: 700,
             marginBottom: '1.5rem',
+            color:'black'
           }}
         >
           Book a Ride
@@ -180,9 +182,9 @@ export default function BookingWidget() {
                   flex: 1,
                   padding: '0.6rem',
                   borderRadius: '10px',
-                  border: `1px solid ${payment === m ? '#1DB954' : '#262626'}`,
-                  background: payment === m ? 'rgba(29,185,84,0.08)' : 'transparent',
-                  color: payment === m ? '#1DB954' : '#aaa',
+                  border: `1px solid ${payment === m ? 'white' : '#262626'}`,
+                  background: payment === m ? 'rgba(29,185,84,0.07)' : 'transparent',
+                  color: payment === m ? 'white' : '#aaa',
                   fontSize: '0.88rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -218,7 +220,7 @@ export default function BookingWidget() {
             </div>
             <div
               style={{
-                fontFamily: 'var(--font-syne), sans-serif',
+                fontFamily: 'var(--font-inter), sans-serif',
                 fontWeight: 800,
                 fontSize: '1.6rem',
                 color: '#1DB954',

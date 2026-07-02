@@ -71,17 +71,17 @@ export default function HeroSection() {
         {/* Headline */}
         <h1
           style={{
-            fontFamily: 'var(--font-syne), sans-serif',
-            fontSize: 'clamp(2.8rem, 6vw, 5.2rem)',
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: 'clamp(2.8rem, 6vw, 4.2rem)',
             fontWeight: 800,
             lineHeight: 1.05,
             letterSpacing: '-1.5px',
             marginBottom: '1.4rem',
           }}
         >
-          Pakistan&apos;s<br />
-          ride-hailing,<br />
-          <span style={{ color: '#1DB954' }}>done right.</span>
+          Move smarter. <br />
+          
+          <span style={{ color: '#1DB954' }}>Ride better.</span>
         </h1>
 
         <p
@@ -93,8 +93,7 @@ export default function HeroSection() {
             lineHeight: 1.7,
           }}
         >
-          Verified drivers. Local payments. Transparent fares.
-          Built in Pakistan, for Pakistan — starting in Rawalpindi and Islamabad.
+          From daily commutes to airport transfers and intercity travel, RideFlow gets you there safely, comfortably, and on time.
         </p>
 
         <div className="flex flex-wrap" style={{ gap: '1rem' }}>

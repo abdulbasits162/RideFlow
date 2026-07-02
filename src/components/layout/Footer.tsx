@@ -26,12 +26,13 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: '#111111',
-        borderTop: '1px solid #262626',
+        // background: '#111111'  ,
+        // borderTop: '1px solid #262626',
         padding: '4rem 5vw 2rem',
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto',            borderTop: '1px solid #262626',
+ }}>
 
         {/* Top grid */}
         <div
@@ -40,6 +41,7 @@ export default function Footer() {
             gridTemplateColumns: '2fr 1fr 1fr 1fr',
             gap: '3rem',
             marginBottom: '3rem',
+            marginTop:'3rem'
           }}
         >
           {/* Brand */}
@@ -104,7 +106,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           style={{
-            borderTop: '1px solid #262626',
+            // borderTop: '1px solid #262626',
             paddingTop: '1.5rem',
             display: 'flex',
             justifyContent: 'space-between',

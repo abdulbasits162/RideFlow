@@ -12,7 +12,7 @@ export default function StatsBar() {
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',
         background: '#111111',
-        padding: '2rem 5vw',
+        padding: '4rem 5vw',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -24,7 +24,7 @@ export default function StatsBar() {
         <div key={s.desc} style={{ textAlign: 'center' }}>
           <div
             style={{
-              fontFamily: 'var(--font-syne), sans-serif',
+              fontFamily: 'var(--font-inter), sans-serif',
               fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
               fontWeight: 800,
               color: '#1DB954',

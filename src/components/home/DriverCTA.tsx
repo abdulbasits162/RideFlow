@@ -44,7 +44,7 @@ export default function DriverCTA() {
           </span>
           <h2
             style={{
-              fontFamily: 'var(--font-syne), sans-serif',
+              fontFamily: 'var(--font-inter), sans-serif',
               fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
               fontWeight: 800,
               letterSpacing: '-0.8px',

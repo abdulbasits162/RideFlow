@@ -32,7 +32,7 @@ export default function HowItWorks() {
         </span>
         <h2
           style={{
-            fontFamily: 'var(--font-syne), sans-serif',
+            fontFamily: 'var(--font-inter), sans-serif',
             fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)',
             fontWeight: 800,
             letterSpacing: '-0.8px',
@@ -63,7 +63,7 @@ export default function HowItWorks() {
                   color: '#000',
                   fontFamily: 'var(--font-syne), sans-serif',
                   fontWeight: 800,
-                  fontSize: '1rem',
+                  fontSize: '1.2rem',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
