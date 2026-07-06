@@ -8,6 +8,10 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden"
       style={{ padding: '120px 5vw 80px' }}
     >
+     
+
+
+     
       {/* Green glow */}
       <div
         className="absolute inset-0 z-0"
@@ -18,6 +22,7 @@ export default function HeroSection() {
       />
 
       {/* Grid overlay */}
+     
       <div
         className="absolute inset-0 z-0"
 
