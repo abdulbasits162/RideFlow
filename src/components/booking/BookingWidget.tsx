@@ -184,7 +184,7 @@ export default function BookingWidget() {
                   padding: '0.6rem',
                   borderRadius: '10px',
                   border: `1px solid ${payment === m ? 'black' : '#999'}`,
-                  background: payment === m ? '#1DB954' : '#fff',
+                  background: payment === m ? '#85D3A1' : '#fff',
                   color: payment === m ? '#111' : '#444',
                   fontSize: '0.88rem',
                   fontWeight: 600,

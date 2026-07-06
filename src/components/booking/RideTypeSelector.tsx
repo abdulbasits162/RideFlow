@@ -31,8 +31,8 @@ export default function RideTypeSelector({ value, onChange }: Props) {
             type="button"
             onClick={() => onChange(type)}
             style={{
-              background: active ? '#fff' : '#rgba(29,185,84,0.08)',
-              border: `1px solid ${active ? 'white' : '#262626'}`,
+              background: active ? '#85D3A1' : '#fff',
+              border: `1px solid ${active ? 'black' : '#888'}`,
               borderRadius: '12px',
               padding: '1rem 0.75rem',
               cursor: 'pointer',

@@ -10,8 +10,8 @@ export default function HowItWorks() {
     <section
       id="how"
       style={{
-        padding: '140px 5vw',
-        background: '#111111',
+        padding: '160px 5vw',
+        background: '#444',
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',
       }}
@@ -30,7 +30,7 @@ export default function HowItWorks() {
         >
           How It Works
         </span>
-        <br/>
+        <br />
         <h2
           style={{
             fontFamily: 'var(--font-inter), sans-serif',
@@ -42,22 +42,38 @@ export default function HowItWorks() {
         >
           From tap to destination in four steps.
         </h2>
-<br />
+        <br />
         <div
-
-      style={{
+          style={{
+            position: 'relative',
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '2rem',
           }}
         >
+          {/* Connecting line */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '23px',
+              left: 'calc(0% + 23px)',
+              right: 'calc(20% + 23px)',
+              height: '1px',
+              // background: '#1DB954',
+              background: 'linear-gradient(90deg,  #1DB954 0%,rgba(29, 185, 84, 0.2) 100%)',
+              zIndex: 0,
+            }}
+          />
+
           {steps.map((step) => (
             <div key={step.num}
-             style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
->
+       
+            >
+         
               <div
 
                 style={{
+
                   width: '46px',
                   height: '46px',
                   background: '#1DB954',
@@ -71,6 +87,8 @@ export default function HowItWorks() {
                   justifyContent: 'center',
                   marginBottom: '1.2rem',
                   flexShrink: 0,
+                  position:'relative',
+                  zIndex: 1,
                 }}
               >
                 {step.num}
@@ -78,14 +96,14 @@ export default function HowItWorks() {
               <h4
                 style={{
                   fontFamily: 'var(--font-syne), sans-serif',
-                  fontSize: '1.5rem',
+                  fontSize: '1.9rem',
                   fontWeight: 700,
                   marginBottom: '0.5rem',
                 }}
               >
                 {step.title}
               </h4>
-              <p style={{ fontSize: '1rem', color: '#888', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '1.3rem', color: '#999', lineHeight: 1.6 }}>
                 {step.desc}
               </p>
             </div>

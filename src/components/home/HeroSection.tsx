@@ -6,7 +6,7 @@ export default function HeroSection() {
   return (
     <section
       className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden"
-      style={{ padding: '120px 5vw 80px' }}
+      style={{ padding: '140px 5vw 80px' }}
     >
      
 

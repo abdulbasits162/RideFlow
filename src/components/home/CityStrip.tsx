@@ -13,9 +13,10 @@ export default function CityStrip() {
     <section
       id="cities"
       style={{
-        padding: '170px 5vw',
-        borderTop: '1px solid #262626',
-        borderBottom: '1px solid #262626',
+        padding: '180px 5vw',
+        background: '#FFFFFF',
+        borderTop: '1px solid #EAEAEA',
+        borderBottom: '1px solid #EAEAEA',
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -39,11 +40,12 @@ export default function CityStrip() {
             fontWeight: 800,
             letterSpacing: '-0.8px',
             marginBottom: '1rem',
+            color: '#0A0A0A',
           }}
         >
           Where we operate.
         </h2>
-        <p style={{ fontSize: '1.15rem', color: '#888', maxWidth: '520px', marginBottom: '3rem', lineHeight: 1.7 }}>
+        <p style={{ fontSize: '1.15rem', color: '#666', maxWidth: '520px', marginBottom: '3rem', lineHeight: 1.7 }}>
           Starting in the twin cities of Rawalpindi and Islamabad, then expanding across Pakistan.
         </p>
 
@@ -58,8 +60,8 @@ export default function CityStrip() {
             <div
               key={c.name}
               style={{
-                background: '#181818',
-                border: `1px solid ${c.status === 'live' ? '#1DB954' : '#262626'}`,
+                background: c.status === 'live' ? 'rgba(29,185,84,0.06)' : '#F7F7F7',
+                border: `1px solid ${c.status === 'live' ? '#1DB954' : '#E5E5E5'}`,
                 borderRadius: '14px',
                 padding: '1.5rem',
                 textAlign: 'center' as const,
@@ -71,6 +73,7 @@ export default function CityStrip() {
                   fontSize: '1.15rem',
                   fontWeight: 700,
                   marginBottom: '0.4rem',
+                  color: '#0A0A0A',
                 }}
               >
                 {c.name}

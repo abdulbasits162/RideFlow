@@ -13,8 +13,8 @@ export default function HomePage() {
       <HeroSection />
       <BookingWidget />
       <StatsBar />
-      <HowItWorks />
       <WhyRideFlow />
+      <HowItWorks />
       <CityStrip />
       <DriverCTA />
       <AppDownload />
