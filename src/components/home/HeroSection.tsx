@@ -20,18 +20,19 @@ export default function HeroSection() {
       {/* Grid overlay */}
       <div
         className="absolute inset-0 z-0"
-        style={{
-          backgroundImage:
-            'linear-gradient(#262626 1px, transparent 1px), linear-gradient(90deg, #262626 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-          opacity: 0.3,
-          maskImage:
-            'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
-        }}
-      />
 
+      style={{
+
+        backgroundImage:
+          'linear-gradient(#262626 1px, transparent 1px), linear-gradient(90deg, #262626 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
+        opacity: 0.3,
+        maskImage:
+          'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
+        WebkitMaskImage:
+          'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
+      }}
+      />
       {/* Content */}
       <div className="relative z-10" style={{ maxWidth: '680px' }}>
         {/* Badge */}
@@ -57,7 +58,7 @@ export default function HeroSection() {
           />
           <span
             style={{
-              fontSize: '0.8rem',
+              fontSize: '1rem',
               fontWeight: 700,
               color: '#1DB954',
               letterSpacing: '0.5px',
@@ -72,7 +73,7 @@ export default function HeroSection() {
         <h1
           style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2.8rem, 6vw, 4.2rem)',
+            fontSize: '6rem',
             fontWeight: 800,
             lineHeight: 1.05,
             letterSpacing: '-1.5px',
@@ -80,7 +81,7 @@ export default function HeroSection() {
           }}
         >
           Move smarter. <br />
-          
+
           <span style={{ color: '#1DB954' }}>Ride better.</span>
         </h1>
 
@@ -113,7 +114,7 @@ export default function HeroSection() {
               transition: 'background 0.2s',
             }}
           >
-           📍 Book a Ride
+            📍 Book a Ride
           </Link>
           <Link
             href="/driver"
@@ -121,8 +122,8 @@ export default function HeroSection() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.5rem',
-              background: 'transparent',
-              color: '#fff',
+              background: '#1DB954',
+              color: 'black',
               fontWeight: 600,
               fontSize: '0.95rem',
               padding: '0.85rem 2rem',
@@ -133,10 +134,10 @@ export default function HeroSection() {
             }}
           >
 
-          🚗 Drive with RideFlow
+            🚗 Drive with RideFlow
           </Link>
         </div>
-        
+
       </div>
 
       <style>{`
