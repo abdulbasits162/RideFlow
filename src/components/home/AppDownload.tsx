@@ -13,10 +13,10 @@ export default function AppDownload() {
     }}>
       <div
         className="absolute inset-0 z-0"
-        style={{ borderRadius: '20px', overflow: 'hidden',margin:'100px 20px 100px 682px' }}
+        style={{ borderRadius: '30px', overflow: 'hidden',margin:'100px 50px 100px 682px' }}
       >
         <Image
-          src="/images/appdown.jpeg"
+          src="/images/downapp.jpeg"
           alt="RideFlow app"
           fill
           priority

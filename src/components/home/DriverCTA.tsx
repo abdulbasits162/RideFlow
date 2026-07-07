@@ -79,8 +79,8 @@ export default function DriverCTA() {
                   ✓
                 </div>
                 <div>
-                  <h5 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.15rem' }}>{p.title}</h5>
-                  <p style={{ fontSize: '0.9rem', color: '#777' }}>{p.desc}</p>
+                  <h5 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.15rem' }}>{p.title}</h5>
+                  <p style={{ fontSize: '1rem', color: '#777' }}>{p.desc}</p>
                 </div>
               </div>
             ))}
