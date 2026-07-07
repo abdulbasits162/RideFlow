@@ -11,7 +11,7 @@ export default function DriverCTA() {
     <section
       id="driver"
       style={{
-        padding: '100px 5vw',
+        padding: '140px 5vw',
         background: '#111111',
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',

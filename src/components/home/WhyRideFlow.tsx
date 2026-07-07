@@ -36,7 +36,7 @@ export default function WhyRideFlow() {
         >
           Safety and fairness, not just speed.
         </h2>
-        <p style={{ fontSize: '1.05rem', color: '#888', maxWidth: '520px', marginBottom: '3rem', lineHeight: 1.7 }}>
+        <p style={{ fontSize: '1.25rem', color: '#888', maxWidth: '520px', marginBottom: '3rem', lineHeight: 1.7 }}>
           Every decision is built around two people: the passenger who needs to feel safe, and the driver who deserves to earn fairly.
         </p>
 
@@ -85,7 +85,7 @@ export default function WhyRideFlow() {
               <h4
                 style={{
                   fontFamily: 'var(--font-syne), sans-serif',
-                  fontSize: '1.10rem',
+                  fontSize: '1.30rem',
                   fontWeight: 700,
                   marginBottom: '0.5rem',
                 }}

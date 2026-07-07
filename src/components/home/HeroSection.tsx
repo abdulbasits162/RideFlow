@@ -1,5 +1,5 @@
 'use client'
-
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function HeroSection() {
@@ -9,16 +9,24 @@ export default function HeroSection() {
       style={{ padding: '140px 5vw 80px' }}
     >
      
-
+ <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero-bg.jpg.jpg"
+          alt="RideFlow hero"
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+      </div>
 
      
       {/* Green glow */}
       <div
         className="absolute inset-0 z-0"
-        style={{
-          background:
-            'radial-gradient(ellipse 70% 60% at 80% 40%, rgba(29,185,84,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(29,185,84,0.06) 0%, transparent 50%)',
-        }}
+        // style={{
+        //   background:
+        //     'radial-gradient(ellipse 70% 60% at 80% 40%, rgba(29,185,84,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(29,185,84,0.06) 0%, transparent 50%)',
+        // }}
       />
 
       {/* Grid overlay */}
@@ -26,17 +34,17 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 z-0"
 
-      style={{
+      // style={{
 
-        backgroundImage:
-          'linear-gradient(#262626 1px, transparent 1px), linear-gradient(90deg, #262626 1px, transparent 1px)',
-        backgroundSize: '60px 60px',
-        opacity: 0.3,
-        maskImage:
-          'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
-        WebkitMaskImage:
-          'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
-      }}
+      //   backgroundImage:
+      //     'linear-gradient(#262626 1px, transparent 1px), linear-gradient(90deg, #262626 1px, transparent 1px)',
+      //   backgroundSize: '60px 60px',
+      //   opacity: 0.3,
+      //   maskImage:
+      //     'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
+      //   WebkitMaskImage:
+      //     'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
+      // }}
       />
       {/* Content */}
       <div className="relative z-10" style={{ maxWidth: '680px' }}>

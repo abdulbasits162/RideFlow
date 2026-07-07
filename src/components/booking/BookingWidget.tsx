@@ -42,7 +42,7 @@ export default function BookingWidget() {
 
   const inputStyle = {
     width: '100%',
-    background: '#fff',
+    background: '#F0F2F1',
     border: '1px solid #262626',
     borderRadius: '10px',
     padding: '0.75rem 1rem',
@@ -55,10 +55,9 @@ export default function BookingWidget() {
   const labelStyle = {
     display: 'block',
     fontSize: '0.8rem',
-    fontWeight: 800,
     letterSpacing: '0.5px',
     textTransform: 'uppercase' as const,
-    color: 'gray',
+    color: '#444',
     marginBottom: '0.4rem',
   }
 
@@ -68,8 +67,8 @@ export default function BookingWidget() {
       id="book"
 
       style={{
-        background:'white',
-        padding: '90px 10vw',
+        background:'#eee',
+        padding: '110px 10vw',
         borderBottom: '1px solid #262626',
         display: 'flex',
         justifyContent: 'space-evenly'
@@ -117,10 +116,10 @@ export default function BookingWidget() {
 
       <div
         style={{
-          background: '#eee',
-          border: '1px solid #262626',
+          background: '#fff',
+          // border: '1px solid #262626',
           borderRadius: '14px',
-          padding: '2rem',
+          padding: '1rem',
           
           width: '100%',
           maxWidth: '500px',
@@ -149,7 +148,7 @@ export default function BookingWidget() {
             style={inputStyle}
           />
         </div>
-
+<br />
         {/* Dropoff */}
         <div style={{ marginBottom: '1rem' }}>
           <label style={labelStyle}>Drop-off Location</label>
@@ -163,13 +162,12 @@ export default function BookingWidget() {
         </div>
 
        
-
+<br />  
         {/* Ride Type */}
         <div style={{ marginBottom: '1rem' }}>
           <label style={labelStyle}>Ride Type</label>
           <RideTypeSelector value={rideType} onChange={setRideType} />
         </div>
-
         {/* Payment */}
         <div style={{ marginBottom: '1.2rem' }}>
           <label style={labelStyle}>Payment</label>
@@ -198,7 +196,7 @@ export default function BookingWidget() {
             ))}
           </div>
         </div>
-
+<br />
         {/* Fare result */}
         {fare && (
           <div

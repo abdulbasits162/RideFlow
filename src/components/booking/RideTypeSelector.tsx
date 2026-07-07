@@ -34,7 +34,7 @@ export default function RideTypeSelector({ value, onChange }: Props) {
               background: active ? '#85D3A1' : '#fff',
               border: `1px solid ${active ? 'black' : '#888'}`,
               borderRadius: '12px',
-              padding: '1rem 0.75rem',
+              padding: '0.75rem 0.75rem',
               cursor: 'pointer',
               textAlign: 'left',
               transition: 'all 0.2s',
@@ -46,14 +46,14 @@ export default function RideTypeSelector({ value, onChange }: Props) {
             <span
               style={{
                 fontFamily: 'var(--font-syne), sans-serif',
-                fontWeight: 700,
+                // fontWeight: 700,
                 fontSize: '0.88rem',
-                color: active ? '#222' : '#999',
+                color: active ? '#000' : '#444',
               }}
             >
               {config.label}
             </span>
-            <span style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.4 }}>
+            {/* <span style={{ fontSize: '0.9rem', color: '#666', lineHeight: 1.4 }}>
               {descriptions[type]}
             </span>
             <span
@@ -65,7 +65,7 @@ export default function RideTypeSelector({ value, onChange }: Props) {
               }}
             >
               From PKR {config.minFare}
-            </span>
+            </span> */}
           </button>
         )
       })}

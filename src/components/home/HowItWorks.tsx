@@ -59,7 +59,6 @@ export default function HowItWorks() {
               left: 'calc(0% + 23px)',
               right: 'calc(20% + 23px)',
               height: '1px',
-              // background: '#1DB954',
               background: 'linear-gradient(90deg,  #1DB954 0%,rgba(29, 185, 84, 0.2) 100%)',
               zIndex: 0,
             }}
