@@ -10,17 +10,18 @@ const features = [
 
 export default function WhyRideFlow() {
   return (
-    <section style={{ padding: 'clamp(50px, 8vw, 90px) 5vw' }}>
+    <section style={{ padding: 'clamp(50px, 8vw, 90px) 5vw',background:'#fff' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <span
           style={{
             display: 'inline-block',
-            fontSize: 'clamp(0.8rem, 1.8vw, 1rem)',
+            fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
             fontWeight: 700,
             letterSpacing: '2px',
             textTransform: 'uppercase' as const,
             color: '#1DB954',
             marginBottom: '0.75rem',
+            
           }}
         >
           Why RideFlow
@@ -32,14 +33,15 @@ export default function WhyRideFlow() {
             fontWeight: 800,
             letterSpacing: '-0.8px',
             marginBottom: '1rem',
+            color:'black'
           }}
         >
           Safety and fairness, not just speed.
         </h2>
-        <p style={{ fontSize: 'clamp(0.9rem, 2vw, 1.25rem)', color: '#888', maxWidth: '520px', marginBottom: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.7 }}>
+        {/* <p style={{ fontSize: 'clamp(0.9rem, 2vw, 1.25rem)', color: '#666', maxWidth: '520px', marginBottom: 'clamp(2rem, 5vw, 3rem)', lineHeight: 1.7 }}>
           Every decision is built around two people: the passenger who needs to feel safe, and the driver who deserves to earn fairly.
-        </p>
-
+        </p> */}
+<br />
         <div
           className="why-rideflow-grid"
           style={{
@@ -52,7 +54,7 @@ export default function WhyRideFlow() {
             <div
               key={f.title}
               style={{
-                background: '#181818',
+                background: '#fff',
                 border: '1px solid #262626',
                 borderRadius: '14px',
                 padding: 'clamp(1.2rem, 3.5vw, 1.8rem)',
@@ -89,11 +91,12 @@ export default function WhyRideFlow() {
                   fontSize: 'clamp(1.05rem, 2.5vw, 1.30rem)',
                   fontWeight: 700,
                   marginBottom: '0.5rem',
+                  color:'black'
                 }}
               >
                 {f.title}
               </h4>
-              <p style={{ fontSize: 'clamp(0.82rem, 1.8vw, 1rem)', color: '#888', lineHeight: 1.65 }}>
+              <p style={{ fontSize: 'clamp(0.82rem, 1.8vw, 1rem)', color: '#666', lineHeight: 1.65 }}>
                 {f.desc}
               </p>
             </div>

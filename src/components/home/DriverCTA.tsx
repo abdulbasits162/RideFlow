@@ -15,9 +15,9 @@ export default function DriverCTA() {
       id="driver"
       style={{
         padding: 'clamp(70px, 12vw, 140px) 5vw',
-        background: '#111111',
-        borderTop: '1px solid #262626',
-        borderBottom: '1px solid #262626',
+        background: '#fff',
+        // borderTop: '1px solid #262626',
+        // borderBottom: '1px solid #262626',
       }}
     >
       <div
@@ -53,6 +53,7 @@ export default function DriverCTA() {
               fontWeight: 800,
               letterSpacing: '-0.8px',
               marginBottom: '1rem',
+              color:'black'
             }}
           >
             The most driver-friendly platform in Pakistan.
@@ -63,7 +64,7 @@ export default function DriverCTA() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
             {perks.map((p) => (
-              <div key={p.title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+              <div key={p.title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem',color:'#444' }}>
                 <div
                   style={{
                     width: 'clamp(30px, 4vw, 34px)',
