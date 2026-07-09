@@ -70,14 +70,14 @@ export default function Navbar() {
         position: 'fixed',
         top: 0, left: 0, right: 0,
         zIndex: 100,
-        height: '68px',
+        height: 'clamp(52px, 9vw, 68px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 5vw',
-        background: scrolled ? 'rgba(10,10,10,0.92)' : 'transparent',
+        padding: '0 clamp(1rem, 6vw, 5vw)',
+        background: 'white' ,
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid #262626' : 'none',
+        borderBottom: scrolled ? '1px solid #eee' : 'none',
         transform: visible ? 'translateY(0)' : 'translateY(-100%)',
         transition: 'transform 0.3s ease, background 0.3s, border-color 0.3s',
       }}
@@ -88,19 +88,19 @@ export default function Navbar() {
         style={{
           fontFamily: 'var(--font-syne), sans-serif',
           fontWeight: 800,
-          fontSize: '1.45rem',
+          fontSize: 'clamp(1rem, 4vw, 1.45rem)',
           letterSpacing: '-0.5px',
-          color: '#fff',
+          color: 'black',
           textDecoration: 'none',
         }}
       >
         Ride<span style={{ color: '#1DB954' }}>Flow</span>
       </Link>
 
-      {/* Desktop links */}
+      {/* Desktop links — hidden below 768px via CSS class */}
       <ul
-        className="hidden md:flex"
-        style={{ gap: '2rem', listStyle: 'none', alignItems: 'center', display: 'flex' }}
+        className="nav-desktop-links"
+        style={{ gap: 'clamp(0.75rem, 3vw, 2rem)', listStyle: 'none', alignItems: 'center', display: 'flex' }}
       >
         {links.map((l) => (
           <li key={l.href}>
@@ -108,15 +108,16 @@ export default function Navbar() {
               href={l.href}
               onClick={(e) => handleNavClick(e, l.href)}
               style={{
-                color: '#ccc',
+                color: 'black',
                 textDecoration: 'none',
-                fontSize: '0.9rem',
+                fontSize: 'clamp(0.7rem, 1.4vw, 0.9rem)',
                 fontWeight: 500,
                 cursor: 'pointer',
                 transition: 'color 0.2s',
+                whiteSpace: 'nowrap',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#ccc')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#444')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'black')}
             >
               {l.label}
             </a>
@@ -124,25 +125,30 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* Desktop CTAs */}
+      {/* Desktop CTAs — hidden below 768px via CSS class */}
       <div
-        className="hidden md:flex"
-        style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}
+        className="nav-desktop-ctas"
+        style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.4rem, 1.5vw, 0.75rem)' }}
       >
+        {/* Become a Driver — hidden below 1024px via CSS class */}
         <Link
           href="/driver/register"
+          className="nav-become-driver"
           style={{
-            fontSize: '0.88rem',
+            fontSize: 'clamp(0.68rem, 1.3vw, 0.88rem)',
             fontWeight: 600,
-            color: '#fff',
+            color: 'black',
             border: '1px solid #262626',
-            padding: '0.45rem 1.2rem',
+            padding: 'clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.6rem, 2.5vw, 1.2rem)',
             borderRadius: '50px',
             textDecoration: 'none',
             transition: 'border-color 0.2s',
+            whiteSpace: 'nowrap',
           }}
           onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#262626')}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#E1E1E1')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
         >
           Become a Driver
         </Link>
@@ -150,15 +156,16 @@ export default function Navbar() {
           href="#book"
           onClick={(e) => handleNavClick(e, '#book')}
           style={{
-            fontSize: '0.88rem',
+            fontSize: 'clamp(0.68rem, 1.3vw, 0.88rem)',
             fontWeight: 600,
             color: '#000',
             background: '#1DB954',
-            padding: '0.45rem 1.2rem',
+            padding: 'clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.6rem, 2.5vw, 1.2rem)',
             borderRadius: '50px',
             textDecoration: 'none',
             cursor: 'pointer',
             transition: 'background 0.2s',
+            whiteSpace: 'nowrap',
           }}
           onMouseEnter={(e) => (e.currentTarget.style.background = '#159040')}
           onMouseLeave={(e) => (e.currentTarget.style.background = '#1DB954')}
@@ -167,16 +174,16 @@ export default function Navbar() {
         </a>
       </div>
 
-      {/* Mobile toggle */}
+      {/* Mobile toggle — shown below 768px via CSS class */}
       <button
-        className="md:hidden"
+        className="nav-mobile-toggle"
         onClick={() => setOpen(!open)}
         style={{
           background: 'none',
           border: 'none',
           color: '#fff',
           cursor: 'pointer',
-          padding: '0.5rem',
+          padding: 'clamp(0.3rem, 1.5vw, 0.5rem)',
         }}
       >
         {open ? <X size={22} /> : <Menu size={22} />}
@@ -187,14 +194,14 @@ export default function Navbar() {
         <div
           style={{
             position: 'absolute',
-            top: '68px',
+            top: 'clamp(52px, 9vw, 68px)',
             left: 0, right: 0,
             background: '#0A0A0A',
             borderBottom: '1px solid #262626',
-            padding: '1rem 5vw',
+            padding: 'clamp(0.6rem, 4vw, 1rem) clamp(1rem, 6vw, 5vw)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1rem',
+            gap: 'clamp(0.6rem, 3vw, 1rem)',
           }}
         >
           {links.map((l) => (
@@ -205,8 +212,8 @@ export default function Navbar() {
               style={{
                 color: '#ccc',
                 textDecoration: 'none',
-                fontSize: '0.9rem',
-                padding: '0.25rem 0',
+                fontSize: 'clamp(0.75rem, 3.5vw, 0.9rem)',
+                padding: 'clamp(0.15rem, 1vw, 0.25rem) 0',
                 cursor: 'pointer',
               }}
             >
@@ -221,17 +228,44 @@ export default function Navbar() {
               color: '#000',
               fontWeight: 700,
               textAlign: 'center',
-              padding: '0.75rem',
+              padding: 'clamp(0.5rem, 3vw, 0.75rem)',
               borderRadius: '50px',
               textDecoration: 'none',
               cursor: 'pointer',
               marginTop: '0.5rem',
+              fontSize: 'clamp(0.8rem, 3.5vw, 0.95rem)',
             }}
           >
             Book Now
           </a>
         </div>
       )}
+
+      <style jsx>{`
+        .nav-mobile-toggle {
+          display: none;
+        }
+
+        /* Below 1024px: hide "Become a Driver" button only */
+        @media (max-width: 1024px) {
+          .nav-become-driver {
+            display: none;
+          }
+        }
+
+        /* Below 768px: hide desktop links + CTAs, show hamburger */
+        @media (max-width: 768px) {
+          .nav-desktop-links {
+            display: none !important;
+          }
+          .nav-desktop-ctas {
+            display: none !important;
+          }
+          .nav-mobile-toggle {
+            display: flex !important;
+          }
+        }
+      `}</style>
     </nav>
   )
 }

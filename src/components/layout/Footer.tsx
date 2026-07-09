@@ -28,7 +28,7 @@ export default function Footer() {
       style={{
         // background: '#111111'  ,
         // borderTop: '1px solid #262626',
-        padding: '4rem 5vw 2rem',
+        padding: 'clamp(2.5rem, 6vw, 4rem) 5vw clamp(1.25rem, 3vw, 2rem)',
       }}
     >
       <div style={{ maxWidth: '1200px', margin: '0 auto',            borderTop: '1px solid #262626',
@@ -36,12 +36,13 @@ export default function Footer() {
 
         {/* Top grid */}
         <div
+          className="footer-top-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '2fr 1fr 1fr 1fr',
-            gap: '3rem',
-            marginBottom: '3rem',
-            marginTop:'3rem'
+            gap: 'clamp(1.5rem, 4vw, 3rem)',
+            marginBottom: 'clamp(2rem, 4vw, 3rem)',
+            marginTop:'clamp(2rem, 4vw, 3rem)'
           }}
         >
           {/* Brand */}
@@ -51,7 +52,7 @@ export default function Footer() {
               style={{
                 fontFamily: 'var(--font-syne), sans-serif',
                 fontWeight: 800,
-                fontSize: '1.6rem',
+                fontSize: 'clamp(1.3rem, 3vw, 1.6rem)',
                 letterSpacing: '-0.5px',
                 color: '#fff',
                 textDecoration: 'none',
@@ -61,7 +62,7 @@ export default function Footer() {
             >
               Ride<span style={{ color: '#1DB954' }}>Flow</span>
             </Link>
-            <p style={{ fontSize: '0.85rem', color: '#555', lineHeight: 1.7, maxWidth: '260px' }}>
+            <p style={{ fontSize: 'clamp(0.78rem, 1.7vw, 0.85rem)', color: '#555', lineHeight: 1.7, maxWidth: '260px' }}>
               Pakistan&apos;s safety-first, driver-fair ride-hailing platform.
               Starting in Rawalpindi &amp; Islamabad.
             </p>
@@ -89,7 +90,7 @@ export default function Footer() {
                       href={item.href}
                       style={{
                         color: '#888',
-                        fontSize: '0.88rem',
+                        fontSize: 'clamp(0.82rem, 1.8vw, 0.88rem)',
                         textDecoration: 'none',
                         transition: 'color 0.2s',
                       }}
@@ -115,16 +116,16 @@ export default function Footer() {
             gap: '1rem',
           }}
         >
-          <p style={{ fontSize: '0.8rem', color: '#555' }}>
+          <p style={{ fontSize: 'clamp(0.72rem, 1.6vw, 0.8rem)', color: '#555' }}>
             © 2026 RideFlow Pakistan. All rights reserved.
           </p>
-          <div style={{ display: 'flex', gap: '1.2rem' }}>
+          <div style={{ display: 'flex', gap: 'clamp(0.8rem, 2vw, 1.2rem)', flexWrap: 'wrap' as const }}>
             {socials.map((s) => (
               <a
                 key={s}
                 href="#"
                 style={{
-                  fontSize: '0.8rem',
+                  fontSize: 'clamp(0.72rem, 1.6vw, 0.8rem)',
                   color: '#555',
                   textDecoration: 'none',
                   transition: 'color 0.2s',
@@ -137,6 +138,19 @@ export default function Footer() {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .footer-top-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+        @media (max-width: 560px) {
+          .footer-top-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </footer>
   )
 }

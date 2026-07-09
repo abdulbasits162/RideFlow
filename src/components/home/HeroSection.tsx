@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function HeroSection() {
   const imageWrapRef = useRef<HTMLDivElement>(null)
-  const imageRef     = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let rafId: number
@@ -14,15 +14,15 @@ export default function HeroSection() {
     const onScroll = () => {
       rafId = requestAnimationFrame(() => {
         const imgWrap = imageWrapRef.current
-        const imgEl   = imageRef.current
+        const imgEl = imageRef.current
         if (!imgWrap || !imgEl) return
 
-        const scrollY  = window.scrollY
-        const vh       = window.innerHeight
+        const scrollY = window.scrollY
+        const vh = window.innerHeight
         const progress = Math.min(Math.max(scrollY / vh, 0), 1)
 
         // image rises from bottom → top  (same as before)
-        const translateY = (1 - progress) * 100
+        const translateY = 70 - (progress * 70)
         imgWrap.style.transform = `translateY(${translateY}%)`
 
         // zoom: starts at 1.0, grows to 1.18 as user scrolls
@@ -44,37 +44,18 @@ export default function HeroSection() {
       <div style={{ height: '200vh' }}>
         <section
           className="relative min-h-screen flex flex-col justify-center items-start overflow-hidden sticky top-0"
-          style={{ padding: '140px 5vw 80px' }}
+          style={{ padding: 'clamp(90px, 12vw, 140px) 5vw clamp(50px, 8vw, 80px) ', background: 'white' }}
         >
 
           {/* YOUR ORIGINAL green glow — unchanged */}
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              background:
-                'radial-gradient(ellipse 70% 60% at 80% 40%, rgba(29,185,84,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(29,185,84,0.06) 0%, transparent 50%)',
-            }}
-          />
 
-          {/* YOUR ORIGINAL grid overlay — unchanged */}
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage:
-                'linear-gradient(#262626 1px, transparent 1px), linear-gradient(90deg, #262626 1px, transparent 1px)',
-              backgroundSize: '60px 60px',
-              opacity: 0.3,
-              maskImage:
-                'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
-              WebkitMaskImage:
-                'radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)',
-            }}
-          />
+
+
 
           {/* YOUR ORIGINAL content — completely unchanged */}
-          <div className="relative z-10" style={{ maxWidth: '680px' }}>
-            <div
-              className="inline-flex items-center gap-2"
+          <div className="relative z-10" style={{ width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'clamp(-200px, -9vw, -190px)' }}>
+            {/* <div
+              className="inline-flex items-center gap-2 "
               style={{
                 background: 'rgba(29,185,84,0.12)',
                 border: '1px solid rgba(29,185,84,0.3)',
@@ -104,35 +85,37 @@ export default function HeroSection() {
               >
                 Now live — Rawalpindi & Islamabad
               </span>
-            </div>
+            </div> */}
 
             <h1
               style={{
                 fontFamily: 'var(--font-inter), sans-serif',
-                fontSize: '6rem',
+                fontSize: 'clamp(2.2rem, 6vw, 5rem)',
                 fontWeight: 800,
                 lineHeight: 1.05,
                 letterSpacing: '-1.5px',
-                marginBottom: '1.4rem',
+                marginBottom: 'clamp(1rem, 2vw, 1.4rem)',
+                color: 'black'
               }}
             >
-              Move smarter. <br />
+              Move smarter.
               <span style={{ color: '#1DB954' }}>Ride better.</span>
             </h1>
 
             <p
               style={{
-                fontSize: '1.15rem',
-                color: '#B0B0B0',
-                maxWidth: '520px',
-                marginBottom: '2.5rem',
+                fontSize: 'clamp(0.9rem, 1.5vw, 1.2rem)',
+                color: '#333',
+                maxWidth: '720px',
+                marginBottom: 'clamp(1.75rem, 3vw, 2.5rem)',
                 lineHeight: 1.7,
+                padding: '0 1rem',
               }}
             >
               From daily commutes to airport transfers and intercity travel, RideFlow gets you there safely, comfortably, and on time.
             </p>
 
-            <div className="flex flex-wrap" style={{ gap: '1rem' }}>
+            <div className="flex flex-wrap" style={{ gap: 'clamp(0.6rem, 1.5vw, 1rem)', justifyContent: 'center' }}>
               <Link
                 href="/book"
                 style={{
@@ -142,12 +125,15 @@ export default function HeroSection() {
                   background: '#1DB954',
                   color: '#000',
                   fontWeight: 700,
-                  fontSize: '0.95rem',
-                  padding: '0.85rem 2rem',
-                  borderRadius: '50px',
+                  fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
+                  padding: 'clamp(0.7rem, 1.5vw, 0.85rem) clamp(1.4rem, 3vw, 2rem)',
+                  borderRadius: '10px',
                   textDecoration: 'none',
                   transition: 'background 0.2s',
                 }}
+                
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#1BA94C')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#1DB954')}
               >
                 📍 Book a Ride
               </Link>
@@ -159,14 +145,18 @@ export default function HeroSection() {
                   gap: '0.5rem',
                   background: '#1DB954',
                   color: 'black',
-                  fontWeight: 600,
-                  fontSize: '0.95rem',
-                  padding: '0.85rem 2rem',
-                  borderRadius: '50px',
-                  border: '1px solid #262626',
+                  fontWeight: 700,
+                  fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
+                  padding: 'clamp(0.7rem, 1.5vw, 0.85rem) clamp(1.4rem, 3vw, 2rem)',
+                  borderRadius: '10px',
                   textDecoration: 'none',
                   transition: 'border-color 0.2s',
+                  backgroundColor: '#eee'
+
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#E1E1E1')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#eee')}
+
               >
                 🚗 Drive with RideFlow
               </Link>
@@ -177,7 +167,7 @@ export default function HeroSection() {
           <div
             ref={imageWrapRef}
             className="absolute inset-0 z-20 will-change-transform pointer-events-none overflow-hidden"
-            style={{ transform: 'translateY(100%)' }}
+            style={{ transform: 'translateY(60%)' }}
           >
             {/* Inner div — zooms independently of the rise */}
             <div

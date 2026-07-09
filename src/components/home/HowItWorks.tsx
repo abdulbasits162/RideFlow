@@ -1,3 +1,5 @@
+'use client'
+
 const steps = [
   { num: '1', title: 'Set Your Route', desc: 'Enter pickup and drop-off. See your upfront fare before you confirm — no surprises.' },
   { num: '2', title: 'Matched in Seconds', desc: 'We find the nearest verified driver. You see their name, photo, rating, and plate.' },
@@ -10,7 +12,7 @@ export default function HowItWorks() {
     <section
       id="how"
       style={{
-        padding: '160px 5vw',
+        padding: 'clamp(70px, 12vw, 160px) 5vw',
         background: '#444',
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',
@@ -20,7 +22,7 @@ export default function HowItWorks() {
         <span
           style={{
             display: 'inline-block',
-            fontSize: '1rem',
+            fontSize: 'clamp(0.8rem, 1.8vw, 1rem)',
             fontWeight: 700,
             letterSpacing: '2px',
             textTransform: 'uppercase' as const,
@@ -34,28 +36,30 @@ export default function HowItWorks() {
         <h2
           style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(1.9rem, 3.5vw, 2.8rem)',
+            fontSize: 'clamp(1.6rem, 5vw, 2.8rem)',
             fontWeight: 800,
             letterSpacing: '-0.8px',
-            marginBottom: '3.5rem',
+            marginBottom: 'clamp(2rem, 5vw, 3.5rem)',
           }}
         >
           From tap to destination in four steps.
         </h2>
         <br />
         <div
+          className="how-it-works-grid"
           style={{
             position: 'relative',
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '2rem',
+            gap: 'clamp(1.2rem, 3vw, 2rem)',
           }}
         >
           {/* Connecting line */}
           <div
+            className="how-it-works-line"
             style={{
               position: 'absolute',
-              top: '23px',
+              top: 'clamp(19px, 3vw, 23px)',
               left: 'calc(0% + 23px)',
               right: 'calc(20% + 23px)',
               height: '1px',
@@ -73,13 +77,13 @@ export default function HowItWorks() {
 
                 style={{
 
-                  width: '46px',
-                  height: '46px',
+                  width: 'clamp(38px, 6vw, 46px)',
+                  height: 'clamp(38px, 6vw, 46px)',
                   background: '#1DB954',
                   color: '#000',
                   fontFamily: 'var(--font-syne), sans-serif',
                   fontWeight: 800,
-                  fontSize: '1.2rem',
+                  fontSize: 'clamp(1rem, 2.2vw, 1.2rem)',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -95,20 +99,36 @@ export default function HowItWorks() {
               <h4
                 style={{
                   fontFamily: 'var(--font-syne), sans-serif',
-                  fontSize: '1.9rem',
+                  fontSize: 'clamp(1.25rem, 3vw, 1.9rem)',
                   fontWeight: 700,
                   marginBottom: '0.5rem',
                 }}
               >
                 {step.title}
               </h4>
-              <p style={{ fontSize: '1.3rem', color: '#999', lineHeight: 1.6 }}>
+              <p style={{ fontSize: 'clamp(0.9rem, 2vw, 1.3rem)', color: '#999', lineHeight: 1.6 }}>
                 {step.desc}
               </p>
             </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 900px) {
+          .how-it-works-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .how-it-works-line {
+            display: none;
+          }
+        }
+        @media (max-width: 560px) {
+          .how-it-works-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

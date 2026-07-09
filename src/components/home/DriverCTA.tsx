@@ -1,9 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 
 const perks = [
-  { title: 'Weekly Payouts', desc: 'Your earnings land in your wallet every week. No delays, no queues.' },
-  { title: 'Full Earnings Transparency', desc: 'See every deduction itemised — fare, commission, promotions. Zero hidden cuts.' },
-  { title: 'You Set Your Hours', desc: 'Go online when you want, go offline when you don\'t. No minimum hours.' },
+  { title: 'Weekly Payouts' },
+  { title: 'lowest commission' },
+  { title: 'Full Earnings Transparency' },
+  { title: 'You Set Your Hours' },
 ]
 
 export default function DriverCTA() {
@@ -11,19 +14,20 @@ export default function DriverCTA() {
     <section
       id="driver"
       style={{
-        padding: '140px 5vw',
+        padding: 'clamp(70px, 12vw, 140px) 5vw',
         background: '#111111',
         borderTop: '1px solid #262626',
         borderBottom: '1px solid #262626',
       }}
     >
       <div
+        className="driver-cta-grid"
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          gap: '4rem',
+          gap: 'clamp(2rem, 6vw, 4rem)',
           alignItems: 'center',
         }}
       >
@@ -32,7 +36,7 @@ export default function DriverCTA() {
           <span
             style={{
               display: 'inline-block',
-              fontSize: '1rem',
+              fontSize: 'clamp(0.8rem, 1.8vw, 1rem)',
               fontWeight: 700,
               letterSpacing: '2px',
               textTransform: 'uppercase' as const,
@@ -45,7 +49,7 @@ export default function DriverCTA() {
           <h2
             style={{
               fontFamily: 'var(--font-inter), sans-serif',
-              fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+              fontSize: 'clamp(1.4rem, 4.2vw, 2.5rem)',
               fontWeight: 800,
               letterSpacing: '-0.8px',
               marginBottom: '1rem',
@@ -53,17 +57,17 @@ export default function DriverCTA() {
           >
             The most driver-friendly platform in Pakistan.
           </h2>
-          <p style={{ fontSize: '1.15rem', color: '#888', maxWidth: '520px', marginBottom: '2rem', lineHeight: 1.7 }}>
+          {/* <p style={{ fontSize: 'clamp(0.85rem, 2vw, 1.15rem)', color: '#888', maxWidth: '520px', marginBottom: '2rem', lineHeight: 1.7 }}>
             RideFlow charges the lowest commission in the market — meaning more in your pocket every single ride.
-          </p>
+          </p> */}
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
             {perks.map((p) => (
-              <div key={p.title} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.9rem' }}>
+              <div key={p.title} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
                 <div
                   style={{
-                    width: '22px',
-                    height: '22px',
+                    width: 'clamp(30px, 4vw, 34px)',
+                    height: 'clamp(30px, 4vw, 34px)',
                     borderRadius: '50%',
                     background: 'rgba(29,185,84,0.12)',
                     border: '1px solid rgba(29,185,84,0.3)',
@@ -72,15 +76,14 @@ export default function DriverCTA() {
                     justifyContent: 'center',
                     flexShrink: 0,
                     marginTop: '2px',
-                    fontSize: '0.7rem',
+                    fontSize: '1rem',
                     color: '#1DB954',
                   }}
                 >
                   ✓
                 </div>
                 <div>
-                  <h5 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '0.15rem' }}>{p.title}</h5>
-                  <p style={{ fontSize: '1rem', color: '#777' }}>{p.desc}</p>
+                  <h5 style={{ fontSize: 'clamp(1.5rem, 2.2vw, 1.5rem)', fontWeight: 600, marginBottom: '0.15rem' }}>{p.title}</h5>
                 </div>
               </div>
             ))}
@@ -94,8 +97,8 @@ export default function DriverCTA() {
               background: '#1DB954',
               color: '#000',
               fontWeight: 700,
-              fontSize: '0.95rem',
-              padding: '0.85rem 2rem',
+              fontSize: 'clamp(0.82rem, 1.8vw, 0.95rem)',
+              padding: 'clamp(0.65rem, 2vw, 0.85rem) clamp(1.4rem, 4vw, 2rem)',
               borderRadius: '50px',
               textDecoration: 'none',
             }}
@@ -110,12 +113,14 @@ export default function DriverCTA() {
             background: '#181818',
             border: '1px solid #262626',
             borderRadius: '14px',
-            padding: '2rem',
+            padding: 'clamp(1.25rem, 4vw, 2rem)',
+            height: '570px',
+            width:'500px'
           }}
         >
           <h4
             style={{
-              fontSize: '0.75rem',
+              fontSize: '1rem',
               fontWeight: 700,
               textTransform: 'uppercase' as const,
               letterSpacing: '1px',
@@ -125,7 +130,7 @@ export default function DriverCTA() {
           >
             Sample Weekly Earnings
           </h4>
-
+          <br />
           {[
             { label: 'Total Fare Collected', val: 'PKR 28,500', color: '#fff' },
             { label: 'Platform Commission (17%)', val: '− PKR 4,845', color: '#e05' },
@@ -138,24 +143,27 @@ export default function DriverCTA() {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                padding: '0.85rem 0',
+                padding: '1rem 0',
                 borderBottom: row.large ? 'none' : '1px solid #262626',
+                gap: '0.75rem',
               }}
             >
-              <span style={{ fontSize: '0.9rem', color: '#aaa' }}>{row.label}</span>
+
+              <span style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', color: '#aaa' }}>{row.label} </span>
               <span
                 style={{
                   fontFamily: 'var(--font-syne), sans-serif',
                   fontWeight: 700,
-                  fontSize: row.large ? '1.3rem' : '1rem',
+                  fontSize: row.large ? 'clamp(1.3rem, 2.8vw, 1.6rem)' : 'clamp(1.05rem, 2.2vw, 1.25rem)',
                   color: row.color,
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {row.val}
               </span>
             </div>
           ))}
-
+<br /><br />
           <div
             style={{
               marginTop: '1.2rem',
@@ -171,6 +179,14 @@ export default function DriverCTA() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @media (max-width: 900px) {
+          .driver-cta-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
