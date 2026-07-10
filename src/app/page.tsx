@@ -12,11 +12,11 @@ export default function HomePage() {
     <>
       <HeroSection />
       <BookingWidget />
-      <StatsBar />
-      <HowItWorks />
+      {/* <StatsBar /> */}
       <WhyRideFlow />
-      <CityStrip />
+      <HowItWorks />
       <DriverCTA />
+      <CityStrip />
       <AppDownload />
     </>
   )

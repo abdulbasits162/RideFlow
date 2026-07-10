@@ -20,7 +20,7 @@ const descriptions: Record<RideType, string> = {
 
 export default function RideTypeSelector({ value, onChange }: Props) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+    <div className="ride-type-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(0.35rem, 2vw, 0.75rem)' }}>
       {rideTypes.map((type) => {
         const config = FARE_CONFIG[type]
         const active = value === type
@@ -30,37 +30,41 @@ export default function RideTypeSelector({ value, onChange }: Props) {
             key={type}
             type="button"
             onClick={() => onChange(type)}
+            className="ride-type-card"
             style={{
-              background: active ? 'rgba(29,185,84,0.08)' : '#0A0A0A',
-              border: `1px solid ${active ? '#1DB954' : '#262626'}`,
+              background: active ? 'rgba(29,185,84,0.12)' : '#333',
+              border: `1px solid ${active ? '#1DB954' : '#2A2A2A'}`,
               borderRadius: '12px',
-              padding: '1rem 0.75rem',
+              padding: 'clamp(0.5rem, 3vw, 1rem) clamp(0.35rem, 2vw, 0.75rem)',
               cursor: 'pointer',
               textAlign: 'left',
               transition: 'all 0.2s',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.4rem',
+              gap: 'clamp(0.2rem, 1vw, 0.4rem)',
+              boxShadow: active ? '0 0 0 1px rgba(29,185,84,0.25)' : 'none',
             }}
           >
             <span
+              className="ride-type-label"
               style={{
                 fontFamily: 'var(--font-syne), sans-serif',
                 fontWeight: 700,
-                fontSize: '0.88rem',
-                color: active ? '#1DB954' : '#fff',
+                fontSize: 'clamp(0.62rem, 2.2vw, 0.88rem)',
+                color: active ? '#1DB954' : '#E5E5E5',
               }}
             >
               {config.label}
             </span>
-            <span style={{ fontSize: '0.75rem', color: '#666', lineHeight: 1.4 }}>
+            <span className="ride-type-desc" style={{ fontSize: 'clamp(0.52rem, 1.9vw, 0.8rem)', color: active ? '#C9C9C9' : '#888', lineHeight: 1.4 }}>
               {descriptions[type]}
             </span>
             <span
+              className="ride-type-price"
               style={{
-                fontSize: '0.78rem',
+                fontSize: 'clamp(0.52rem, 1.9vw, 0.8rem)',
                 fontWeight: 600,
-                color: '#1DB954',
+                color: active ? '#1DB954' : '#666',
                 marginTop: '0.2rem',
               }}
             >
