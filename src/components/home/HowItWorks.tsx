@@ -22,11 +22,11 @@ export default function HowItWorks() {
         <span
           style={{
             display: 'inline-block',
-            fontSize: 'clamp(0.8rem, 1.8vw, 1rem)',
-            fontWeight: 700,
+            fontSize: 'clamp(1.5rem, 1.8vw, 1rem)',
+            fontWeight: 800,
             letterSpacing: '2px',
             textTransform: 'uppercase' as const,
-            color: '#1DB954',
+            color: '#2B8659',
             marginBottom: '0.75rem',
           }}
         >
@@ -63,7 +63,7 @@ export default function HowItWorks() {
               left: 'calc(0% + 23px)',
               right: 'calc(20% + 23px)',
               height: '1px',
-              background: 'linear-gradient(90deg,  #1DB954 0%,rgba(29, 185, 84, 0.2) 100%)',
+              background: 'linear-gradient(90deg,  #2B8659 0%,rgba(29, 185, 84, 0.2) 100%)',
               zIndex: 0,
             }}
           />
@@ -79,7 +79,7 @@ export default function HowItWorks() {
 
                   width: 'clamp(38px, 6vw, 46px)',
                   height: 'clamp(38px, 6vw, 46px)',
-                  background: '#1DB954',
+                  background: '#2B8659',
                   color: '#000',
                   fontFamily: 'var(--font-syne), sans-serif',
                   fontWeight: 800,

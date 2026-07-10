@@ -26,14 +26,16 @@ export default function Footer() {
   return (
     <footer
       style={{
-        // background: '#111111'  ,
-        // borderTop: '1px solid #262626',
         padding: 'clamp(2.5rem, 6vw, 4rem) 5vw clamp(1.25rem, 3vw, 2rem)',
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto',            borderTop: '1px solid #262626',
- }}>
-
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          borderTop: '1px solid #262626',
+        }}
+      >
         {/* Top grid */}
         <div
           className="footer-top-grid"
@@ -42,7 +44,7 @@ export default function Footer() {
             gridTemplateColumns: '2fr 1fr 1fr 1fr',
             gap: 'clamp(1.5rem, 4vw, 3rem)',
             marginBottom: 'clamp(2rem, 4vw, 3rem)',
-            marginTop:'clamp(2rem, 4vw, 3rem)'
+            marginTop: 'clamp(2rem, 4vw, 3rem)',
           }}
         >
           {/* Brand */}
@@ -60,9 +62,9 @@ export default function Footer() {
                 marginBottom: '0.8rem',
               }}
             >
-              Ride<span style={{ color: '#1DB954' }}>Flow</span>
+              Ride<span style={{ color: '#2B8659' }}>Flow</span>
             </Link>
-            <p style={{ fontSize: 'clamp(0.78rem, 1.7vw, 0.85rem)', color: '#555', lineHeight: 1.7, maxWidth: '260px' }}>
+            <p style={{ fontSize: 'clamp(0.78rem, 1.7vw, 0.85rem)', color: '#999', lineHeight: 1.7, maxWidth: '260px' }}>
               Pakistan&apos;s safety-first, driver-fair ride-hailing platform.
               Starting in Rawalpindi &amp; Islamabad.
             </p>
@@ -107,7 +109,6 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           style={{
-            // borderTop: '1px solid #262626',
             paddingTop: '1.5rem',
             display: 'flex',
             justifyContent: 'space-between',
@@ -136,7 +137,6 @@ export default function Footer() {
             ))}
           </div>
         </div>
-
       </div>
 
       <style>{`
@@ -148,6 +148,9 @@ export default function Footer() {
         @media (max-width: 560px) {
           .footer-top-grid {
             grid-template-columns: 1fr;
+          }
+          .footer-top-grid > div:first-child {
+            grid-column: 1 / -1;
           }
         }
       `}</style>

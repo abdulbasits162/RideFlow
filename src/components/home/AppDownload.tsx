@@ -5,7 +5,7 @@ export default function AppDownload() {
   return (
     <section id="app" style={{
       padding: 'clamp(70px, 15vw, 190px) 1.25rem',
-      background: '#1DB954',
+      background: '#fff',
       position: 'relative',
       overflow: 'hidden',
       textAlign: 'center' as const,

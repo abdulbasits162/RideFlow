@@ -15,11 +15,11 @@ export default function WhyRideFlow() {
         <span
           style={{
             display: 'inline-block',
-            fontSize: 'clamp(1rem, 1.8vw, 1.2rem)',
-            fontWeight: 700,
+            fontSize: 'clamp(1.5rem, 1.8vw, 1.2rem)',
+            fontWeight: 800,
             letterSpacing: '2px',
             textTransform: 'uppercase' as const,
-            color: '#1DB954',
+            color: '#2B8659',
             marginBottom: '0.75rem',
             
           }}
@@ -62,7 +62,7 @@ export default function WhyRideFlow() {
                 cursor: 'default',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#1DB954'
+                e.currentTarget.style.borderColor = '#2B8659'
                 e.currentTarget.style.transform = 'translateY(-3px)'
               }}
               onMouseLeave={(e) => {

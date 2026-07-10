@@ -94,7 +94,7 @@ export default function Navbar() {
           textDecoration: 'none',
         }}
       >
-        Ride<span style={{ color: '#1DB954' }}>Flow</span>
+        Ride<span style={{ color: '#2B8659' }}>Flow</span>
       </Link>
 
       {/* Desktop links — hidden below 768px via CSS class */}
@@ -145,7 +145,7 @@ export default function Navbar() {
             transition: 'border-color 0.2s',
             whiteSpace: 'nowrap',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#2B8659')}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#262626')}
           onMouseEnter={(e) => (e.currentTarget.style.background = '#E1E1E1')}
           onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
@@ -158,8 +158,8 @@ export default function Navbar() {
           style={{
             fontSize: 'clamp(0.68rem, 1.3vw, 0.88rem)',
             fontWeight: 600,
-            color: '#000',
-            background: '#1DB954',
+            color: '#fff',
+            background: '#2B8659',
             padding: 'clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.6rem, 2.5vw, 1.2rem)',
             borderRadius: '50px',
             textDecoration: 'none',
@@ -167,8 +167,8 @@ export default function Navbar() {
             transition: 'background 0.2s',
             whiteSpace: 'nowrap',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#159040')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = '#1DB954')}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#34A16A')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = '#2B8659')}
         >
           Book Now
         </a>
@@ -179,8 +179,9 @@ export default function Navbar() {
         className="nav-mobile-toggle"
         onClick={() => setOpen(!open)}
         style={{
-          background: 'none',
+          background: '#444',
           border: 'none',
+          borderRadius:'10px',
           color: '#fff',
           cursor: 'pointer',
           padding: 'clamp(0.3rem, 1.5vw, 0.5rem)',
@@ -196,7 +197,7 @@ export default function Navbar() {
             position: 'absolute',
             top: 'clamp(52px, 9vw, 68px)',
             left: 0, right: 0,
-            background: '#0A0A0A',
+            background: '#444',
             borderBottom: '1px solid #262626',
             padding: 'clamp(0.6rem, 4vw, 1rem) clamp(1rem, 6vw, 5vw)',
             display: 'flex',
@@ -210,7 +211,7 @@ export default function Navbar() {
               href={l.href}
               onClick={(e) => handleNavClick(e, l.href)}
               style={{
-                color: '#ccc',
+                color: '#eee',
                 textDecoration: 'none',
                 fontSize: 'clamp(0.75rem, 3.5vw, 0.9rem)',
                 padding: 'clamp(0.15rem, 1vw, 0.25rem) 0',
@@ -224,7 +225,7 @@ export default function Navbar() {
             href="#book"
             onClick={(e) => handleNavClick(e, '#book')}
             style={{
-              background: '#1DB954',
+              background: '#2B8659',
               color: '#000',
               fontWeight: 700,
               textAlign: 'center',

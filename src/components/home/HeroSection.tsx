@@ -68,7 +68,7 @@ export default function HeroSection() {
                 style={{
                   width: '7px',
                   height: '7px',
-                  background: '#1DB954',
+                  background: '#2B8659',
                   borderRadius: '50%',
                   animation: 'pulse 2s infinite',
                   display: 'inline-block',
@@ -78,7 +78,7 @@ export default function HeroSection() {
                 style={{
                   fontSize: '1rem',
                   fontWeight: 700,
-                  color: '#1DB954',
+                  color: '#2B8659',
                   letterSpacing: '0.5px',
                   textTransform: 'uppercase',
                 }}
@@ -99,12 +99,12 @@ export default function HeroSection() {
               }}
             >
               Move smarter.
-              <span style={{ color: '#1DB954' }}>Ride better.</span>
+              <span style={{ color: '#2B8659' }}>Ride better.</span>
             </h1>
 
             <p
               style={{
-                fontSize: 'clamp(0.9rem, 1.5vw, 1.2rem)',
+                fontSize: 'clamp(1.2rem, 1.5vw, 2rem)',
                 color: '#333',
                 maxWidth: '720px',
                 marginBottom: 'clamp(1.75rem, 3vw, 2.5rem)',
@@ -122,8 +122,8 @@ export default function HeroSection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  background: '#1DB954',
-                  color: '#000',
+                  background: '#2B8659',
+                  color: '#fff',
                   fontWeight: 700,
                   fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
                   padding: 'clamp(0.7rem, 1.5vw, 0.85rem) clamp(1.4rem, 3vw, 2rem)',
@@ -132,8 +132,8 @@ export default function HeroSection() {
                   transition: 'background 0.2s',
                 }}
                 
-                onMouseEnter={(e) => (e.currentTarget.style.background = '#1BA94C')}
-                onMouseLeave={(e) => (e.currentTarget.style.background = '#1DB954')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = '#34A16A')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = '#2B8659')}
               >
                 📍 Book a Ride
               </Link>
@@ -143,7 +143,7 @@ export default function HeroSection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  background: '#1DB954',
+                  background: '#2B8659',
                   color: 'black',
                   fontWeight: 700,
                   fontSize: 'clamp(0.85rem, 1.3vw, 0.95rem)',
