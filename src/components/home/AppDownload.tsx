@@ -9,16 +9,18 @@ export default function AppDownload() {
         background: '#fff',
         position: 'relative',
         overflow: 'hidden',
-        padding: '100px 5vw',
+        padding: '150px 5vw',
       }}
+      
     >
+       <Image
+            src="/images/app-bg.jpg"
+            alt="RideFlow app on phone"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
       {/* Background subtle glow */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'radial-gradient(ellipse 60% 80% at 80% 50%, rgba(29,185,84,0.07) 0%, transparent 70%)',
-        zIndex: 0,
-      }} />
+  
 
       <div style={{
         position: 'relative',
@@ -61,7 +63,7 @@ export default function AppDownload() {
 
           <p style={{
             fontSize: '1rem',
-            color: '#555',
+            color: '#222',
             lineHeight: 1.75,
             marginBottom: '2rem',
             maxWidth: '400px',
@@ -106,7 +108,7 @@ export default function AppDownload() {
                   alignItems: 'center',
                   gap: '0.75rem',
                   background: '#2B8659',
-                  border: '1px solid #fff',
+                  border: '1px solid #444',
                   borderRadius: '12px',
                   padding: '0.85rem 1.4rem',
                   textDecoration: 'none',
@@ -119,7 +121,7 @@ export default function AppDownload() {
                   e.currentTarget.style.transform = 'translateY(-2px)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#fff'
+                  e.currentTarget.style.borderColor = '#444'
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
@@ -138,71 +140,7 @@ export default function AppDownload() {
           </div>
         </div>
 
-        {/* Right: phone image */}
-        <div style={{
-          position: 'relative',
-          height: '520px',
-          borderRadius: '24px',
-          overflow: 'hidden',
-          border: '1px solid #1a1a1a',
-        }}>
-          <Image
-            src="/images/app-bg.jpg"
-            alt="RideFlow app on phone"
-            fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-          />
-          {/* Overlay gradient */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, transparent 60%)',
-          }} />
-
-          {/* Floating stat card */}
-          <div style={{
-            position: 'absolute',
-            left: '1.5rem',
-            top: '2rem',
-            background: 'rgba(10,10,10,0.85)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid #262626',
-            borderRadius: '14px',
-            padding: '1rem 1.25rem',
-            minWidth: '180px',
-          }}>
-            <div style={{ fontSize: '0.7rem', color: '#555', marginBottom: '0.3rem', textTransform: 'uppercase' as const, letterSpacing: '1px' }}>
-              Match Time
-            </div>
-            <div style={{
-              fontFamily: 'var(--font-syne), sans-serif',
-              fontSize: '1.6rem',
-              fontWeight: 800,
-              color: '#1DB954',
-              lineHeight: 1,
-            }}>
-              &lt;90s
-            </div>
-            <div style={{ fontSize: '0.75rem', color: '#555', marginTop: '0.25rem' }}>
-              Average driver match
-            </div>
-          </div>
-
-          {/* Floating rating card */}
-          <div style={{
-            position: 'absolute',
-            bottom: '2rem',
-            right: '1.5rem',
-            background: 'rgba(10,10,10,0.85)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid #262626',
-            borderRadius: '14px',
-            padding: '0.85rem 1.1rem',
-          }}>
-            <div style={{ fontSize: '1.1rem', marginBottom: '0.2rem' }}>⭐⭐⭐⭐⭐</div>
-            <div style={{ fontSize: '0.72rem', color: '#777' }}>4.8 · 2,400+ rides</div>
-          </div>
-        </div>
+       
       </div>
     </section>
   )

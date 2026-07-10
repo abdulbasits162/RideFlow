@@ -79,7 +79,7 @@ export default function Footer() {
                   fontWeight: 700,
                   textTransform: 'uppercase' as const,
                   letterSpacing: '1.5px',
-                  color: '#555',
+                  color: '#eee',
                   marginBottom: '1rem',
                 }}
               >
@@ -91,7 +91,7 @@ export default function Footer() {
                     <Link
                       href={item.href}
                       style={{
-                        color: '#888',
+                        color: '#999',
                         fontSize: 'clamp(0.82rem, 1.8vw, 0.88rem)',
                         textDecoration: 'none',
                         transition: 'color 0.2s',
@@ -117,7 +117,7 @@ export default function Footer() {
             gap: '1rem',
           }}
         >
-          <p style={{ fontSize: 'clamp(0.72rem, 1.6vw, 0.8rem)', color: '#555' }}>
+          <p style={{ fontSize: 'clamp(0.72rem, 1.6vw, 0.8rem)', color: '#888' }}>
             © 2026 RideFlow Pakistan. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: 'clamp(0.8rem, 2vw, 1.2rem)', flexWrap: 'wrap' as const }}>
@@ -127,7 +127,7 @@ export default function Footer() {
                 href="#"
                 style={{
                   fontSize: 'clamp(0.72rem, 1.6vw, 0.8rem)',
-                  color: '#555',
+                  color: '#888',
                   textDecoration: 'none',
                   transition: 'color 0.2s',
                 }}
