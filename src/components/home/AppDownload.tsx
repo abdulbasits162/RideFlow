@@ -17,7 +17,7 @@ export default function AppDownload() {
             src="/images/app-bg.jpg"
             alt="RideFlow app on phone"
             fill
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            style={{ objectFit: 'cover', objectPosition: 'center', }}
           />
       {/* Background subtle glow */}
   
