@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown, Car, Truck, BookOpen} from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 const links = [
@@ -10,53 +10,99 @@ const links = [
   { label: 'How It Works', href: '#how' },
   { label: 'Cities', href: '#cities' },
   { label: 'Drive with Us', href: '#driver' },
+  { label: 'For Fleets', href: '#fleet' },
 ]
+
+const registerOptions = [
+  {
+    icon: <BookOpen size={18} color="#2B8659" />,
+    label: 'Book a Ride',
+    desc: 'Find a ride in seconds',
+    href: '/books',
+    isHash: true,
+  },
+  {
+    icon: <Car size={18} color="#2B8659" />,
+    label: 'Become a Driver',
+    desc: 'Make money on your terms',
+    href: '/driver/register',
+    isHash: false,
+  },
+  {
+    icon: <Truck size={18} color="#2B8659" />,
+    label: 'Sign up as Fleet Owner',
+    desc: 'Add your fleet and boost income',
+    href: '/driver/register',
+    isHash: true,
+  },
+  // {
+  //   icon: <Users size={18} color="#2B8659" />,
+  //   label: 'Corporate Account',
+  //   desc: 'Rides for your entire team',
+  //   href: '/corporate',
+  //   isHash: false,
+  // },
+]
+
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [visible, setVisible] = useState(true)
   const [open, setOpen] = useState(false)
+  const [registerOpen, setRegisterOpen] = useState(false)
+  // const [langOpen, setLangOpen] = useState(false)
+  // const [activeLang, setActiveLang] = useState('EN')
   const lastScrollY = useRef(0)
+  const registerRef = useRef<HTMLDivElement>(null)
+  // const langRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY
-
-      // Show/hide based on scroll direction
       if (currentY < 50) {
         setVisible(true)
       } else if (currentY > lastScrollY.current) {
-        // Scrolling down — hide
         setVisible(false)
         setOpen(false)
+        setRegisterOpen(false)
+        // setLangOpen(false)
       } else {
-        // Scrolling up — show
         setVisible(true)
       }
-
       setScrolled(currentY > 20)
       lastScrollY.current = currentY
     }
-
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (registerRef.current && !registerRef.current.contains(e.target as Node)) {
+        setRegisterOpen(false)
+      }
+      // if (langRef.current && !langRef.current.contains(e.target as Node)) {
+      //   setLangOpen(false)
+      // }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
     e.preventDefault()
     setOpen(false)
-
+    setRegisterOpen(false)
     if (href.startsWith('#')) {
       const isHome = window.location.pathname === '/'
       if (isHome) {
-        const el = document.getElementById(href.replace('#', ''))
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
+        document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
       } else {
         router.push('/')
         setTimeout(() => {
-          const el = document.getElementById(href.replace('#', ''))
-          if (el) el.scrollIntoView({ behavior: 'smooth' })
+          document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
         }, 500)
       }
     } else {
@@ -65,43 +111,42 @@ export default function Navbar() {
   }
 
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        top: 0, left: 0, right: 0,
-        zIndex: 100,
-        height: 'clamp(52px, 9vw, 68px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 clamp(1rem, 6vw, 5vw)',
-        background: 'white' ,
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid #eee' : 'none',
-        transform: visible ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'transform 0.3s ease, background 0.3s, border-color 0.3s',
-      }}
-    >
+    <nav style={{
+      position: 'fixed',
+      top: 0, left: 0, right: 0,
+      zIndex: 100,
+      height: 'clamp(52px, 9vw, 68px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '0 clamp(1rem, 6vw, 5vw)',
+      background: 'white',
+      backdropFilter: scrolled ? 'blur(12px)' : 'none',
+      borderBottom: '1px solid #eee',
+      transform: visible ? 'translateY(0)' : 'translateY(-100%)',
+      transition: 'transform 0.3s ease, background 0.3s',
+    }}>
+
       {/* Logo */}
-      <Link
-        href="/"
-        style={{
-          fontFamily: 'var(--font-syne), sans-serif',
-          fontWeight: 800,
-          fontSize: 'clamp(1rem, 4vw, 1.45rem)',
-          letterSpacing: '-0.5px',
-          color: 'black',
-          textDecoration: 'none',
-        }}
-      >
+      <Link href="/" style={{
+        fontFamily: 'var(--font-syne), sans-serif',
+        fontWeight: 800,
+        fontSize: 'clamp(1rem, 4vw, 1.45rem)',
+        letterSpacing: '-0.5px',
+        color: 'black',
+        textDecoration: 'none',
+        flexShrink: 0,
+      }}>
         Ride<span style={{ color: '#2B8659' }}>Flow</span>
       </Link>
 
-      {/* Desktop links — hidden below 768px via CSS class */}
-      <ul
-        className="nav-desktop-links"
-        style={{ gap: 'clamp(0.75rem, 3vw, 2rem)', listStyle: 'none', alignItems: 'center', display: 'flex' }}
-      >
+      {/* Desktop nav links */}
+      <ul className="nav-desktop-links" style={{
+        gap: 'clamp(0.75rem, 3vw, 2rem)',
+        listStyle: 'none',
+        alignItems: 'center',
+        display: 'flex',
+      }}>
         {links.map((l) => (
           <li key={l.href}>
             <a
@@ -110,13 +155,13 @@ export default function Navbar() {
               style={{
                 color: 'black',
                 textDecoration: 'none',
-                fontSize: 'clamp(0.7rem, 1.4vw, 0.9rem)',
+                fontSize: 'clamp(0.7rem, 1.4vw, 0.88rem)',
                 fontWeight: 500,
                 cursor: 'pointer',
                 transition: 'color 0.2s',
                 whiteSpace: 'nowrap',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#444')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#2B8659')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'black')}
             >
               {l.label}
@@ -125,136 +170,302 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* Desktop CTAs — hidden below 768px via CSS class */}
-      <div
-        className="nav-desktop-ctas"
-        style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.4rem, 1.5vw, 0.75rem)' }}
-      >
-        {/* Become a Driver — hidden below 1024px via CSS class */}
-        <Link
-          href="/driver/register"
-          className="nav-become-driver"
-          style={{
-            fontSize: 'clamp(0.68rem, 1.3vw, 0.88rem)',
-            fontWeight: 600,
-            color: 'black',
-            border: '1px solid #262626',
-            padding: 'clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.6rem, 2.5vw, 1.2rem)',
-            borderRadius: '50px',
-            textDecoration: 'none',
-            transition: 'border-color 0.2s',
-            whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = '#2B8659')}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = '#262626')}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#E1E1E1')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = 'white')}
-        >
-          Become a Driver
-        </Link>
-        <a
-          href="#book"
-          onClick={(e) => handleNavClick(e, '#book')}
-          style={{
-            fontSize: 'clamp(0.68rem, 1.3vw, 0.88rem)',
-            fontWeight: 600,
-            color: '#fff',
-            background: '#2B8659',
-            padding: 'clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.6rem, 2.5vw, 1.2rem)',
-            borderRadius: '50px',
-            textDecoration: 'none',
-            cursor: 'pointer',
-            transition: 'background 0.2s',
-            whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = '#34A16A')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = '#2B8659')}
-        >
-          Book Now
-        </a>
+      {/* Desktop right side */}
+      <div className="nav-desktop-ctas" style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.6rem',
+        flexShrink: 0,
+      }}>
+
+      {/* Support button */}
+<a
+  href="/support"
+  style={{
+    fontSize: '0.85rem',
+    fontWeight: 600,
+    color: '#333',
+    textDecoration: 'none',
+    padding: '0.45rem 1rem',
+    borderRadius: '50px',
+    transition: 'color 0.2s',
+    whiteSpace: 'nowrap',
+    fontFamily: 'var(--font-inter), sans-serif',
+    marginRight:'20px'
+  }}
+  onMouseEnter={(e) => (e.currentTarget.style.background = '#eee')}
+  onMouseLeave={(e) => (e.currentTarget.style.background = 'none')}
+>
+  Support
+</a>
+
+        {/* Register dropdown */}
+        <div ref={registerRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => { setRegisterOpen(!registerOpen); }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              background: '#444',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '50px',
+              padding: '0.45rem 1.1rem',
+              cursor: 'pointer',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              fontFamily: 'var(--font-inter), sans-serif',
+              transition: 'background 0.2s',
+              whiteSpace: 'nowrap',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#555')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#444')}
+          >
+            Register
+            <ChevronDown
+              size={14}
+              color="#fff"
+              style={{
+                transform: registerOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.2s',
+              }}
+            />
+          </button>
+
+          {registerOpen && (
+            <div style={{
+              position: 'absolute',
+              top: 'calc(100% + 10px)',
+              right: 0,
+              background: '#fff',
+              border: '1px solid #E5E5E5',
+              borderRadius: '16px',
+              boxShadow: '0 12px 40px rgba(0,0,0,0.12)',
+              minWidth: '260px',
+              overflow: 'hidden',
+              zIndex: 200,
+            }}>
+              {registerOptions.map((opt) => (
+                opt.isHash ? (
+                  <a
+                    key={opt.label}
+                    href={opt.href}
+                    onClick={(e) => handleNavClick(e, opt.href)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.9rem',
+                      padding: '0.9rem 1.1rem',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid #F5F5F5',
+                      transition: 'background 0.15s',
+                      cursor: 'pointer',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#F9FFF6')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                  >
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      background: 'rgba(43,134,89,0.08)',
+                      borderRadius: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      {opt.icon}
+                    </div>
+                    <div>
+                      <div style={{
+                        fontSize: '0.88rem',
+                        fontWeight: 700,
+                        color: '#0A0A0A',
+                        fontFamily: 'var(--font-inter), sans-serif',
+                      }}>
+                        {opt.label}
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#888', marginTop: '1px' }}>
+                        {opt.desc}
+                      </div>
+                    </div>
+                  </a>
+                ) : (
+                  <Link
+                    key={opt.label}
+                    href={opt.href}
+                    onClick={() => setRegisterOpen(false)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.9rem',
+                      padding: '0.9rem 1.1rem',
+                      textDecoration: 'none',
+                      borderBottom: '1px solid #F5F5F5',
+                      transition: 'background 0.15s',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = '#F9FFF6')}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                  >
+                    <div style={{
+                      width: '36px',
+                      height: '36px',
+                      background: 'rgba(43,134,89,0.08)',
+                      borderRadius: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      {opt.icon}
+                    </div>
+                    <div>
+                      <div style={{
+                        fontSize: '0.88rem',
+                        fontWeight: 700,
+                        color: '#0A0A0A',
+                        fontFamily: 'var(--font-inter), sans-serif',
+                      }}>
+                        {opt.label}
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#888', marginTop: '1px' }}>
+                        {opt.desc}
+                      </div>
+                    </div>
+                  </Link>
+                )
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Mobile toggle — shown below 768px via CSS class */}
+      {/* Mobile toggle */}
       <button
         className="nav-mobile-toggle"
         onClick={() => setOpen(!open)}
         style={{
-          background: '#444',
+          background: '#0A0A0A',
           border: 'none',
-          borderRadius:'10px',
+          borderRadius: '10px',
           color: '#fff',
           cursor: 'pointer',
-          padding: 'clamp(0.3rem, 1.5vw, 0.5rem)',
+          padding: '0.4rem',
+          display: 'none',
         }}
       >
-        {open ? <X size={22} /> : <Menu size={22} />}
+        {open ? <X size={20} /> : <Menu size={20} />}
       </button>
 
       {/* Mobile menu */}
       {open && (
-        <div
-          style={{
-            position: 'absolute',
-            top: 'clamp(52px, 9vw, 68px)',
-            left: 0, right: 0,
-            background: '#444',
-            borderBottom: '1px solid #262626',
-            padding: 'clamp(0.6rem, 4vw, 1rem) clamp(1rem, 6vw, 5vw)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'clamp(0.6rem, 3vw, 1rem)',
-          }}
-        >
+        <div style={{
+          position: 'absolute',
+          top: 'clamp(52px, 9vw, 68px)',
+          left: 0, right: 0,
+          background: '#fff',
+          borderBottom: '1px solid #eee',
+          padding: '1rem clamp(1rem, 6vw, 5vw)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.25rem',
+          zIndex: 200,
+        }}>
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={(e) => handleNavClick(e, l.href)}
               style={{
-                color: '#eee',
+                color: '#333',
                 textDecoration: 'none',
-                fontSize: 'clamp(0.75rem, 3.5vw, 0.9rem)',
-                padding: 'clamp(0.15rem, 1vw, 0.25rem) 0',
+                fontSize: '0.95rem',
+                fontWeight: 500,
+                padding: '0.65rem 0',
+                borderBottom: '1px solid #F5F5F5',
                 cursor: 'pointer',
               }}
             >
               {l.label}
             </a>
           ))}
-          <a
-            href="#book"
-            onClick={(e) => handleNavClick(e, '#book')}
-            style={{
-              background: '#2B8659',
-              color: '#000',
-              fontWeight: 700,
-              textAlign: 'center',
-              padding: 'clamp(0.5rem, 3vw, 0.75rem)',
-              borderRadius: '50px',
-              textDecoration: 'none',
-              cursor: 'pointer',
-              marginTop: '0.5rem',
-              fontSize: 'clamp(0.8rem, 3.5vw, 0.95rem)',
-            }}
-          >
-            Book Now
-          </a>
+
+          <div style={{ marginTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {registerOptions.map((opt) => (
+              opt.isHash ? (
+                <a
+                  key={opt.label}
+                  href={opt.href}
+                  onClick={(e) => handleNavClick(e, opt.href)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.75rem 1rem',
+                    background: '#F9F9F9',
+                    borderRadius: '12px',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <div style={{
+                    width: '32px', height: '32px',
+                    background: 'rgba(43,134,89,0.08)',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    {opt.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0A0A0A' }}>{opt.label}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#888' }}>{opt.desc}</div>
+                  </div>
+                </a>
+              ) : (
+                <Link
+                  key={opt.label}
+                  href={opt.href}
+                  onClick={() => setOpen(false)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    padding: '0.75rem 1rem',
+                    background: '#F9F9F9',
+                    borderRadius: '12px',
+                    textDecoration: 'none',
+                  }}
+                >
+                  <div style={{
+                    width: '32px', height: '32px',
+                    background: 'rgba(43,134,89,0.08)',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    {opt.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#0A0A0A' }}>{opt.label}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#888' }}>{opt.desc}</div>
+                  </div>
+                </Link>
+              )
+            ))}
+          </div>
+
+        
         </div>
       )}
 
       <style jsx>{`
         .nav-mobile-toggle {
-          display: none;
+          display: none !important;
         }
-
-        /* Below 1024px: hide "Become a Driver" button only */
-        @media (max-width: 1024px) {
-          .nav-become-driver {
-            display: none;
-          }
-        }
-
-        /* Below 768px: hide desktop links + CTAs, show hamburger */
         @media (max-width: 768px) {
           .nav-desktop-links {
             display: none !important;

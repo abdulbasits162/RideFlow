@@ -32,7 +32,7 @@ export default function RideTypeSelector({ value, onChange }: Props) {
             onClick={() => onChange(type)}
             className="ride-type-card"
             style={{
-              background: active ? 'rgba(29,185,84,0.12)' : '#333',
+              background: active ? 'rgba(29,185,84,0.12)' : '#444',
               border: `1px solid ${active ? '#1DB954' : '#2A2A2A'}`,
               borderRadius: '12px',
               padding: 'clamp(0.5rem, 3vw, 1rem) clamp(0.35rem, 2vw, 0.75rem)',

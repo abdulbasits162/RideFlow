@@ -117,10 +117,12 @@ export default function HeroSection() {
 
             <div className="flex flex-wrap" style={{ gap: 'clamp(0.6rem, 1.5vw, 1rem)', justifyContent: 'center' }}>
               <Link
-                href="/book"
+                href="/books"
                 style={{
+                  width: '250px',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: '0.5rem',
                   background: '#2B8659',
                   color: '#fff',
@@ -131,17 +133,19 @@ export default function HeroSection() {
                   textDecoration: 'none',
                   transition: 'background 0.2s',
                 }}
-                
+
                 onMouseEnter={(e) => (e.currentTarget.style.background = '#34A16A')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = '#2B8659')}
               >
-                📍 Book a Ride
+                📍Book a Ride
               </Link>
               <Link
-                href="/driver"
+                href="/driver/register"
                 style={{
+                  width: '250px',
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: '0.5rem',
                   background: '#2B8659',
                   color: 'black',
@@ -166,7 +170,7 @@ export default function HeroSection() {
           {/* IMAGE wrapper — rises on scroll */}
           <div
             ref={imageWrapRef}
-            className="absolute inset-0 z-20 will-change-transform pointer-events-none overflow-hidden"
+            className="absolute inset-0 z-20 will-change-transform pointer-events-none overflow-hidden hero-image-wrap"
             style={{ transform: 'translateY(60%)' }}
           >
             {/* Inner div — zooms independently of the rise */}
@@ -183,31 +187,13 @@ export default function HeroSection() {
                 alt="RideFlow driver"
                 fill
                 priority
+                className="hero-driver-img"
                 style={{ objectFit: 'cover', objectPosition: 'center' }}
               />
             </div>
 
-            {/* Top gradient */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 40%)',
-              }}
-            />
 
-            {/* Bottom fade */}
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '30%',
-                background: 'linear-gradient(to top, #0A0A0A 0%, transparent 100%)',
-              }}
-            />
+
           </div>
 
         </section>
@@ -215,8 +201,18 @@ export default function HeroSection() {
 
       <style>{`
         @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(1.4); }
+          // 0%, 100% { opacity: 1; transform: scale(1); }
+          // 50% { opacity: 0.4; transform: scale(1.4); }
+        }
+
+        /* Mobile: keep image's original aspect ratio instead of cropping it */
+        @media (max-width: 768px) {
+          .hero-driver-img {
+            object-fit: contain !important;
+          }
+          .hero-image-wrap {
+            background: transparent;
+          }
         }
       `}</style>
     </>

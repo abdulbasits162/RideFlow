@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import { useState } from 'react'
 
 export default function AppDownload() {
   return (
@@ -20,7 +21,7 @@ export default function AppDownload() {
             style={{ objectFit: 'cover', objectPosition: 'center', }}
           />
       {/* Background subtle glow */}
-  
+
 
       <div style={{
         position: 'relative',
@@ -50,7 +51,7 @@ export default function AppDownload() {
 
           <h2 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+            fontSize: 'clamp(2rem, 4vw, 4rem)',
             fontWeight: 800,
             letterSpacing: '-1px',
             lineHeight: 1.1,
@@ -62,7 +63,7 @@ export default function AppDownload() {
           </h2>
 
           <p style={{
-            fontSize: '1rem',
+            fontSize: '1.3rem',
             color: '#222',
             lineHeight: 1.75,
             marginBottom: '2rem',
@@ -85,7 +86,7 @@ export default function AppDownload() {
                 border: '1px solid rgba(29,185,84,0.2)',
                 borderRadius: '50px',
                 padding: '0.35rem 0.9rem',
-                fontSize: '0.78rem',
+                fontSize: '1rem',
                 fontWeight: 600,
                 color: '#1DB954',
               }}>

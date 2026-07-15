@@ -6,6 +6,7 @@ import WhyRideFlow from '@/components/home/WhyRideFlow'
 import DriverCTA from '@/components/home/DriverCTA'
 import CityStrip from '@/components/home/CityStrip'
 import AppDownload from '@/components/home/AppDownload'
+import FleetSection from '@/components/home/Fleetsection'
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       <HowItWorks />
       <DriverCTA />
       <CityStrip />
+      <FleetSection/>
       <AppDownload />
     </>
   )

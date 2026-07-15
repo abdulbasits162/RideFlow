@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const footerLinks = {
   Passengers: [
-    { label: 'Book a Ride', href: '/book' },
+    { label: 'Book a Ride', href: '/books' },
     { label: 'How It Works', href: '/#how' },
     { label: 'Safety Features', href: '/safety' },
     { label: 'Download App', href: '/#app' },

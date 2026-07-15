@@ -54,8 +54,8 @@ export default function WhyRideFlow() {
             <div
               key={f.title}
               style={{
-                background: '#fff',
-                border: '1px solid #262626',
+                background: '#F9F9F9',
+                border: '1px ',
                 borderRadius: '14px',
                 padding: 'clamp(1.2rem, 3.5vw, 1.8rem)',
                 transition: 'border-color 0.25s, transform 0.2s',
@@ -87,7 +87,7 @@ export default function WhyRideFlow() {
               </div>
               <h4
                 style={{
-                  fontFamily: 'var(--font-syne), sans-serif',
+                  fontFamily: 'var(--font-inter), sans-serif',
                   fontSize: 'clamp(1.05rem, 2.5vw, 1.30rem)',
                   fontWeight: 700,
                   marginBottom: '0.5rem',
