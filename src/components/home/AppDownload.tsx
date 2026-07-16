@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
 
 export default function AppDownload() {
   return (
@@ -10,7 +9,7 @@ export default function AppDownload() {
         background: '#fff',
         position: 'relative',
         overflow: 'hidden',
-        padding: '150px 5vw',
+        padding: 'clamp(70px, 15vw, 150px) 5vw',
       }}
       
     >
@@ -23,23 +22,24 @@ export default function AppDownload() {
       {/* Background subtle glow */}
 
 
-      <div style={{
-        position: 'relative',
-        zIndex: 1,
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '4rem',
-        alignItems: 'center',
-      }}
-        className="md:grid-cols-2 grid-cols-1"
+      <div
+        className="app-download-grid"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 'clamp(2rem, 6vw, 4rem)',
+          alignItems: 'center',
+        }}
       >
         {/* Left: text */}
         <div>
           <span style={{
             display: 'inline-block',
-            fontSize: '1.5rem',
+            fontSize: 'clamp(0.9rem, 2vw, 1.5rem)',
             fontWeight: 700,
             letterSpacing: '2px',
             textTransform: 'uppercase' as const,
@@ -51,7 +51,7 @@ export default function AppDownload() {
 
           <h2 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2rem, 4vw, 4rem)',
+            fontSize: 'clamp(1.8rem, 5.5vw, 4rem)',
             fontWeight: 800,
             letterSpacing: '-1px',
             lineHeight: 1.1,
@@ -63,7 +63,7 @@ export default function AppDownload() {
           </h2>
 
           <p style={{
-            fontSize: '1.3rem',
+            fontSize: 'clamp(0.9rem, 2.2vw, 1.3rem)',
             color: '#222',
             lineHeight: 1.75,
             marginBottom: '2rem',
@@ -77,7 +77,7 @@ export default function AppDownload() {
           <div style={{
             display: 'flex',
             flexWrap: 'wrap' as const,
-            gap: '0.6rem',
+            gap: 'clamp(0.4rem, 1.2vw, 0.6rem)',
             marginBottom: '2.5rem',
           }}>
             {['Live GPS', 'SOS Button', 'Ride History', 'In-App Chat', 'Saved Places'].map((f) => (
@@ -85,8 +85,8 @@ export default function AppDownload() {
                 background: 'rgba(29,185,84,0.08)',
                 border: '1px solid rgba(29,185,84,0.2)',
                 borderRadius: '50px',
-                padding: '0.35rem 0.9rem',
-                fontSize: '1rem',
+                padding: 'clamp(0.28rem, 1vw, 0.35rem) clamp(0.65rem, 2vw, 0.9rem)',
+                fontSize: 'clamp(0.78rem, 1.8vw, 1rem)',
                 fontWeight: 600,
                 color: '#1DB954',
               }}>
@@ -96,7 +96,7 @@ export default function AppDownload() {
           </div>
 
           {/* App store badges */}
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' as const }}>
+          <div style={{ display: 'flex', gap: 'clamp(0.6rem, 2vw, 1rem)', flexWrap: 'wrap' as const }}>
             {[
               { icon: '🤖', sub: 'Get it on', name: 'Google Play' },
               { icon: '🍎', sub: 'Download on the', name: 'App Store' },
@@ -111,10 +111,10 @@ export default function AppDownload() {
                   background: '#2B8659',
                   border: '1px solid #444',
                   borderRadius: '12px',
-                  padding: '0.85rem 1.4rem',
+                  padding: 'clamp(0.7rem, 2vw, 0.85rem) clamp(1rem, 3vw, 1.4rem)',
                   textDecoration: 'none',
                   color: '#fff',
-                  minWidth: '160px',
+                  minWidth: 'clamp(140px, 32vw, 160px)',
                   transition: 'border-color 0.2s, transform 0.15s',
                 }}
                 onMouseEnter={(e) => {
@@ -126,13 +126,13 @@ export default function AppDownload() {
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                <span style={{ fontSize: '1.5rem' }}>{badge.icon}</span>
+                <span style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)' }}>{badge.icon}</span>
                 <div>
                   <span style={{ display: 'block', fontSize: '0.7rem', color: '#333' }}>{badge.sub}</span>
                   <span style={{
                     display: 'block',
                     fontFamily: 'var(--font-inter), sans-serif',
-                    fontSize: '0.95rem',
+                    fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
                     fontWeight: 700,
                   }}>{badge.name}</span>
                 </div>
@@ -143,6 +143,14 @@ export default function AppDownload() {
 
        
       </div>
+
+      <style jsx>{`
+        @media (max-width: 900px) {
+          .app-download-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

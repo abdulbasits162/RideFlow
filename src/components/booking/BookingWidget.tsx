@@ -90,7 +90,7 @@ export default function BookingWidget() {
       }}
     >
       {/* Left */}
-      <div style={{ flex: '1 1 280px', maxWidth: '420px',alignContent:'center' }}>
+      <div style={{ flex: '1 1 280px', maxWidth: '420px', alignContent: 'center' }}>
         <span className="book-tag" style={{
           fontSize: 'clamp(1rem, 2.2vw, 1.5rem)',
           fontWeight: 800,
@@ -127,6 +127,12 @@ export default function BookingWidget() {
           ))}
         </div>
       </div>
+
+
+
+
+
+
 
       {/* Right: form */}
       <div style={{
