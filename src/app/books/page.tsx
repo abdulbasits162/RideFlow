@@ -115,31 +115,31 @@ export default function BookPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem',
+        padding: 'clamp(1.25rem, 5vw, 2rem)',
       }}>
         <div style={{ textAlign: 'center', maxWidth: '440px' }}>
           <div style={{
-            width: '90px', height: '90px',
+            width: 'clamp(70px, 12vw, 90px)', height: 'clamp(70px, 12vw, 90px)',
             background: 'rgba(43,134,89,0.1)',
             borderRadius: '50%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto 1.5rem',
-            fontSize: '2.5rem',
+            fontSize: 'clamp(1.9rem, 5vw, 2.5rem)',
           }}>
             🚗
           </div>
           <h1 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: '2rem',
+            fontSize: 'clamp(1.5rem, 5vw, 2rem)',
             fontWeight: 800,
             color: '#0A0A0A',
             marginBottom: '0.75rem',
           }}>
             Ride Confirmed!
           </h1>
-          <p style={{ color: '#666', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '0.95rem' }}>
+          <p style={{ color: '#666', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: 'clamp(0.85rem, 2vw, 0.95rem)' }}>
             We&apos;re finding the nearest verified driver. You&apos;ll be matched in under 90 seconds.
           </p>
 
@@ -147,7 +147,7 @@ export default function BookPage() {
             background: '#F7FFF9',
             border: '1px solid #C5E8D4',
             borderRadius: '14px',
-            padding: '1.25rem 1.5rem',
+            padding: 'clamp(1rem, 3vw, 1.25rem) clamp(1.1rem, 3vw, 1.5rem)',
             marginBottom: '1.5rem',
             textAlign: 'left' as const,
           }}>
@@ -165,12 +165,15 @@ export default function BookPage() {
             </div>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '0.75rem',
-            marginBottom: '2rem',
-          }}>
+          <div
+            className="confirm-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '0.75rem',
+              marginBottom: '2rem',
+            }}
+          >
             {[
               { icon: '📍', label: 'From', value: pickup },
               { icon: '🏁', label: 'To', value: dropoff },
@@ -184,7 +187,7 @@ export default function BookPage() {
                 textAlign: 'left' as const,
               }}>
                 <div style={{ fontSize: '0.7rem', color: '#aaa', marginBottom: '0.2rem' }}>{item.label}</div>
-                <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#111' }}>
+                <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#111', wordBreak: 'break-word' as const }}>
                   {item.icon} {item.value}
                 </div>
               </div>
@@ -205,6 +208,14 @@ export default function BookPage() {
             Back to Home
           </Link>
         </div>
+
+        <style jsx>{`
+          @media (max-width: 420px) {
+            .confirm-grid {
+              grid-template-columns: 1fr !important;
+            }
+          }
+        `}</style>
       </div>
     )
   }
@@ -213,11 +224,14 @@ export default function BookPage() {
     <div style={{ minHeight: '100vh', background: '#fff' }}>
 
       {/* Header */}
-      <div style={{
-        background: '#eee',
-        padding: '100px 5vw 50px',
-        paddingLeft:'220px'
-      }}>
+      <div
+        className="book-header"
+        style={{
+          background: '#eee',
+          padding: 'clamp(80px, 14vw, 100px) 5vw clamp(35px, 6vw, 50px)',
+          paddingLeft: 'clamp(1.25rem, 15vw, 220px)',
+        }}
+      >
         <Link href="/" style={{
 
           display: 'inline-flex',
@@ -225,14 +239,14 @@ export default function BookPage() {
           gap: '0.5rem',
           color: '#333',
           textDecoration: 'none',
-          fontSize: '1rem',
+          fontSize: 'clamp(0.85rem, 1.8vw, 1rem)',
           marginBottom: '1.5rem',
         }}>
           <ArrowLeft size={16} /> Back to Home
         </Link>
         <h1 style={{
           fontFamily: 'var(--font-inter), sans-serif',
-          fontSize: 'clamp(2rem, 5vw, 3rem)',
+          fontSize: 'clamp(1.8rem, 5vw, 3rem)',
           fontWeight: 800,
           color: '#000',
           letterSpacing: '-1px',
@@ -241,22 +255,23 @@ export default function BookPage() {
         }}>
           Book your ride.
         </h1>
-        <p style={{ color: '#333', fontSize: '1rem' }}>
+        <p style={{ color: '#333', fontSize: 'clamp(0.85rem, 2vw, 1rem)' }}>
           Fare shown upfront. Verified driver. No surprises.
         </p>
       </div>
 
       {/* Main content */}
-      <div style={{
-        maxWidth: '1100px',
-        margin: '0 auto',
-        padding: '3rem 1.5rem 5rem',
-        display: 'grid',
-        gridTemplateColumns: '1fr 380px',
-        gap: '3rem',
-        alignItems: 'start',
-      }}
+      <div
         className="booking-grid"
+        style={{
+          maxWidth: '1100px',
+          margin: '0 auto',
+          padding: 'clamp(1.75rem, 5vw, 3rem) clamp(1rem, 4vw, 1.5rem) clamp(3rem, 8vw, 5rem)',
+          display: 'grid',
+          gridTemplateColumns: '1fr 380px',
+          gap: 'clamp(1.75rem, 5vw, 3rem)',
+          alignItems: 'start',
+        }}
       >
         {/* Left: form */}
         <div>
@@ -266,14 +281,14 @@ export default function BookPage() {
             background: '#fff',
             border: '1px solid #EFEFEF',
             borderRadius: '16px',
-            padding: '1.75rem',
+            padding: 'clamp(1.25rem, 4vw, 1.75rem)',
             marginBottom: '1.25rem',
             boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
           }}>
             <h3 style={{
               fontFamily: 'var(--font-inter), sans-serif',
               fontWeight: 700,
-              fontSize: '1rem',
+              fontSize: 'clamp(0.92rem, 2vw, 1rem)',
               color: '#0A0A0A',
               marginBottom: '1.25rem',
             }}>
@@ -347,14 +362,14 @@ export default function BookPage() {
             background: '#fff',
             border: '1px solid #EFEFEF',
             borderRadius: '16px',
-            padding: '1.75rem',
+            padding: 'clamp(1.25rem, 4vw, 1.75rem)',
             marginBottom: '1.25rem',
             boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
           }}>
             <h3 style={{
               fontFamily: 'var(--font-inter), sans-serif',
               fontWeight: 700,
-              fontSize: '1rem',
+              fontSize: 'clamp(0.92rem, 2vw, 1rem)',
               color: '#0A0A0A',
               marginBottom: '1.25rem',
             }}>
@@ -368,13 +383,13 @@ export default function BookPage() {
             background: '#fff',
             border: '1px solid #EFEFEF',
             borderRadius: '16px',
-            padding: '1.75rem',
+            padding: 'clamp(1.25rem, 4vw, 1.75rem)',
             boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
           }}>
             <h3 style={{
               fontFamily: 'var(--font-inter), sans-serif',
               fontWeight: 700,
-              fontSize: '1rem',
+              fontSize: 'clamp(0.92rem, 2vw, 1rem)',
               color: '#0A0A0A',
               marginBottom: '1.25rem',
             }}>
@@ -388,12 +403,12 @@ export default function BookPage() {
                   onClick={() => setPayment(m)}
                   style={{
                     flex: 1,
-                    padding: '0.85rem',
+                    padding: 'clamp(0.7rem, 2.5vw, 0.85rem)',
                     borderRadius: '10px',
                     border: `1.5px solid ${payment === m ? '#2B8659' : '#E5E5E5'}`,
                     background: payment === m ? 'rgba(43,134,89,0.06)' : '#F7F7F7',
                     color: payment === m ? '#2B8659' : '#666',
-                    fontSize: '0.88rem',
+                    fontSize: 'clamp(0.78rem, 2vw, 0.88rem)',
                     fontWeight: 600,
                     cursor: 'pointer',
                     fontFamily: 'var(--font-inter), sans-serif',
@@ -408,19 +423,19 @@ export default function BookPage() {
         </div>
 
         {/* Right: fare summary + CTA */}
-        <div style={{ position: 'sticky', top: '90px' }}>
+        <div className="fare-sidebar" style={{ position: 'sticky', top: '90px' }}>
 
           {/* Fare card */}
           <div style={{
             background: '#444',
             borderRadius: '20px',
-            padding: '2rem',
+            padding: 'clamp(1.4rem, 4vw, 2rem)',
             marginBottom: '1rem',
           }}>
             <h3 style={{
               fontFamily: 'var(--font-inter), sans-serif',
               fontWeight: 700,
-              fontSize: '1.3rem',
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
               color: '#fff',
               marginBottom: '1.5rem',
             }}>
@@ -477,12 +492,14 @@ export default function BookPage() {
                   alignItems: 'center',
                   paddingTop: '1rem',
                   marginTop: '0.5rem',
+                  flexWrap: 'wrap' as const,
+                  gap: '0.5rem',
                 }}>
-                  <span style={{ fontSize: '1.2rem', color: '#fff' }}>Total</span>
+                  <span style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', color: '#fff' }}>Total</span>
                   <span style={{
                     fontFamily: 'var(--font-inter), sans-serif',
                     fontWeight: 800,
-                    fontSize: '2rem',
+                    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                     color: '#2B8659',
                   }}>
                     {loading ? '...' : `PKR ${fare.finalFare}`}
@@ -493,7 +510,7 @@ export default function BookPage() {
               <div style={{ textAlign: 'center' as const, padding: '1.5rem 0' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💰</div>
                 <p style={{ fontSize: '0.9rem', color: '#eee', lineHeight: 1.6 }}>
-                  Enter your locations and click "Get Fare Estimate" to see the price.
+                  Enter your locations and click &quot;Get Fare Estimate&quot; to see the price.
                 </p>
               </div>
             )}
@@ -526,9 +543,9 @@ export default function BookPage() {
                 color: '#fff',
                 border: 'none',
                 borderRadius: '50px',
-                padding: '1rem',
+                padding: 'clamp(0.85rem, 2.5vw, 1rem)',
                 fontFamily: 'var(--font-inter), sans-serif',
-                fontSize: '1rem',
+                fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                 fontWeight: 700,
                 cursor: loading ? 'not-allowed' : 'pointer',
                 transition: 'background 0.2s',
@@ -548,9 +565,9 @@ export default function BookPage() {
                 color: '#fff',
                 border: 'none',
                 borderRadius: '50px',
-                padding: '1rem',
+                padding: 'clamp(0.85rem, 2.5vw, 1rem)',
                 fontFamily: 'var(--font-inter), sans-serif',
-                fontSize: '1rem',
+                fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                 fontWeight: 700,
                 cursor: loading ? 'not-allowed' : 'pointer',
                 transition: 'background 0.2s',
@@ -601,6 +618,10 @@ export default function BookPage() {
         @media (max-width: 768px) {
           .booking-grid {
             grid-template-columns: 1fr !important;
+          }
+          .fare-sidebar {
+            position: static !important;
+            top: auto !important;
           }
         }
       `}</style>

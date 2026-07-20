@@ -32,7 +32,7 @@ const registerOptions = [
     icon: <Truck size={18} color="#2B8659" />,
     label: 'Sign up as Fleet Owner',
     desc: 'Add your fleet and boost income',
-    href: '/driver/register',
+    href: '/fleet',
     isHash: true,
   },
   // {

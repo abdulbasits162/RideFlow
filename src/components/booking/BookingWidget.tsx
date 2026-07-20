@@ -5,6 +5,13 @@ import { Zap, MapPin, ShieldCheck } from 'lucide-react'
 import { RideType, PaymentMethod, FareEstimate } from '@/types'
 import RideTypeSelector from './RideTypeSelector'
 
+
+
+import Link from 'next/link'
+import Image from 'next/image'
+
+
+
 export default function BookingWidget() {
   const [pickup, setPickup] = useState('')
   const [dropoff, setDropoff] = useState('')
@@ -80,15 +87,21 @@ export default function BookingWidget() {
     <section
       id="book"
       className="booking-section"
-      style={{
-        background: '#ffffff',
-        padding: 'clamp(50px, 9vw, 90px) clamp(1.25rem, 6vw, 10vw)',
-        display: 'flex',
-        justifyContent: 'space-around',
-        flexWrap: 'wrap' as const,
-        gap: 'clamp(1.75rem, 4vw, 3rem)',
+     style={{
+        background: '#F7F8F7',
+        padding: 'clamp(60px, 10vw, 120px) 5vw',
       }}
     >
+      <div
+      className="booking-grid"
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 'clamp(2rem, 6vw, 4rem)',
+          alignItems: 'center',
+        }}>
       {/* Left */}
       <div style={{ flex: '1 1 280px', maxWidth: '420px', alignContent: 'center' }}>
         <span className="book-tag" style={{
@@ -126,146 +139,50 @@ export default function BookingWidget() {
             </div>
           ))}
         </div>
+         <Link
+            href="/books"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              background: '#2B8659',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: 'clamp(0.9rem, 1.6vw, 1rem)',
+              padding: 'clamp(1rem, 2vw, 0.95rem) clamp(2rem, 6vw, 5rem)',
+              borderRadius: '10px',
+              marginTop:'20px',
+              textDecoration: 'none',
+              transition: 'background 0.2s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = '#256E4A')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = '#2B8659')}
+          >
+            Book a Ride
+          </Link>
       </div>
 
-
-
-
-
-
-
-      {/* Right: form */}
-      <div style={{
-        flex: '1 1 320px',
-        maxWidth: '460px',
-        background: '#444',
-        border: '1px solid #222',
-        borderRadius: '16px',
-        padding: 'clamp(1.25rem, 4vw, 2rem)',
-      }}>
-        <h3 style={{
-          fontFamily: 'var(--font-inter), sans-serif',
-          fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
-          fontWeight: 700,
-          marginBottom: '1.5rem',
-          color: '#fff',
-        }}>
-          Book a Ride
-        </h3>
-
-        <div style={{ marginBottom: '1rem' }}>
-          <label style={{ ...labelStyle, color: '#999' }}>Pickup Location</label>
-          <input
-            type="text" value={pickup}
-            onChange={(e) => setPickup(e.target.value)}
-            placeholder="e.g. Saddar, Rawalpindi"
-            style={inputStyle}
-            onFocus={(e) => (e.currentTarget.style.borderColor = '#2B8659')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E5E5')}
-          />
-        </div>
-
-        <div style={{ marginBottom: '1rem' }}>
-          <label style={{ ...labelStyle, color: '#999' }}>Drop-off Location</label>
-          <input
-            type="text" value={dropoff}
-            onChange={(e) => setDropoff(e.target.value)}
-            placeholder="e.g. Centaurus Mall, Islamabad"
-            style={inputStyle}
-            onFocus={(e) => (e.currentTarget.style.borderColor = '#2B8659')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E5E5')}
-          />
-        </div>
-
-        <div style={{ marginBottom: '1rem' }}>
-          <label style={{ ...labelStyle, color: '#999' }}>Ride Type</label>
-          <RideTypeSelector value={rideType} onChange={setRideType} />
-        </div>
-
-        {fare && (
-          <div style={{
-            background: 'rgba(29,185,84,0.08)',
-            border: '1px solid rgba(29,185,84,0.3)',
-            borderRadius: '12px',
-            padding: 'clamp(0.85rem, 3vw, 1rem) clamp(0.9rem, 3vw, 1.25rem)',
-            marginBottom: '1.25rem',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap' as const,
-            gap: '0.5rem',
-          }}>
-            <div>
-              <div style={{ fontSize: '0.78rem', color: 'white' }}>Estimated Fare</div>
-              <div style={{ fontSize: '0.72rem', color: '#999', marginTop: '2px' }}>
-                {fare.distanceKm} km · {fare.durationMin} min
-              </div>
-            </div>
-            <div style={{
-              fontFamily: 'var(--font-inter), sans-serif',
-              fontWeight: 800,
-              fontSize: 'clamp(1.4rem, 4vw, 1.8rem)',
-              color: loading ? '#888' : '#2B8659',
-              transition: 'color 0.2s',
-            }}>
-              {loading ? '...' : `PKR ${fare.finalFare}`}
-            </div>
-          </div>
-        )}
-
-        <div style={{ marginBottom: '1.25rem' }}>
-          <label style={{ ...labelStyle, color: '#999' }}>Payment</label>
-          <div style={{ display: 'flex', gap: '0.75rem' }}>
-            {(['cash', 'wallet'] as PaymentMethod[]).map((m) => (
-              <button
-                key={m} type="button" onClick={() => setPayment(m)}
-                style={{
-                  flex: 1,
-                  padding: 'clamp(0.55rem, 2vw, 0.65rem)',
-                  borderRadius: '10px',
-                  border: `1.5px solid ${payment === m ? '#2B8659' : '#E5E5E5'}`,
-                  background: payment === m ? 'rgba(29,185,84,0.08)' : '#333',
-                  color: payment === m ? '#2B8659' : '#999',
-                  fontSize: 'clamp(0.75rem, 2vw, 0.85rem)',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  transition: 'all 0.2s',
-                }}
-              >
-                {m === 'cash' ? '💵 Cash' : '📱 Mobile Wallet'}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {error && <p style={{ fontSize: '0.8rem', color: '#ff4444', marginBottom: '1rem' }}>{error}</p>}
-
-        <button
-          type="button" onClick={handleGetFare}
-          disabled={loading || !pickup || !dropoff}
+ <div
+          className="fleet-image-wrap"
           style={{
+            position: 'relative',
             width: '100%',
-            background: loading || !pickup || !dropoff ? '#333' : '#1DB954',
-            color: loading || !pickup || !dropoff ? '#888' : '#000',
-            border: `1px solid ${loading || !pickup || !dropoff ? '#333' : '#2B8659'}`,
-            borderRadius: '50px',
-            padding: 'clamp(0.8rem, 2.5vw, 0.95rem)',
-            fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-            fontWeight: 700,
-            cursor: loading || !pickup || !dropoff ? 'not-allowed' : 'pointer',
-            transition: 'all 0.2s',
+            height: 'clamp(340px, 45vw, 480px)',
+            borderRadius: '20px',
+            overflow: 'hidden',
           }}
         >
-          {loading ? 'Calculating...' : fare ? '✓ Confirm Booking' : 'Get Fare Estimate'}
-        </button>
+          <Image
+            src="/images/fleet-car.jpeg"
+            alt="RideFlow fleet vehicle"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          />
+        </div>
 
-        <p style={{ textAlign: 'center' as const, fontSize: 'clamp(0.78rem, 1.8vw, 0.9rem)', color: '#999', marginTop: '0.75rem' }}>
-          Fare is locked at booking — no hidden charges.
-        </p>
-      </div>
 
+
+
+</div>
       <style jsx>{`
         @media (max-width: 640px) {
           .booking-section {
@@ -284,6 +201,17 @@ export default function BookingWidget() {
           }
         }
       `}</style>
+      <style jsx>{`
+        @media (max-width: 900px) {
+          .booking-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .fleet-image-wrap {
+            order: -1;
+          }
+        }
+      `}</style>
+
     </section>
   )
 }

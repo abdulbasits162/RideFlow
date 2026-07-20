@@ -81,7 +81,7 @@ export default function HowItWorks() {
                   height: 'clamp(38px, 6vw, 46px)',
                   background: '#2B8659',
                   color: '#000',
-                  fontFamily: 'var(--font-syne), sans-serif',
+                  fontFamily: 'var(--font-inter), sans-serif',
                   fontWeight: 800,
                   fontSize: 'clamp(1rem, 2.2vw, 1.2rem)',
                   borderRadius: '50%',
@@ -98,7 +98,7 @@ export default function HowItWorks() {
               </div>
               <h4
                 style={{
-                  fontFamily: 'var(--font-syne), sans-serif',
+                  fontFamily: 'var(--font-inter), sans-serif',
                   fontSize: 'clamp(1.25rem, 3vw, 1.9rem)',
                   fontWeight: 700,
                   marginBottom: '0.5rem',

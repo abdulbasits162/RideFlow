@@ -96,11 +96,11 @@ export default function DriverCTA() {
               display: 'inline-flex',
               alignItems: 'center',
               background: '#2B8659',
-              color: '#000',
+              color: '#fff',
               fontWeight: 700,
               fontSize: 'clamp(0.82rem, 1.8vw, 0.95rem)',
               padding: 'clamp(0.65rem, 2vw, 0.85rem) clamp(1.4rem, 4vw, 2rem)',
-              borderRadius: '50px',
+              borderRadius: '10px',
               textDecoration: 'none',
             }}
           >
