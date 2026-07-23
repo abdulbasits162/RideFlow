@@ -1,38 +1,43 @@
 'use client'
 
 import { useState } from 'react'
-import { Car, TrendingUp, Shield, Clock, ChevronDown } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { CheckCircle, ChevronDown, Search, TrendingUp, Car, Shield, Clock } from 'lucide-react'
 
 const benefits = [
   {
-    icon: <TrendingUp size={22} color="#1DB954" />,
-    title: 'Maximise Fleet Revenue',
+    icon: '📈',
+    title: 'Maximise fleet revenue',
     desc: 'Keep your vehicles earning around the clock. Our dispatch system fills idle time automatically.',
   },
   {
-    icon: <Car size={22} color="#1DB954" />,
-    title: 'Manage All Vehicles in One Place',
+    icon: '🚗',
+    title: 'Manage all vehicles in one place',
     desc: 'Track every vehicle in real time, view trip history, and monitor driver performance from a single dashboard.',
   },
   {
-    icon: <TrendingUp size={22} color="#1DB954" />,
-    title: 'Weekly Payouts Per Vehicle',
+    icon: '💳',
+    title: 'Weekly payouts per vehicle',
     desc: 'Earnings for every vehicle land in your account weekly — broken down trip by trip, driver by driver.',
   },
+]
+
+const steps = [
   {
-    icon: <Shield size={22} color="#1DB954" />,
-    title: 'Verified Drivers Only',
-    desc: 'Every driver assigned to your fleet is NADRA-verified. You approve drivers before they touch your vehicles.',
+    num: '1',
+    title: 'Register your fleet',
+    desc: 'Tell us your city, fleet size, and CNIC. We will send you next steps within 24 hours.',
   },
   {
-    icon: <Clock size={22} color="#1DB954" />,
-    title: 'Onboarding in 3–5 Days',
-    desc: 'Submit your fleet documents, get verified, and go live. Our team handles the setup end to end.',
+    num: '2',
+    title: 'Upload documents & verify',
+    desc: 'Submit ownership and vehicle documents. Every driver assigned is NADRA-verified before going live.',
   },
   {
-    icon: <Car size={22} color="#1DB954" />,
-    title: 'Lowest Commission on Fleet',
-    desc: 'Fleet owners get preferential commission rates. The more vehicles, the better your rate.',
+    num: '3',
+    title: 'Go live and earn',
+    desc: 'Assign drivers to your vehicles and start receiving weekly, trip-by-trip payouts.',
   },
 ]
 
@@ -53,51 +58,50 @@ const faqs = [
     q: 'What vehicle types are accepted?',
     a: 'Sedans, SUVs, and vans are accepted. All vehicles must be 2015 or newer and pass a roadworthiness check.',
   },
+  {
+    q: 'What if I have 20+ vehicles?',
+    a: 'Large fleets get access to our enterprise team, custom commission rates, and a dedicated account manager.',
+  },
 ]
 
-type VehicleType = 'sedan' | 'suv' | 'van'
+const cities = ['Rawalpindi', 'Islamabad', 'Lahore', 'Karachi', 'Faisalabad']
 
 interface FormState {
-  ownerName: string
+  email: string
   phone: string
-  cnic: string
-  companyName: string
+
   fleetSize: string
-  vehicleTypes: VehicleType[]
-  city: string
-  payoutNumber: string
+  agree: boolean
 }
 
 export default function FleetSection() {
   const [form, setForm] = useState<FormState>({
-    ownerName: '',
+    email: '',
     phone: '',
-    cnic: '',
-    companyName: '',
     fleetSize: '',
-    vehicleTypes: [],
-    city: 'Rawalpindi',
-    payoutNumber: '',
+    agree: false,
   })
 
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [cityOpen, setCityOpen] = useState(false)
+  const [citySearch, setCitySearch] = useState('')
 
-  function toggleVehicleType(type: VehicleType) {
-    setForm((prev) => ({
-      ...prev,
-      vehicleTypes: prev.vehicleTypes.includes(type)
-        ? prev.vehicleTypes.filter((t) => t !== type)
-        : [...prev.vehicleTypes, type],
-    }))
+  function update(field: keyof FormState, value: string | boolean) {
+    setForm((prev) => ({ ...prev, [field]: value }))
+    setError('')
   }
 
   async function handleSubmit() {
     setError('')
-    if (!form.ownerName || !form.phone || !form.cnic || !form.fleetSize) {
+    if (!form.email || !form.phone || !form.fleetSize ) {
       setError('Please fill in all required fields.')
+      return
+    }
+    if (!form.agree) {
+      setError('Please agree to the Terms of Service and Privacy Policy.')
       return
     }
     setLoading(true)
@@ -119,504 +123,665 @@ export default function FleetSection() {
 
   const inputStyle = {
     width: '100%',
-    background: '#333',
-    border: '1px solid #262626',
+    background: '#F0F0F0',
+    border: 'none',
     borderRadius: '10px',
-    padding: '0.75rem 1rem',
-    color: '#fff',
-    fontSize: '0.9rem',
+    padding: '0.95rem 1rem',
+    color: '#111',
+    fontSize: '0.95rem',
     outline: 'none',
     fontFamily: 'var(--font-inter), sans-serif',
-    transition: 'border-color 0.2s',
   }
 
   const labelStyle = {
     display: 'block',
-    fontSize: '0.72rem',
-    fontWeight: 700,
-    letterSpacing: '0.5px',
-    textTransform: 'uppercase' as const,
-    color: '#6B6B6B',
-    marginBottom: '0.4rem',
+    fontSize: '0.85rem',
+    fontWeight: 500,
+    color: '#333',
+    marginBottom: '0.5rem',
+  }
+
+  const filteredCities = cities.filter((c) =>
+    c.toLowerCase().includes(citySearch.toLowerCase())
+  )
+
+  // ── Success screen ──
+  if (success) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        background: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem',
+      }}>
+        <div style={{ textAlign: 'center', maxWidth: '480px' }}>
+          <div style={{
+            width: '80px', height: '80px',
+            background: 'rgba(43,134,89,0.1)',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+          }}>
+            <CheckCircle size={40} color="#2B8659" />
+          </div>
+          <h1 style={{
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: '2rem',
+            fontWeight: 800,
+            color: '#0A0A0A',
+            marginBottom: '0.75rem',
+          }}>
+            Application Received!
+          </h1>
+          <p style={{ color: '#666', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+            Our fleet team will review your application and contact you within 24 hours with next steps.
+          </p>
+          <div style={{
+            background: '#F7FFF9',
+            border: '1px solid #C5E8D4',
+            borderRadius: '12px',
+            padding: '1rem 1.5rem',
+            marginBottom: '2rem',
+          }}>
+            <div style={{ fontSize: '0.72rem', color: '#888', marginBottom: '0.25rem' }}>Application ID</div>
+            <div style={{
+              fontFamily: 'var(--font-inter), sans-serif',
+              fontWeight: 800,
+              fontSize: '1.1rem',
+              color: '#2B8659',
+              letterSpacing: '1px',
+            }}>
+              {success}
+            </div>
+          </div>
+          <Link href="/" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            background: '#0A0A0A',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: '0.92rem',
+            padding: '0.85rem 2rem',
+            borderRadius: '50px',
+            textDecoration: 'none',
+          }}>
+            Back to Home
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   return (
-    <section
-      id="fleet"
-      style={{
-        background: '#ffffff',
-        padding: 'clamp(60px, 12vw, 100px) 5vw',
-        borderTop: '1px solid #EFEFEF',
-      }}
-    >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ minHeight: '100vh', background: '#fff', fontFamily: 'var(--font-inter), sans-serif' }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: 'clamp(2.5rem, 6vw, 4rem)' }}>
-          <span style={{
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase' as const,
-            color: '#1DB954',
-            display: 'block',
-            marginBottom: '1rem',
-          }}>
-            For Fleet Owners
-          </span>
-          <h2 style={{
-            fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(1.7rem, 5vw, 3.2rem)',
-            fontWeight: 800,
-            letterSpacing: '-1px',
-            lineHeight: 1.1,
-            color: '#0A0A0A',
-            marginBottom: '1rem',
-            maxWidth: '600px',
-          }}>
-            Put your entire fleet to work with RideFlow.
-          </h2>
-          <p style={{
-            fontSize: 'clamp(0.88rem, 2vw, 1rem)',
-            color: '#777',
-            lineHeight: 1.75,
-            maxWidth: '520px',
-          }}>
-            Whether you own 2 vehicles or 200 — register your fleet, assign verified drivers, and start earning. One dashboard. Weekly payouts. Zero headache.
-          </p>
-        </div>
-
-        {/* Benefits grid */}
+      {/* ── HERO ── */}
+      <section style={{
+        background: '#0A0A0A',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column' as const,
+        justifyContent: 'center',
+        padding: '120px 5vw 80px',
+        position: 'relative',
+        overflow: 'hidden',
+      }}>
         <div
-          className="fleet-benefits-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 'clamp(1rem, 3vw, 1.5rem)',
-            marginBottom: 'clamp(3rem, 8vw, 5rem)',
-          }}
+                  className="absolute inset-0 will-change-transform"
+                  style={{
+                    transform: 'scale(1)',
+                    transformOrigin: 'center center',
+                  }}
+                >
+                  <Image
+                    src="/images/car-park.jpg"
+                    alt="RideFlow driver"
+                    fill
+                    priority
+                    className="hero-driver-img"
+                    style={{ objectFit: 'cover', objectPosition: 'center' }}
+                  /></div>
+
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '1200px',
+          margin: '0 auto',
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: '1fr 420px',
+          gap: '4rem',
+          alignItems: 'center',
+        }}
+          className="fleet-hero-grid"
         >
-          {benefits.map((b) => (
-            <div
-              key={b.title}
-              style={{
-                background: '#F9F9F9',
-                border: '1px solid #EFEFEF',
-                borderRadius: '16px',
-                padding: 'clamp(1.25rem, 4vw, 1.75rem)',
-                transition: 'border-color 0.2s, transform 0.2s, box-shadow 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = '#1DB954'
-                e.currentTarget.style.transform = 'translateY(-3px)'
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(29,185,84,0.08)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = '#EFEFEF'
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
-            >
-              <div style={{
-                width: 'clamp(38px, 6vw, 44px)',
-                height: 'clamp(38px, 6vw, 44px)',
-                background: 'rgba(29,185,84,0.08)',
-                borderRadius: '10px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1rem',
-              }}>
-                {b.icon}
-              </div>
-              <h4 style={{
-                fontFamily: 'var(--font-inter), sans-serif',
-                fontSize: 'clamp(0.95rem, 2vw, 1rem)',
-                fontWeight: 700,
-                color: '#0A0A0A',
-                marginBottom: '0.5rem',
-              }}>
-                {b.title}
-              </h4>
-              <p style={{ fontSize: 'clamp(0.8rem, 1.8vw, 0.85rem)', color: '#888', lineHeight: 1.65 }}>
-                {b.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+          {/* Left */}
+          <div>
+            <h1 style={{
+              fontFamily: 'var(--font-inter), sans-serif',
+              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              fontWeight: 800,
+              color: '#fff',
+              letterSpacing: '-2px',
+              lineHeight: 1.05,
+              marginBottom: '1.5rem',
+            }}>
+              Put your fleet to work<br />
+              <span style={{ color: '#2B8659' }}>with RideFlow.</span>
+            </h1>
+            <p style={{
+              fontSize: '1.1rem',
+              color: '#fff',
+              lineHeight: 1.75,
+              maxWidth: '480px',
+              marginBottom: '2.5rem',
+            }}>
+              Own 2 vehicles or 200 — register your fleet, assign verified drivers, and start earning. One dashboard. Weekly payouts. Zero headache.
+            </p>
 
+            
+          </div>
 
-
-        {/* Form + FAQ grid */}
-        <div
-          className="fleet-form-faq-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 'clamp(2rem, 6vw, 4rem)',
-            alignItems: 'start',
-          }}
-        >
-          {/* Registration form */}
+          {/* Right: Bolt-style inline registration card */}
           <div style={{
-            background: '#444',
+            background: '#fff',
             borderRadius: '20px',
-            padding: 'clamp(1.5rem, 5vw, 2.5rem)',
-            border: '1px solid #1a1a1a',
+            padding: '2rem',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
           }}>
             <h3 style={{
               fontFamily: 'var(--font-inter), sans-serif',
-              fontSize: 'clamp(1.15rem, 3vw, 1.4rem)',
-              fontWeight: 700,
-              color: '#fff',
-              marginBottom: '0.5rem',
+              fontSize: '1.6rem',
+              fontWeight: 800,
+              color: '#0A0A0A',
+              marginBottom: '1.5rem',
+              letterSpacing: '-0.5px',
             }}>
-              Register Your Fleet
+              Become a fleet owner
             </h3>
-            <p style={{ fontSize: '0.85rem', color: '#555', marginBottom: '2rem' }}>
-              Takes less than 5 minutes. Our team reviews within 24 hours.
-            </p>
 
-            {success ? (
-              <div style={{
-                background: 'rgba(29,185,84,0.08)',
-                border: '1px solid rgba(29,185,84,0.3)',
-                borderRadius: '12px',
-                padding: 'clamp(1.25rem, 4vw, 2rem)',
-                textAlign: 'center' as const,
-              }}>
-                <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✅</div>
-                <h4 style={{
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  fontWeight: 700,
-                  color: '#1DB954',
-                  fontSize: '1.1rem',
-                  marginBottom: '0.5rem',
-                }}>
-                  Application Submitted!
-                </h4>
-                <p style={{ fontSize: '0.85rem', color: '#777', marginBottom: '0.75rem' }}>
-                  Your application ID is:
-                </p>
-                <div style={{
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  fontWeight: 800,
-                  fontSize: '1.1rem',
-                  color: '#1DB954',
-                  letterSpacing: '1px',
-                  marginBottom: '1rem',
-                  wordBreak: 'break-word' as const,
-                }}>
-                  {success}
-                </div>
-                <p style={{ fontSize: '0.8rem', color: '#555' }}>
-                  Our fleet team will call you within 24 hours.
-                </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
+
+              {/* Email */}
+              <div>
+                <label style={labelStyle}>Email address</label>
+                <input
+                  type="email" value={form.email}
+                  onChange={(e) => update('email', e.target.value)}
+                  placeholder="Enter email address"
+                  style={inputStyle}
+                />
               </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-                {/* Row 1 */}
-                <div className="fleet-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                  <div>
-                    <label style={labelStyle}>Full Name *</label>
-                    <input
-                      type="text"
-                      value={form.ownerName}
-                      onChange={(e) => setForm({ ...form, ownerName: e.target.value })}
-                      placeholder="Muhammad Ahmed"
-                      style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = '#262626')}
-                    />
+             {/* Phone with country code */}
+              <div>
+                <label style={labelStyle}>Phone number</label>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    background: '#F0F0F0',
+                    borderRadius: '10px',
+                    padding: '0 0.85rem',
+                    minWidth: '92px',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#111', marginBottom: '-3px' }}>+92</span>
                   </div>
-                  <div>
-                    <label style={labelStyle}>Phone *</label>
-                    <input
-                      type="tel"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="03XX-XXXXXXX"
-                      style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = '#262626')}
-                    />
-                  </div>
-                </div>
-
-                {/* Row 2 */}
-                <div className="fleet-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                  <div>
-                    <label style={labelStyle}>CNIC *</label>
-                    <input
-                      type="text"
-                      value={form.cnic}
-                      onChange={(e) => setForm({ ...form, cnic: e.target.value })}
-                      placeholder="XXXXX-XXXXXXX-X"
-                      style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = '#262626')}
-                    />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Company Name</label>
-                    <input
-                      type="text"
-                      value={form.companyName}
-                      onChange={(e) => setForm({ ...form, companyName: e.target.value })}
-                      placeholder="Optional"
-                      style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = '#262626')}
-                    />
-                  </div>
-                </div>
-
-                {/* Row 3 */}
-                <div className="fleet-form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                  <div>
-                    <label style={labelStyle}>Number of Vehicles *</label>
-                    <input
-                      type="number"
-                      value={form.fleetSize}
-                      onChange={(e) => setForm({ ...form, fleetSize: e.target.value })}
-                      placeholder="e.g. 5"
-                      min="2"
-                      style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = '#262626')}
-                    />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>City *</label>
-                    <select
-                      value={form.city}
-                      onChange={(e) => setForm({ ...form, city: e.target.value })}
-                      style={{ ...inputStyle, cursor: 'pointer' }}
-                    >
-                      <option value="Rawalpindi">Rawalpindi</option>
-                      <option value="Islamabad">Islamabad</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Vehicle types */}
-                <div>
-                  <label style={labelStyle}>Vehicle Types</label>
-                  <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' as const }}>
-                    {(['sedan', 'suv', 'van'] as VehicleType[]).map((type) => {
-                      const active = form.vehicleTypes.includes(type)
-                      return (
-                        <button
-                          key={type}
-                          type="button"
-                          onClick={() => toggleVehicleType(type)}
-                          style={{
-                            padding: 'clamp(0.4rem, 1.5vw, 0.5rem) clamp(0.8rem, 2.5vw, 1.1rem)',
-                            borderRadius: '50px',
-                            border: `1px solid ${active ? '#1DB954' : '#262626'}`,
-                            background: active ? 'rgba(29,185,84,0.1)' : 'transparent',
-                            color: active ? '#1DB954' : '#666',
-                            fontSize: 'clamp(0.75rem, 1.8vw, 0.82rem)',
-                            fontWeight: 600,
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            fontFamily: 'var(--font-inter), sans-serif',
-                            textTransform: 'capitalize' as const,
-                          }}
-                        >
-                          {type === 'sedan' ? '🚗' : type === 'suv' ? '🚙' : '🚐'} {type}
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
-
-                {/* Payout */}
-                <div>
-                  <label style={labelStyle}>Payout Number (JazzCash / EasyPaisa)</label>
                   <input
-                    type="tel"
-                    value={form.payoutNumber}
-                    onChange={(e) => setForm({ ...form, payoutNumber: e.target.value })}
-                    placeholder="03XX-XXXXXXX"
-                    style={inputStyle}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = '#1DB954')}
-                    onBlur={(e) => (e.currentTarget.style.borderColor = '#262626')}
+                    type="tel" value={form.phone}
+                    onChange={(e) => {
+                      const digitsOnly = e.target.value.replace(/\D/g, '').slice(0, 11)
+                      update('phone', digitsOnly)
+                    }}
+                    onKeyDown={(e) => {
+                      if (
+                        !/[0-9]/.test(e.key) &&
+                        !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)
+                      ) {
+                        e.preventDefault()
+                      }
+                    }}
+                    inputMode="numeric"
+                    maxLength={11}
+                    placeholder="Enter a phone number"
+                    style={{ ...inputStyle, flex: 1, minWidth: 0 }}
                   />
                 </div>
-
-                {error && (
-                  <p style={{ fontSize: '0.82rem', color: '#ff4444' }}>{error}</p>
-                )}
-
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={loading}
-                  style={{
-                    width: '100%',
-                    background: loading ? '#1a1a1a' : '#1DB954',
-                    color: loading ? '#444' : '#000',
-                    border: 'none',
-                    borderRadius: '50px',
-                    padding: 'clamp(0.85rem, 2.5vw, 1rem)',
-                    fontFamily: 'var(--font-inter), sans-serif',
-                    fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                    fontWeight: 700,
-                    cursor: loading ? 'not-allowed' : 'pointer',
-                    transition: 'all 0.2s',
-                    marginTop: '0.5rem',
-                  }}
-                >
-                  {loading ? 'Submitting...' : 'Submit Fleet Application →'}
-                </button>
-
-                <p style={{ textAlign: 'center' as const, fontSize: '0.72rem', color: '#444' }}>
-                  Your CNIC is verified securely. We never share your data.
-                </p>
               </div>
-            )}
-          </div>
 
-          {/* FAQ */}
-          <div>
-            <h3 style={{
-              fontFamily: 'var(--font-inter), sans-serif',
-              fontSize: 'clamp(1.15rem, 3vw, 1.4rem)',
-              fontWeight: 700,
-              color: '#0A0A0A',
-              marginBottom: '0.5rem',
-            }}>
-              Common Questions
-            </h3>
-            <p style={{ fontSize: '0.85rem', color: '#888', marginBottom: '2rem' }}>
-              Everything you need to know about running a fleet on RideFlow.
-            </p>
+              {/* Fleet size */}
+              <div>
+                <label style={labelStyle}>Number of vehicles</label>
+                <input
+                  type="number" value={form.fleetSize}
+                  onChange={(e) => update('fleetSize', e.target.value)}
+                  placeholder="e.g. 5"
+                  min="2"
+                  style={inputStyle}
+                />
+              </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {faqs.map((faq, i) => (
-                <div
-                  key={i}
-                  style={{
-                    border: `1px solid ${openFaq === i ? '#1DB954' : '#EFEFEF'}`,
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                    transition: 'border-color 0.2s',
-                  }}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    style={{
-                      width: '100%',
-                      background: openFaq === i ? '#F9FFF9' : '#fff',
-                      border: 'none',
-                      padding: 'clamp(0.9rem, 3vw, 1.1rem) clamp(1rem, 3vw, 1.25rem)',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      cursor: 'pointer',
-                      textAlign: 'left' as const,
-                      transition: 'background 0.2s',
-                      gap: '0.75rem',
-                    }}
-                  >
-                    <span style={{
-                      fontFamily: 'var(--font-inter), sans-serif',
-                      fontWeight: 600,
-                      fontSize: 'clamp(0.85rem, 2vw, 0.95rem)',
-                      color: '#0A0A0A',
-                    }}>
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      size={18}
-                      color="#1DB954"
-                      style={{
-                        transform: openFaq === i ? 'rotate(180deg)' : 'rotate(0deg)',
-                        transition: 'transform 0.2s',
-                        flexShrink: 0,
-                        marginLeft: '1rem',
-                      }}
-                    />
-                  </button>
-                  {openFaq === i && (
-                    <div style={{
-                      padding: '0 clamp(1rem, 3vw, 1.25rem) 1.1rem',
-                      fontSize: 'clamp(0.82rem, 1.8vw, 0.88rem)',
-                      color: '#666',
-                      lineHeight: 1.7,
-                      background: '#F9FFF9',
-                    }}>
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+          
 
-            {/* Bottom CTA */}
-            <div style={{
-              marginTop: '2.5rem',
-              background: '#444',
-              borderRadius: '16px',
-              padding: 'clamp(1.25rem, 4vw, 1.75rem)',
-            }}>
-              <h4 style={{
-                fontFamily: 'var(--font-inter), sans-serif',
-                fontWeight: 700,
-                fontSize: '1rem',
-                color: '#fff',
-                marginBottom: '0.5rem',
+
+              {/* Terms checkbox */}
+              <label style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.65rem',
+                cursor: 'pointer',
+                marginTop: '0.25rem',
               }}>
-                Have a large fleet?
-              </h4>
-              <p style={{ fontSize: '0.85rem', color: '#666', marginBottom: '1.25rem' }}>
-                For fleets of 20+ vehicles, contact our enterprise team for custom rates and a dedicated account manager.
-              </p>
-              <a
-                href="mailto:fleet@rideflow.pk"
+                <input
+                  type="checkbox"
+                  checked={form.agree}
+                  onChange={(e) => update('agree', e.target.checked)}
+                  style={{
+                    marginTop: '0.2rem',
+                    width: '16px',
+                    height: '16px',
+                    accentColor: '#2B8659',
+                    flexShrink: 0,
+                  }}
+                />
+                <span style={{ fontSize: '0.8rem', color: '#555', lineHeight: 1.6 }}>
+                  By registering, you agree to our{' '}
+                  <a href="#" style={{ color: '#2B8659', fontWeight: 600, textDecoration: 'none' }}>Terms of Service</a>
+                  {' '}and{' '}
+                  <a href="#" style={{ color: '#2B8659', fontWeight: 600, textDecoration: 'none' }}>Privacy Policy</a>,
+                  commit to comply with obligations under applicable law, and provide only legal
+                  services and content on the RideFlow Platform.
+                </span>
+              </label>
+
+              {error && (
+                <p style={{ fontSize: '0.82rem', color: '#e53e3e', padding: '0.6rem 0.8rem', background: '#FFF5F5', borderRadius: '8px', border: '1px solid #FED7D7' }}>
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={loading}
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  background: '#1DB954',
-                  color: '#000',
+                  width: '100%',
+                  background: loading ? '#ccc' : '#2B8659',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '12px',
+                  padding: '1rem',
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontSize: '1rem',
                   fontWeight: 700,
-                  fontSize: '0.88rem',
-                  padding: '0.7rem 1.5rem',
-                  borderRadius: '50px',
-                  textDecoration: 'none',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                  marginTop: '0.25rem',
                 }}
               >
-                Contact Fleet Team →
-              </a>
+                {loading ? 'Submitting...' : 'Register as a fleet owner'}
+              </button>
+
+              <p style={{ textAlign: 'center' as const, fontSize: '0.85rem', color: '#555' }}>
+                Already have an account?{' '}
+                <a href="#" style={{ color: '#2B8659', fontWeight: 700, textDecoration: 'none' }}>
+                  Log in ↗
+                </a>
+              </p>
+
+              <p style={{ textAlign: 'center' as const, fontSize: '0.82rem', color: '#777' }}>
+                Have a single vehicle?{' '}
+                <a href="#" style={{ color: '#2B8659', fontWeight: 700, textDecoration: 'none' }}>
+                  Register as a driver.
+                </a>
+              </p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── WHY RIDEFLOW FOR FLEETS ── */}
+      <section style={{
+        padding: '100px 5vw',
+        background: '#fff',
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        
+          <h2 style={{
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 800,
+            color: '#0A0A0A',
+            letterSpacing: '-1px',
+            marginBottom: '4rem',
+            maxWidth: '600px',
+            lineHeight: 1.1,
+          }}>
+            Why run your fleet on RideFlow?
+          </h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '2rem',
+          }}
+            className="fleet-benefits-grid"
+          >
+            {benefits.map((b, i) => (
+              <div key={i}>
+                <div style={{
+                  width: '100%',
+                  aspectRatio: '350 / 240',
+                  background: '#EFF3F0',
+                  borderRadius: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 'clamp(1.5rem, 5vw, 3rem)',
+                  fontSize: 'clamp(4rem, 18vw, 9rem)',
+                  overflow: 'hidden',
+                }}>
+                  {b.icon}
+                </div>
+                <h3 style={{
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontSize: '1.1rem',
+                  fontWeight: 700,
+                  color: '#0A0A0A',
+                  marginBottom: '0.6rem',
+                }}>
+                  {b.title}
+                </h3>
+                <p style={{ fontSize: '0.88rem', color: '#888', lineHeight: 1.7 }}>
+                  {b.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section style={{
+        padding: '130px 5vw',
+        background: '#F9F9F9',
+        borderTop: '1px solid #EFEFEF',
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          
+          <h2 style={{
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontWeight: 800,
+            color: '#0A0A0A',
+            letterSpacing: '-1px',
+            marginBottom: '0.75rem',
+            lineHeight: 1.1,
+          }}>
+            Get your fleet earning in 3 steps.
+          </h2>
+          <p style={{ color: '#666', fontSize: '1rem', marginBottom: '4rem', maxWidth: '480px', lineHeight: 1.7 }}>
+            From 2 vehicles to 200 — registering your fleet with RideFlow is quick and straightforward.
+          </p>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '2rem',
+          }}
+            className="fleet-steps-grid"
+          >
+            {steps.map((step) => (
+              <div
+                key={step.num}
+                style={{
+                  background: '#fff',
+                  border: '1px solid #EFEFEF',
+                  borderRadius: '20px',
+                  padding: '2rem',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                  transition: 'box-shadow 0.2s, transform 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(43,134,89,0.08)'
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
+              >
+                <div style={{
+                  width: '42px', height: '42px',
+                  background: '#2B8659',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  color: '#fff',
+                  marginBottom: '1.25rem',
+                }}>
+                  {step.num}
+                </div>
+                <p style={{
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  color: '#2B8659',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase' as const,
+                  marginBottom: '0.5rem',
+                }}>
+                  Step {step.num}
+                </p>
+                <h3 style={{
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontSize: '1.3rem',
+                  fontWeight: 700,
+                  color: '#0A0A0A',
+                  marginBottom: '0.6rem',
+                }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontSize: '1rem', color: '#666', lineHeight: 1.65 }}>
+                  {step.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+   
+
+      {/* ── FAQ ── */}
+      <section style={{
+        padding: '190px 5vw',
+        background: '#fff',
+        borderTop: '1px solid #EFEFEF',
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '5rem',
+          alignItems: 'start',
+        }}
+          className="fleet-faq-grid"
+        >
+          <div>
+           
+            <h2 style={{
+              fontFamily: 'var(--font-inter), sans-serif',
+              fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
+              fontWeight: 800,
+              color: '#0A0A0A',
+              letterSpacing: '-0.8px',
+              lineHeight: 1.15,
+              marginBottom: '1rem',
+            }}>
+              Common questions from fleet owners.
+            </h2>
+            <p style={{ color: '#555', fontSize: '1.2rem', lineHeight: 1.7 }}>
+              Can&apos;t find your answer? Contact our fleet support team directly.
+            </p>
+            <a
+              href="mailto:fleet@rideflow.pk"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: '#0A0A0A',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                padding: '0.8rem 1.75rem',
+                borderRadius: '50px',
+                textDecoration: 'none',
+                marginTop: '1.5rem',
+              }}
+            >
+              Contact Fleet Team →
+            </a>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                style={{
+                  border: `1px solid ${openFaq === i ? '#2B8659' : '#EFEFEF'}`,
+                  borderRadius: '14px',
+                  overflow: 'hidden',
+                  transition: 'border-color 0.2s',
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  style={{
+                    width: '100%',
+                    background: openFaq === i ? '#F7FFF9' : '#fff',
+                    border: 'none',
+                    padding: '1rem 1.25rem',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    cursor: 'pointer',
+                    textAlign: 'left' as const,
+                    transition: 'background 0.2s',
+                  }}
+                >
+                  <span style={{
+                    fontFamily: 'var(--font-inter), sans-serif',
+                    fontWeight: 600,
+                    fontSize: '1.2rem',
+                    color: '#0A0A0A',
+                    paddingRight: '1rem',
+                  }}>
+                    {faq.q}
+                  </span>
+                  <ChevronDown
+                    size={17}
+                    color="#2B8659"
+                    style={{
+                      transform: openFaq === i ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s',
+                      flexShrink: 0,
+                    }}
+                  />
+                </button>
+                {openFaq === i && (
+                  <div style={{
+                    padding: '0 1.25rem 1rem',
+                    fontSize: '0.87rem',
+                    color: '#555',
+                    lineHeight: 1.75,
+                    background: '#F7FFF9',
+                  }}>
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── BOTTOM CTA ── */}
+      <section style={{
+        padding: '100px 5vw',
+        background: '#0A0A0A',
+        textAlign: 'center' as const,
+      }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontWeight: 800,
+            color: '#fff',
+            letterSpacing: '-1px',
+            lineHeight: 1.1,
+            marginBottom: '1rem',
+          }}>
+            Have a large fleet?
+          </h2>
+          <p style={{ color: '#999', fontSize: '1rem', lineHeight: 1.75, marginBottom: '2rem' }}>
+            For fleets of 20+ vehicles, contact our enterprise team for custom rates and a dedicated account manager.
+          </p>
+          <a
+            href="mailto:fleet@rideflow.pk"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              background: '#2B8659',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: '1rem',
+              padding: '1rem 2.5rem',
+              borderRadius: '50px',
+              textDecoration: 'none',
+              transition: 'background 0.2s',
+            }}
+          >
+            Contact Fleet Team →
+          </a>
+        </div>
+      </section>
 
       <style jsx>{`
         @media (max-width: 900px) {
-          .fleet-benefits-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-          .fleet-form-faq-grid {
+          .fleet-hero-grid {
             grid-template-columns: 1fr !important;
           }
-        }
-        @media (max-width: 560px) {
           .fleet-benefits-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .fleet-steps-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .fleet-stats-strip {
+            grid-template-columns: 1fr 1fr !important;
+          }
+          .fleet-faq-grid {
             grid-template-columns: 1fr !important;
           }
         }
         @media (max-width: 480px) {
-          .fleet-form-row {
-            grid-template-columns: 1fr !important;
+          .fleet-stats-strip {
+            grid-template-columns: 1fr 1fr !important;
           }
         }
       `}</style>
-    </section>
+    </div>
   )
 }

@@ -172,7 +172,7 @@ export default function BookingWidget() {
           }}
         >
           <Image
-            src="/images/fleet-car.jpeg"
+            src="/images/car.jpeg"
             alt="RideFlow fleet vehicle"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}

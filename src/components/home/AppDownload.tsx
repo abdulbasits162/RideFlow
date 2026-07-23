@@ -73,28 +73,6 @@ export default function AppDownload() {
             and SOS — all in one place. Free on Android and iOS.
           </p>
 
-          {/* Feature pills */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap' as const,
-            gap: 'clamp(0.4rem, 1.2vw, 0.6rem)',
-            marginBottom: '2.5rem',
-          }}>
-            {['Live GPS', 'SOS Button', 'Ride History', 'In-App Chat', 'Saved Places'].map((f) => (
-              <span key={f} style={{
-                background: 'rgba(29,185,84,0.08)',
-                border: '1px solid rgba(29,185,84,0.2)',
-                borderRadius: '50px',
-                padding: 'clamp(0.28rem, 1vw, 0.35rem) clamp(0.65rem, 2vw, 0.9rem)',
-                fontSize: 'clamp(0.78rem, 1.8vw, 1rem)',
-                fontWeight: 600,
-                color: '#1DB954',
-              }}>
-                {f}
-              </span>
-            ))}
-          </div>
-
           {/* App store badges */}
           <div style={{ display: 'flex', gap: 'clamp(0.6rem, 2vw, 1rem)', flexWrap: 'wrap' as const }}>
             {[

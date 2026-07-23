@@ -26,6 +26,19 @@ export default function FleetSection() {
         {/* Left: text */}
         <div>
           <span
+          style={{
+            display: 'inline-block',
+            fontSize: 'clamp(1.5rem, 1.8vw, 1rem)',
+            fontWeight: 800,
+            letterSpacing: '2px',
+            textTransform: 'uppercase' as const,
+            color: '#2B8659',
+            marginBottom: '0.75rem',
+          }}
+        >
+          become a partner
+        </span>
+          <span
             style={{
               display: 'block',
               fontSize: 'clamp(0.85rem, 1.6vw, 0.95rem)',
@@ -96,7 +109,7 @@ export default function FleetSection() {
           }}
         >
           <Image
-            src="/images/fleet-car.jpeg"
+            src="/images/car-park (1).jpg"
             alt="RideFlow fleet vehicle"
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}

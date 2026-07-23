@@ -8,7 +8,7 @@ import { CheckCircle, ChevronDown, Search } from 'lucide-react'
 const faqs = [
   {
     q: 'Can I drive with RideFlow in my city?',
-    a: 'Currently RideFlow operates in Rawalpindi and Islamabad. If you are based in either city, you can apply right now. We are expanding to Lahore, Faisalabad, and more cities in 2026.',
+    a: 'Currently RideFlow operates in Rawalpindi and Islamabad. If you are based in either city, you can apply right now. We are expanding to Lahore, Faisalabad, and more cities in 2027.',
   },
   {
     q: 'How do I start driving with RideFlow?',
@@ -153,12 +153,12 @@ export default function DriverRegisterPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem',
+        padding: 'clamp(1.25rem, 5vw, 2rem)',
       }}>
-       
+
         <div style={{ textAlign: 'center', maxWidth: '480px' }}>
           <div style={{
-            width: '80px', height: '80px',
+            width: 'clamp(64px, 12vw, 80px)', height: 'clamp(64px, 12vw, 80px)',
             background: 'rgba(43,134,89,0.1)',
             borderRadius: '50%',
             display: 'flex',
@@ -170,21 +170,21 @@ export default function DriverRegisterPage() {
           </div>
           <h1 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: '2rem',
+            fontSize: 'clamp(1.5rem, 5vw, 2rem)',
             fontWeight: 800,
             color: '#0A0A0A',
             marginBottom: '0.75rem',
           }}>
             Application Received!
           </h1>
-          <p style={{ color: '#666', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+          <p style={{ color: '#666', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: 'clamp(0.85rem, 2vw, 1rem)' }}>
             Our team will review your application and contact you within 24 hours with next steps.
           </p>
           <div style={{
             background: '#F7FFF9',
             border: '1px solid #C5E8D4',
             borderRadius: '12px',
-            padding: '1rem 1.5rem',
+            padding: 'clamp(0.85rem, 3vw, 1rem) clamp(1rem, 4vw, 1.5rem)',
             marginBottom: '2rem',
           }}>
             <div style={{ fontSize: '0.72rem', color: '#888', marginBottom: '0.25rem' }}>Application ID</div>
@@ -194,6 +194,7 @@ export default function DriverRegisterPage() {
               fontSize: '1.1rem',
               color: '#2B8659',
               letterSpacing: '1px',
+              wordBreak: 'break-word' as const,
             }}>
               {success}
             </div>
@@ -226,44 +227,45 @@ export default function DriverRegisterPage() {
         display: 'flex',
         flexDirection: 'column' as const,
         justifyContent: 'center',
-        padding: '120px 5vw 80px',
+        padding: 'clamp(90px, 15vw, 120px) 5vw clamp(50px, 10vw, 80px)',
         position: 'relative',
         overflow: 'hidden',
       }}>
         <div
-              className="absolute inset-0 will-change-transform"
-              style={{
-                transform: 'scale(1)',
-                transformOrigin: 'center center',
-              }}
-            >
-        <Image
-          src="/images/car-car-park.jpg"
-          alt="RideFlow driver"
-          fill
-          priority
-          className="hero-driver-img"
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        /></div>
+          className="absolute inset-0 will-change-transform"
+          style={{
+            transform: 'scale(1)',
+            transformOrigin: 'center center',
+          }}
+        >
+          <Image
+            src="/images/park2.jpg"
+            alt="RideFlow driver"
+            fill
+            priority
+            className="hero-driver-img"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+          /></div>
 
-        <div style={{
-          position: 'relative',
-          zIndex: 1,
-          maxWidth: '1200px',
-          margin: '0 auto',
-          width: '100%',
-          display: 'grid',
-          gridTemplateColumns: '1fr 420px',
-          gap: '4rem',
-          alignItems: 'center',
-        }}
+        <div
           className="driver-hero-grid"
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            maxWidth: '1200px',
+            margin: '0 auto',
+            width: '100%',
+            display: 'grid',
+            gridTemplateColumns: '1fr 420px',
+            gap: 'clamp(2rem, 6vw, 4rem)',
+            alignItems: 'center',
+          }}
         >
           {/* Left */}
-          <div>
+          <div style={{marginBottom:'-0px'}}>
             <h1 style={{
               fontFamily: 'var(--font-inter), sans-serif',
-              fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+              fontSize: 'clamp(2.2rem, 6vw, 4.5rem)',
               fontWeight: 800,
               color: '#fff',
               letterSpacing: '-2px',
@@ -274,48 +276,27 @@ export default function DriverRegisterPage() {
               <span style={{ color: '#2B8659' }}>with RideFlow.</span>
             </h1>
             <p style={{
-              fontSize: '1.5rem',
+              fontSize: 'clamp(1rem, 2.5vw, 1.5rem)',
               color: 'white',
               lineHeight: 1.75,
               maxWidth: '480px',
               marginBottom: '2.5rem',
             }}>
-              Become a RideFlow driver partner, set your own schedule, and earn money on your terms. No minimum hours, no boss, no monthly fees.
-            </p>
+              Become a RideFlow driver partner, set your schedule, and earn money driving</p>
 
-            {/* Trust pills */}
-            <div style={{ display: 'flex', flexWrap: 'wrap' as const, gap: '0.75rem' }}>
-              {[
-                '✅ NADRA Verified',
-                '💳 Weekly Payouts',
-                '📍 Rawalpindi & Islamabad',
-                '🛡️ 15% Commission',
-              ].map((pill) => (
-                <span key={pill} style={{
-                  background: 'rgba(43,134,89,0.1)',
-                  border: '1px solid rgba(43,134,89,0.25)',
-                  borderRadius: '50px',
-                  padding: '0.4rem 1rem',
-                  fontSize: '0.82rem',
-                  fontWeight: 600,
-                  color: '#2B8659',
-                }}>
-                  {pill}
-                </span>
-              ))}
-            </div>
+
           </div>
 
           {/* Right: Bolt-style inline registration card */}
           <div style={{
             background: '#fff',
             borderRadius: '20px',
-            padding: '2rem',
+            padding: 'clamp(1.5rem, 5vw, 2rem)',
             boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
           }}>
             <h3 style={{
               fontFamily: 'var(--font-inter), sans-serif',
-              fontSize: '1.6rem',
+              fontSize: 'clamp(1.3rem, 3.5vw, 1.6rem)',
               fontWeight: 800,
               color: '#0A0A0A',
               marginBottom: '1.5rem',
@@ -350,10 +331,9 @@ export default function DriverRegisterPage() {
                     padding: '0 0.85rem',
                     minWidth: '92px',
                     justifyContent: 'center',
+                    flexShrink: 0,
                   }}>
-                    <span style={{ fontSize: '1.1rem' }}>🇵🇰</span>
-                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#111' }}>+92</span>
-                    <ChevronDown size={14} color="#666" />
+                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#111', marginBottom: '-3px' }}>+92</span>
                   </div>
                   <input
                     type="tel" value={form.phone}
@@ -372,7 +352,7 @@ export default function DriverRegisterPage() {
                     inputMode="numeric"
                     maxLength={11}
                     placeholder="Enter a phone number"
-                    style={{ ...inputStyle, flex: 1 }}
+                    style={{ ...inputStyle, flex: 1, minWidth: 0 }}
                   />
                 </div>
               </div>
@@ -391,16 +371,16 @@ export default function DriverRegisterPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <Search size={16} color="#666" />
-                    <span style={{ fontWeight: 700, color: form.city ? '#111' : '#888' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', minWidth: 0 }}>
+                    <Search size={16} color="#666" style={{ flexShrink: 0 }} />
+                    <span style={{ fontWeight: 700, color: form.city ? '#111' : '#888', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' as const }}>
                       {form.city || 'Select your city'}
                     </span>
                   </span>
                   <ChevronDown
                     size={16}
                     color="#666"
-                    style={{ transform: cityOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }}
+                    style={{ transform: cityOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', flexShrink: 0 }}
                   />
                 </div>
 
@@ -489,12 +469,6 @@ export default function DriverRegisterPage() {
                 </span>
               </label>
 
-              <p style={{ fontSize: '0.78rem', color: '#999', lineHeight: 1.6 }}>
-                Once you&apos;ve become a driver, we will occasionally send you offers and
-                promotions related to our services. You can always unsubscribe by changing your
-                communication preferences.
-              </p>
-
               {error && (
                 <p style={{ fontSize: '0.82rem', color: '#e53e3e', padding: '0.6rem 0.8rem', background: '#FFF5F5', borderRadius: '8px', border: '1px solid #FED7D7' }}>
                   {error}
@@ -542,65 +516,58 @@ export default function DriverRegisterPage() {
 
       {/* ── WHY RIDEFLOW ── */}
       <section style={{
-        padding: '100px 5vw',
+        padding: 'clamp(70px, 14vw, 160px) 5vw',
         background: '#fff',
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <span style={{
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase' as const,
-            color: '#2B8659',
-            display: 'block',
-            marginBottom: '1rem',
-          }}>
-            Why RideFlow
-          </span>
+
           <h2 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontSize: 'clamp(1.7rem, 5vw, 3rem)',
             fontWeight: 800,
             color: '#0A0A0A',
             letterSpacing: '-1px',
-            marginBottom: '4rem',
+            marginBottom: 'clamp(2.25rem, 6vw, 4rem)',
             maxWidth: '500px',
             lineHeight: 1.1,
           }}>
             Why become a RideFlow driver?
           </h2>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '2rem',
-          }}
+          <div
             className="benefits-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: 'clamp(1.5rem, 4vw, 2rem)',
+            }}
           >
             {benefits.map((b, i) => (
               <div key={i}>
                 <div style={{
-                  width: '52px', height: '52px',
-                  background: '#0A0A0A',
+                  width: '100%',
+                  aspectRatio: '350 / 240',
+                  background: '#EFF3F0',
                   borderRadius: '14px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '1.25rem',
-                  fontSize: '1.4rem',
+                  marginBottom: 'clamp(1.5rem, 5vw, 3rem)',
+                  fontSize: 'clamp(4rem, 18vw, 9rem)',
+                  overflow: 'hidden',
                 }}>
-                  {i === 0 ? '🕐' : i === 1 ? '📱' : '💳'}
+                  {i === 0 ? '🕐' : i === 1 ? '📱' : '💳' }
                 </div>
                 <h3 style={{
                   fontFamily: 'var(--font-inter), sans-serif',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
                   fontWeight: 700,
                   color: '#0A0A0A',
                   marginBottom: '0.6rem',
                 }}>
                   {b.title}
                 </h3>
-                <p style={{ fontSize: '0.88rem', color: '#888', lineHeight: 1.7 }}>
+                <p style={{ fontSize: 'clamp(0.88rem, 2vw, 1rem)', color: '#666', lineHeight: 1.7 }}>
                   {b.desc}
                 </p>
               </div>
@@ -611,25 +578,15 @@ export default function DriverRegisterPage() {
 
       {/* ── HOW IT WORKS ── */}
       <section style={{
-        padding: '100px 5vw',
+        padding: 'clamp(70px, 13vw, 150px) 5vw',
         background: '#F9F9F9',
         borderTop: '1px solid #EFEFEF',
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <span style={{
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase' as const,
-            color: '#2B8659',
-            display: 'block',
-            marginBottom: '1rem',
-          }}>
-            Get Started
-          </span>
+
           <h2 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontSize: 'clamp(1.7rem, 5vw, 3rem)',
             fontWeight: 800,
             color: '#0A0A0A',
             letterSpacing: '-1px',
@@ -638,16 +595,17 @@ export default function DriverRegisterPage() {
           }}>
             Start earning in 3 steps.
           </h2>
-          <p style={{ color: '#888', fontSize: '1rem', marginBottom: '4rem', maxWidth: '480px', lineHeight: 1.7 }}>
+          <p style={{ color: '#888', fontSize: 'clamp(0.88rem, 2vw, 1rem)', marginBottom: 'clamp(2.25rem, 6vw, 4rem)', maxWidth: '480px', lineHeight: 1.7 }}>
             Whether you want to drive occasionally or full time, getting started with RideFlow is quick and simple.
           </p>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '2rem',
-          }}
+          <div
             className="steps-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: 'clamp(1.25rem, 4vw, 2rem)',
+            }}
           >
             {steps.map((step) => (
               <div
@@ -656,12 +614,12 @@ export default function DriverRegisterPage() {
                   background: '#fff',
                   border: '1px solid #EFEFEF',
                   borderRadius: '20px',
-                  padding: '2rem',
+                  padding: 'clamp(1.25rem, 4vw, 2rem)',
                   boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
                 }}
               >
                 <div style={{
-                  width: '42px', height: '42px',
+                  width: 'clamp(36px, 6vw, 42px)', height: 'clamp(36px, 6vw, 42px)',
                   background: '#2B8659',
                   borderRadius: '50%',
                   display: 'flex',
@@ -669,14 +627,14 @@ export default function DriverRegisterPage() {
                   justifyContent: 'center',
                   fontFamily: 'var(--font-inter), sans-serif',
                   fontWeight: 800,
-                  fontSize: '1rem',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
                   color: '#fff',
                   marginBottom: '1.25rem',
                 }}>
                   {step.num}
                 </div>
                 <p style={{
-                  fontSize: '0.72rem',
+                  fontSize: '0.9rem',
                   fontWeight: 700,
                   color: '#2B8659',
                   letterSpacing: '1px',
@@ -687,14 +645,14 @@ export default function DriverRegisterPage() {
                 </p>
                 <h3 style={{
                   fontFamily: 'var(--font-inter), sans-serif',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(1.1rem, 2.8vw, 1.3rem)',
                   fontWeight: 700,
                   color: '#0A0A0A',
                   marginBottom: '0.6rem',
                 }}>
                   {step.title}
                 </h3>
-                <p style={{ fontSize: '0.87rem', color: '#888', lineHeight: 1.65 }}>
+                <p style={{ fontSize: 'clamp(0.85rem, 2vw, 1rem)', color: '#888', lineHeight: 1.65 }}>
                   {step.desc}
                 </p>
               </div>
@@ -705,24 +663,14 @@ export default function DriverRegisterPage() {
 
       {/* ── HOW THE APP WORKS ── */}
       <section style={{
-        padding: '100px 5vw',
-        background: '#0A0A0A',
+        padding: 'clamp(80px, 16vw, 180px) 5vw',
+        background: '#444',
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <span style={{
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase' as const,
-            color: '#2B8659',
-            display: 'block',
-            marginBottom: '1rem',
-          }}>
-            The Driver App
-          </span>
+
           <h2 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2rem, 4vw, 3rem)',
+            fontSize: 'clamp(1.7rem, 5vw, 3rem)',
             fontWeight: 800,
             color: '#fff',
             letterSpacing: '-1px',
@@ -731,16 +679,17 @@ export default function DriverRegisterPage() {
           }}>
             How the RideFlow Driver app works.
           </h2>
-          <p style={{ color: '#666', fontSize: '1rem', marginBottom: '4rem', maxWidth: '500px', lineHeight: 1.7 }}>
+          <p style={{ color: '#999', fontSize: 'clamp(0.95rem, 2.5vw, 1.3rem)', marginBottom: 'clamp(2.25rem, 6vw, 4rem)', maxWidth: '500px', lineHeight: 1.7 }}>
             Reliable and easy to use, with everything you need to drive and earn when you want.
           </p>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '1.5rem',
-          }}
+          <div
             className="app-steps-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 'clamp(1.1rem, 3vw, 1.5rem)',
+            }}
           >
             {[
               { num: '01', title: 'Accept a ride request', desc: 'The app automatically finds nearby passengers and sends you ride requests in real time.' },
@@ -754,9 +703,9 @@ export default function DriverRegisterPage() {
               }}>
                 <div style={{
                   fontFamily: 'var(--font-inter), sans-serif',
-                  fontSize: '2rem',
+                  fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                   fontWeight: 800,
-                  color: '#2B8659',
+                  color: '#2A8256',
                   marginBottom: '0.75rem',
                   opacity: 0.4,
                 }}>
@@ -764,14 +713,14 @@ export default function DriverRegisterPage() {
                 </div>
                 <h4 style={{
                   fontFamily: 'var(--font-inter), sans-serif',
-                  fontSize: '1rem',
+                  fontSize: 'clamp(1.05rem, 2.6vw, 1.3rem)',
                   fontWeight: 700,
                   color: '#fff',
                   marginBottom: '0.5rem',
                 }}>
                   {item.title}
                 </h4>
-                <p style={{ fontSize: '0.85rem', color: '#666', lineHeight: 1.65 }}>
+                <p style={{ fontSize: 'clamp(0.85rem, 2vw, 1rem)', color: '#999', lineHeight: 1.65 }}>
                   {item.desc}
                 </p>
               </div>
@@ -780,75 +729,30 @@ export default function DriverRegisterPage() {
         </div>
       </section>
 
-      {/* ── EARNINGS STRIP ── */}
-      <section style={{
-        padding: '80px 5vw',
-        background: '#2B8659',
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '2rem',
-        }}
-          className="earnings-strip"
-        >
-          {[
-            { num: '15%', label: 'Commission — lowest in Pakistan' },
-            { num: 'Weekly', label: 'Payouts every Sunday' },
-            { num: '90s', label: 'Average match time per ride' },
-            { num: '24h', label: 'Application review time' },
-          ].map((s) => (
-            <div key={s.label} style={{ textAlign: 'center' as const }}>
-              <div style={{
-                fontFamily: 'var(--font-inter), sans-serif',
-                fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-                fontWeight: 800,
-                color: '#fff',
-                marginBottom: '0.25rem',
-              }}>
-                {s.num}
-              </div>
-              <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>
-                {s.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* ── FAQ ── */}
       <section style={{
-        padding: '100px 5vw',
+        padding: 'clamp(70px, 14vw, 160px) 5vw',
         background: '#fff',
         borderTop: '1px solid #EFEFEF',
       }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '5rem',
-          alignItems: 'start',
-        }}
+        <div
           className="faq-grid"
+          style={{
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 'clamp(2rem, 6vw, 5rem)',
+            alignItems: 'start',
+          }}
         >
           <div>
-            <span style={{
-              fontSize: '0.72rem',
-              fontWeight: 700,
-              letterSpacing: '2px',
-              textTransform: 'uppercase' as const,
-              color: '#2B8659',
-              display: 'block',
-              marginBottom: '1rem',
-            }}>
-              FAQ
-            </span>
+
             <h2 style={{
               fontFamily: 'var(--font-inter), sans-serif',
-              fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)',
+              fontSize: 'clamp(1.5rem, 4.5vw, 2.5rem)',
               fontWeight: 800,
               color: '#0A0A0A',
               letterSpacing: '-0.8px',
@@ -857,7 +761,7 @@ export default function DriverRegisterPage() {
             }}>
               Frequently asked questions from drivers.
             </h2>
-            <p style={{ color: '#888', fontSize: '0.92rem', lineHeight: 1.7 }}>
+            <p style={{ color: '#555', fontSize: '1rem', lineHeight: 1.7 }}>
               Can&apos;t find your answer? Contact our driver support team directly.
             </p>
             <a
@@ -898,7 +802,7 @@ export default function DriverRegisterPage() {
                     width: '100%',
                     background: openFaq === i ? '#F7FFF9' : '#fff',
                     border: 'none',
-                    padding: '1rem 1.25rem',
+                    padding: 'clamp(0.85rem, 3vw, 1rem) clamp(1rem, 3vw, 1.25rem)',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
@@ -910,7 +814,7 @@ export default function DriverRegisterPage() {
                   <span style={{
                     fontFamily: 'var(--font-inter), sans-serif',
                     fontWeight: 600,
-                    fontSize: '0.92rem',
+                    fontSize: 'clamp(0.85rem, 2vw, 1.2rem)',
                     color: '#0A0A0A',
                     paddingRight: '1rem',
                   }}>
@@ -928,8 +832,8 @@ export default function DriverRegisterPage() {
                 </button>
                 {openFaq === i && (
                   <div style={{
-                    padding: '0 1.25rem 1rem',
-                    fontSize: '0.87rem',
+                    padding: '0 clamp(1rem, 3vw, 1.25rem) 1rem',
+                    fontSize: 'clamp(0.82rem, 1.8vw, 0.87rem)',
                     color: '#555',
                     lineHeight: 1.75,
                     background: '#F7FFF9',
@@ -945,14 +849,14 @@ export default function DriverRegisterPage() {
 
       {/* ── BOTTOM CTA ── */}
       <section style={{
-        padding: '100px 5vw',
+        padding: 'clamp(60px, 11vw, 100px) 5vw',
         background: '#0A0A0A',
         textAlign: 'center' as const,
       }}>
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
           <h2 style={{
             fontFamily: 'var(--font-inter), sans-serif',
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontSize: 'clamp(1.7rem, 6vw, 3.5rem)',
             fontWeight: 800,
             color: '#fff',
             letterSpacing: '-1px',
@@ -961,7 +865,7 @@ export default function DriverRegisterPage() {
           }}>
             Ready to start earning?
           </h2>
-          <p style={{ color: '#666', fontSize: '1rem', lineHeight: 1.75, marginBottom: '2rem' }}>
+          <p style={{ color: '#999', fontSize: 'clamp(0.88rem, 2vw, 1rem)', lineHeight: 1.75, marginBottom: '2rem' }}>
             Join hundreds of drivers already earning with RideFlow in Rawalpindi and Islamabad.
           </p>
           <a
@@ -976,8 +880,8 @@ export default function DriverRegisterPage() {
               background: '#2B8659',
               color: '#fff',
               fontWeight: 700,
-              fontSize: '1rem',
-              padding: '1rem 2.5rem',
+              fontSize: 'clamp(0.9rem, 2vw, 1rem)',
+              padding: 'clamp(0.8rem, 2.5vw, 1rem) clamp(1.5rem, 5vw, 2.5rem)',
               borderRadius: '50px',
               textDecoration: 'none',
               transition: 'background 0.2s',
@@ -1002,9 +906,6 @@ export default function DriverRegisterPage() {
           .app-steps-grid {
             grid-template-columns: 1fr 1fr !important;
           }
-          .earnings-strip {
-            grid-template-columns: 1fr 1fr !important;
-          }
           .faq-grid {
             grid-template-columns: 1fr !important;
           }
@@ -1012,9 +913,6 @@ export default function DriverRegisterPage() {
         @media (max-width: 480px) {
           .app-steps-grid {
             grid-template-columns: 1fr !important;
-          }
-          .earnings-strip {
-            grid-template-columns: 1fr 1fr !important;
           }
         }
       `}</style>
